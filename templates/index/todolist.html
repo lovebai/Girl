@@ -1,0 +1,80 @@
+{{define "index/todolist"}}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    {{template "index/head" .}}
+</head>
+<body>
+  {{template "index/header" .}}
+  <div id="pjax-container">
+    <div class="central">
+        <div class="title">
+            <h1>总有些惊奇的际遇 比方说当我遇见你</h1>
+        </div>
+        <div class="row central central-800">
+
+            <div class="card col-lg-12 col-md-12 col-sm-12 col-sm-x-12">
+                <div
+                    class="list_texts animated fadeInUp delay-03s">
+                    <div class="lovelist ">
+                        <!-- php while  -->
+                            <li class="cike">
+                                php list icon<i class="iconfont icon-chenggong2 com"></i> list end
+                                php icon<i class="iconfont icon-chenggong2 air"></i> list
+                                <span>php echo list eventname </span>
+                                phplist imgurl
+                                    <svg class="icon" aria-hidden="true">
+                                        <use xlink:href="#icon-tupian"></use>
+                                    </svg>php imgurl end
+                            </li>
+                            <ul>
+                                <li>
+                                    phplist imgurl
+                                        <img data-funlazy="php echo list imgurl" alt="php echo list eventname"> 
+                                    php list imgurl end
+                                </li>
+                            </ul>
+                           <!-- end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .icon {
+            width: 1.5em;
+            height: 1.5em;
+            vertical-align: -0.3em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+
+        li.cike {
+            border-bottom: 1px solid #ddd;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        .cike:hover {
+            cursor: pointer;
+            cursor: url(/static/cur/hover.cur), pointer;
+        }
+    </style>
+    <script>
+        $(function () {
+            $(".lovelist ul").hide();
+            $(".lovelist li").bind("click", function () {
+                $(this).next("ul").slideToggle(500).siblings("ul").slideUp(500);
+            })
+        })
+
+    </script>
+</div>
+  {{template "index/footer" .}}
+
+</body>
+</html>
+
+{{end}}

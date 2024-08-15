@@ -1,0 +1,210 @@
+{{define "index/leaving"}}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    {{template "index/head" .}}
+</head>
+<body>
+  {{template "index/header" .}}
+
+  <div id="pjax-container">
+    <div class="central central-800 bg">
+        <div class="title mt-2rem">
+            <h1>php 留言提示标题</h1>
+        </div>
+        <h3>已收到 <b>php 多少</b> 条祝福留言<i class="jiequ">（显示最新 php 多少 条）</i></h3>
+
+        <div class="row">
+            <div class="card col-lg-12 col-md-12 col-sm-12 col-sm-x-12">
+                <!-- 列表循环 -->
+                    <!-- <div class="leavform"> -->
+                    <div class="leavform animated fadeInUp delay-03s">
+                        <div class="textinfo">
+                            <div class="MsgTopInfo">
+                                <i class="time">
+                                    php 时间<b class="yuan"></b>
+                                    <!-- php echo city ? city : '未知'; 评论ip地址 -->
+                                </i>
+                            </div>
+
+                            <div class="user_info">
+                                <img src="https://q1.qlogo.cn/g?b=qq&nk=php 评论者QQ&s=100">
+                                <span class="name">php name 评论者</span>
+                            </div>
+                            <div class="text">评论内容</div>
+                        </div>
+                    </div>
+                    <!-- 列表结束 -->
+                <form action="admin/leavingPost.php" method="post">
+                    <!-- 提交评论要改地址 -->
+                    <div class="inputbox">
+                        <img src="https://q1.qlogo.cn/g?b=qq&nk=1234567&s=100" alt="" class="avatar">
+                        <input id="QQ" type="text" name="qq" placeholder="请输入QQ号码" class="rig">
+                        <input id="nickname" type="text" name="name" placeholder="输入QQ号码后自动获取" class="let">
+                    </div>
+                    <textarea name="text" id="wenben" rows="8" placeholder="请输入您的留言内容（恶意留言会封禁IP...）"></textarea>
+                    <div class="input-sub">
+                        <button type="button" id="leavingPost" class="tijiao">提交留言
+                            <svg style="width:1.3em;height: 1.3em;" t="1717899795089" class="icon"
+                                viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                p-id="28276" width="200" height="200">
+                                <path
+                                    d="M620.8 179.2c12.8 12.8 6.4 32-6.4 44.8-19.2 6.4-38.4 6.4-44.8-12.8-44.8-70.4-128-115.2-217.6-115.2-140.8 0-256 115.2-256 256 0 89.6 44.8 166.4 115.2 217.6 19.2 6.4 19.2 25.6 12.8 38.4-12.8 19.2-32 19.2-44.8 12.8C89.6 563.2 32 460.8 32 352c0-179.2 140.8-320 320-320 108.8 0 211.2 57.6 268.8 147.2zM326.4 332.8l243.2 601.6 83.2-243.2c6.4-19.2 19.2-32 38.4-38.4L934.4 576 326.4 332.8z m25.6-57.6L960 518.4c32 12.8 51.2 51.2 38.4 83.2-6.4 19.2-19.2 32-38.4 38.4l-243.2 83.2L633.6 960c-12.8 32-44.8 51.2-83.2 38.4-19.2-6.4-32-19.2-38.4-38.4L268.8 358.4c-12.8-32 6.4-70.4 38.4-83.2 12.8-6.4 32-6.4 44.8 0z"
+                                    fill="#ffffff" p-id="28277"></path>
+                            </svg></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#QQ').blur(function () {
+            let QQ = $("#QQ").val();
+            if (QQ.length <= 0) {
+                return false
+            }
+            $.ajax({
+                url: "https://api.usuuu.com/qq/" + QQ,
+                type: "GET",
+                timeout: 5000,
+                dataType: "json",
+                statusCode: {
+                    500: function (response) {
+                        loadingname();
+                        setTimeout(function () {
+                            removeLoading('test');
+                            toastr["warning"]("获取QQ头像失败 API请求超时 请联系小站管理员！", "Like_Girl");
+                        }, 2000);
+                    }
+                },
+                success: function (result) {
+                    if (result.code == 500) {
+                        removeLoading('test');
+                        toastr["warning"](result.msg, "Like_Girl");
+                    } else if (result.code == 200) {
+                        loadingname();
+                        $("#nickname").val(result["data"].name);
+                        $(".avatar").attr("src", result["data"].avatar);
+                        setTimeout(function () {
+                            removeLoading('test');
+                            toastr["success"]("获取昵称头像成功", "Like_Girl");
+                        }, 1200);
+                    }
+
+                }
+            });
+        });
+
+        $("#leavingPost").click(function () {
+
+            let qq = $("input[name='qq']").val().trim();
+            let name = $("input[name='name']").val().trim();
+            if (qq.length == 0) {
+                toastr["warning"]("请填写QQ号码！", "Like_Girl");
+                return false;
+            } else if (name.length == 0) {
+                toastr["warning"]("请填写恁的昵称！", "Like_Girl");
+                return false;
+            }
+            let qqlength = /^[0-9]{6,10}$/;
+            if (!qqlength.test(qq)) {
+                toastr["warning"]("您的QQ号码格式错误 <br/> 请输入由6-10位的数字 <br/>组成的QQ号码！", "Like_Girl");
+                return false;
+            }
+            if ((qq == 123456) || (qq == 100000) || (qq == 1234567)) {
+                toastr["warning"]("我想也许这并不是您的QQ号码...", "Like_Girl");
+                return false;
+            }
+            let text = $("textarea[name='text']").val().trim();
+            if (text.length == 0) {
+                toastr["warning"]("请填写您要留言的内容！", "Like_Girl");
+                return false;
+            } else if (text.length <= 2) {
+                toastr["warning"]("请填写两个字符以上的内容！", "Like_Girl");
+                return false;
+            }
+            let nonub = /^[0-9]+$/;
+            // let weifan = new RegExp("php 拦截字符");
+            let weifan = new RegExp("php 拦截字符");
+            if (nonub.test(text)) {
+                toastr["warning"]("内容为纯数字 已被拦截！", "Like_Girl");
+                return false;
+            } else if (weifan.test(text)) {
+                toastr["warning"]("您输入的内容是违禁词 <br/>请注意您的发言不文明的留言 <br/>会被管理员拉进小黑屋喔", "Like_Girl");
+                return false;
+            }
+
+
+            if (!(qq && name && text)) {
+                toastr["warning"]("表单信息不能为空 请先填写完整！", "Like_Girl");
+                return false
+            }
+            $('#leavingPost').text('留言提交中...');
+            $("#leavingPost").attr("disabled", "disabled");
+            $.ajax({
+                url: "admin/leavingPost.php",//后面在改吧
+                data: {
+                    qq: qq,
+                    name: name,
+                    text: text,
+                },
+                type: "POST",
+                dataType: "text",
+                success: function (res) {
+                    setInterval(() => {
+                        $('#leavingPost').removeAttr("disabled");
+                    }, 5000);
+                    if (res == 1) {
+                        toastr["success"]("留言提交成功 请刷新本页查看！", "Like_Girl");
+                        $('#leavingPost').text('留言成功');
+                    } else if (res == 0) {
+                        toastr["error"]("留言提交失败！", "Like_Girl");
+                        $('#leavingPost').text('留言失败');
+                    } else if (res == 3 || res == 30) {
+                        toastr["error"]("留言失败——QQ号码格式错", "Like_Girl");
+                        $('#leavingPost').text('留言失败');
+                    } else if (res == 4 || res == 40) {
+                        toastr["error"]("留言失败——IP格式错误", "Like_Girl");
+                        $('#leavingPost').text('留言失败');
+                    } else if (res == 5 || res == 50) {
+                        toastr["error"]("留言失败——参数错误", "Like_Girl");
+                        $('#leavingPost').text('留言失败');
+                    } else if (res == 8) {
+                        toastr["error"]("留言失败——你今天已经留言过了~", "Like_Girl");
+                        $('#leavingPost').text('留言失败');
+                    } else {
+                        toastr["error"]("未知错误！", "Like_Girl");
+                    }
+                },
+                error: function (err) {
+                    toastr["error"]("网络错误 请稍后重试！", "Like_Girl");
+                }
+            }
+            )
+        })
+        function loadingname() {
+            $('body').loading({
+                loadingWidth: 240,
+                title: '获取昵称头像中',
+                name: 'test',
+                discription: '请稍等片刻',
+                direction: 'column',
+                type: 'origin',
+                originDivWidth: 40,
+                originDivHeight: 40,
+                originWidth: 6,
+                originHeight: 6,
+                smallLoading: false,
+                loadingMaskBg: 'rgba(0,0,0,0.2)'
+            });
+
+        }
+    </script>
+</div>
+
+  {{template "index/footer" .}}
+
+</body>
+</html>
+
+{{end}}

@@ -1,0 +1,179 @@
+{{define "index/about"}}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    {{template "index/head" .}}
+</head>
+<body>
+  {{template "index/header" .}}
+
+  <div id="pjax-container">
+    <style>
+        .central-600 {
+            background: url(https://img.gejiba.com/images/7c5f1a655788c0d6ff0cae50232dde65.jpg) no-repeat center top;
+            /* background: url(php 数据库获取) no-repeat center top; */
+            background-size: cover;
+        }
+
+        .central {
+            padding: 0;
+        }
+    </style>
+
+    <h4 class="text-ce central">与 <i>php about title </i>小站对话中...</h4>
+    <div class="central central-600 animated fadeInUp delay-03s">
+        <div class="botui-app-container" id="botui-app">
+            <bot-ui></bot-ui>
+        </div>
+    </div>
+
+    <script>
+        var botui = new BotUI("botui-app");
+        botui.message.bot({
+            delay: 200,
+            content: "php echo about info1php"
+        }).then(function () {
+            return botui.message.bot({
+                delay: 1000,
+                content: "php echo about info2php"
+            })
+        }).then(function () {
+            return botui.message.bot({
+                delay: 1000,
+                content: "php echo about info3php"
+            })
+        }).then(function () {
+            return botui.action.button({
+                delay: 1500,
+                action: [{
+                    text: "php echo about btn1php",
+                    value: "and"
+                },
+                {
+                    text: "php echo about btn2php",
+                    value: "gg"
+                }]
+            })
+        }).then(function (res) {
+            if (res.value == "and") {
+                other()
+            }
+            if (res.value == "gg") {
+                return botui.message.bot({
+                    delay: 1500,
+                    content: " ![告辞](https://img.gejiba.com/images/4f6983d663bea83530b8ac3a8a6b9220.jpg) "
+                })
+            }
+        });
+
+        var other = function () {
+            botui.message.bot({
+                delay: 1500,
+                content: "php echo about infox1php"
+            }).then(function () {
+                return botui.message.bot({
+                    delay: 1500,
+                    content: "php echo about infox2php"
+                })
+            }).then(function () {
+                return botui.message.bot({
+                    delay: 1500,
+                    content: "php echo about infox3php"
+                })
+            }).then(function () {
+                return botui.message.bot({
+                    delay: 1500,
+                    content: "php echo about infox4php"
+                })
+            }).then(function () {
+                return botui.message.bot({
+                    delay: 1500,
+                    content: "php echo about infox5php"
+                })
+            }).then(function () {
+                return botui.message.bot({
+                    delay: 1500,
+                    content: "php echo about infox6php"
+                })
+            }).then(function () {
+                return botui.action.button({
+                    delay: 1500,
+                    action: [{
+                        text: "php echo about btnx2php",
+                        value: "next"
+                    }]
+                })
+            }).then(function (res) {
+                return botui.message.bot({
+                    delay: 1500,
+                    content: "php echo about infof1php"
+                })
+            }).then(function (res) {
+                return botui.message.bot({
+                    delay: 1500,
+                    content: "php echo about infof2php"
+                })
+            }).then(function (res) {
+                return botui.message.bot({
+                    delay: 1500,
+                    content: "php echo about infof3php"
+                })
+            }).then(function (res) {
+                return botui.message.bot({
+                    delay: 1500,
+                    content: "php echo about infof4php"
+                })
+            }).then(function () {
+                return botui.action.button({
+                    delay: 1500,
+                    action: [{
+                        text: "php echo about btnf3php",
+                        value: "next"
+                    }]
+                })
+            }).then(function (res) {
+                return botui.message.bot({
+                    delay: 1500,
+                    content: "php echo about infod1php"
+                })
+            }).then(function (res) {
+                return botui.message.bot({
+                    delay: 1500,
+                    content: "php echo about infod2php"
+                })
+            }).then(function (res) {
+                return botui.message.bot({
+                    delay: 1500,
+                    content: "php echo about infod3php"
+                })
+            }).then(function (res) {
+                return botui.message.bot({
+                    delay: 1500,
+                    content: "php echo about infod4php"
+                })
+            }).then(function (res) {
+                return botui.message.bot({
+                    delay: 1500,
+                    content: "php echo about infod5php"
+                })
+            }).then(function (res) {
+                return botui.message.bot({
+                    delay: 1500,
+                    content: "本次会话结束..."
+                })
+            }).then(function () {
+                return botui.message.bot({
+                    delay: 1500,
+                    content: "  "
+                })
+            });
+        }
+    </script>
+</div>
+
+  {{template "index/footer" .}}
+
+</body>
+</html>
+
+{{end}}

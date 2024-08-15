@@ -1,4 +1,5 @@
-<script src="../Style/toastr/toastr.js"></script>
+{{define "index/footer"}}
+<script src="/static/toastr/toastr.js"></script>
 <div id="pjax-container">
     <script>
         $(function () {
@@ -48,7 +49,7 @@
             }
 
             FunLazy({
-                placeholder: "Style/img/Loading2.gif",
+                placeholder: "/static/img/Loading2.gif",
                 effect: "show",
                 strictLazyMode: false,
                 useErrorImagePlaceholder: "https://img.gejiba.com/images/dbc7f2562e051afc3c39f916689ba5f0.png"
@@ -77,7 +78,7 @@
 
         .cike:hover {
             cursor: pointer;
-            cursor: url(../Style/cur/hover.cur), pointer;
+            cursor: url(/static/cur/hover.cur), pointer;
         }
 
         button:disabled {
@@ -96,18 +97,19 @@
     </style>
 </div>
 
-<?php if ($icp <> '' || $copy <> ''): ?>
+<!-- php 判断是否显示 -->
     <div class="footer-warp">
         <div class="footer">
-            <?php if ($icp): ?>
-                <p><a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank"><?php echo $icp ?></a></p>
-            <?php endif;
-            if ($copy): ?>
-                <p><?php echo $copy ?></p>
-            <?php endif; ?>
+            
+                <p><a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">php cp号</a></p>
+
+                <p>版权</p>
+            
         </div>
     </div>
-<?php endif; ?>
 
 
-<?php echo htmlspecialchars_decode($diy['footerCon'], ENT_QUOTES) ?>
+
+<!-- php 自定义底部代码 -->
+
+{{end}}

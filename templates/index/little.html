@@ -1,0 +1,45 @@
+{{define "index/little"}}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    {{template "index/head" .}}
+</head>
+<body>
+  {{template "index/header" .}}
+  <div id="pjax-container">
+    <div class="central">
+        <div class="title">
+            <h1>hpdeci1有人</h1>
+        </div>
+        <div class="row central central-800">
+            <!-- php 帖子列表 -->
+                <div
+                    class="card col-lg-12 col-md-12 col-sm-12 col-sm-x-12">
+                    <!-- class="card col-lg-12 col-md-12 col-sm-12 col-sm-x-12 animated fadeInUp delay-03s"> -->
+                    <div class="little_texts">
+                        <a href="Little/{:id}">
+                            <div class="top-title textOneHide">php 标题
+                                <svg class="little_icon" aria-hidden="true">
+                                    <use xlink:href="#icon-zhankai"></use>
+                                </svg>
+                            </div>
+                        </a>
+                        <div class="info">
+                            <span>
+                                <svg class="little_icon" aria-hidden="true">
+                                    <use xlink:href="#icon-shoucang"></use>
+                                </svg>
+                                php 作者 <i>记录于</i> php 日期</span>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+  {{template "index/footer" .}}
+
+</body>
+</html>
+
+{{end}}

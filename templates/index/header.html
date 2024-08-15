@@ -1,0 +1,48 @@
+{{define "index/header"}}
+
+<!-- 头部导航条 -->
+<div class="header-wrap">
+    <div class="header">
+        <div class="logo">
+            <h1><a class="alogo" href="/">php logo 文字</a></h1>
+        </div>
+        <div class="word">
+            <span class="wenan">喜欢花 喜欢浪漫 喜欢你.~ php</span>
+        </div>
+    </div>
+</div>
+<!-- 头像内容 -->
+<div class="bg-wrap">
+    <div class="bg-img">
+        <div class="central central-800">
+            <div
+                class="middle animated fadeInDown Blurkg">
+                <div class="img-male">
+                    <img src="https://q1.qlogo.cn/g?b=qq&nk=Php QQ 男&s=640" draggable="false">
+                    <span>php 男名称</span>
+                </div>
+                <div class="love-icon">
+                    <img src="/static/img/like.svg" draggable="false">
+                </div>
+                <div class="img-female">
+                    <img src="https://q1.qlogo.cn/g?b=qq&nk=php QQ&s=640" draggable="false">
+                    <span>php 女名称</span>
+                </div>
+            </div>
+        </div>
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+            <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g class="parallax">
+                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+                <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+                <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+                <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+            </g>
+        </svg>
+    </div>
+</div>
+
+{{end}}
