@@ -1,18 +1,21 @@
 package indexController
 
 import (
-	"fmt"
+	"Girl/dao"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
 func Index(c *gin.Context) {
+	// dao.Mgr.GetSetting(&model.Setting{})
+	data := dao.Mgr.GetSetting()
+
 	c.HTML(http.StatusOK, "index/index", gin.H{
-		"version": "1.0.0",
-		"title":   "首页",
+		"version":  "1.0.0",
+		"title":    "首页",
+		"siteName": data[1],
 	})
-	fmt.Println("访问首页")
 }
 
 func Little(c *gin.Context) {
