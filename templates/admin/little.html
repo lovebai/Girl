@@ -1,0 +1,74 @@
+{{define "admin/little"}}
+{{template "admin/header" .}}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="header-title mb-3 size_18">点点滴滴
+                    <a class="fabu" href="/admin/littleAdd.php">
+                        <button type="button" class="btn btn-success btn-sm right_10">
+                            <i class="mdi mdi-circle-edit-outline"></i>新增
+                        </button>
+                    </a></h4>
+                <table id="basic-datatable" class="table dt-responsive nowrap" width="100%">
+                    <thead>
+                    <tr>
+                        <th>标题</th>
+                        <th>发布时间</th>
+                        <th>发布者</th>
+                        <th style="width:150px;">操作</th>
+                    </tr>
+                    </thead>
+
+                    <form class="needs-validation" action="littleupda.php" method="post">
+                        <tbody>
+                        php 
+                        while ($info = mysqli_fetch_array($resarticle)) {
+                            php 
+                            <tr>
+                                <td>php  echo $info['articletitle'] php </td>
+                                <td>php  echo $info['articletime'] php </td>
+                                <td>php  echo $info['articlename'] php </td>
+                                <td>
+                                    <a href="modlitt.php?id=php  echo $info['id'] php ">
+                                        <button type="button" class="btn btn-secondary btn-rounded">
+                                            <i class=" mdi mdi-clipboard-text-play-outline mr-1"></i>修改
+                                        </button>
+                                    </a>
+                                    <a href="javascript:del(php  echo $info['id']; php ,'php  echo $info['articletitle']; php ');">
+                                        <button type="button" class="btn btn-danger btn-rounded">
+                                            <i class=" mdi mdi-delete-empty mr-1"></i>删除
+                                        </button>
+                                    </a>
+                                    <input name="id" value="php  echo $info['id']; php " type="hidden">
+
+                                </td>
+                            </tr>
+                            php 
+                        }
+                        php 
+                        </tbody>
+                </table>
+                </form>
+
+            </div> <!-- end card body-->
+        </div> <!-- end card -->
+    </div><!-- end col-->
+</div>
+
+
+<script>
+    function del(id, articletitle) {
+        if (confirm('您确认要删除标题为 ' + articletitle + ' 的文章吗')) {
+            location.href = 'dellitt.php?id=' + id + '&title' + articletitle;
+        }
+    }
+</script>
+
+{{template "admin/footer"}}
+
+</body>
+</html>
+{{end}}
