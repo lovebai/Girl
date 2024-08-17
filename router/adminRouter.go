@@ -21,5 +21,6 @@ func AdminRouter(router *gin.Engine) {
 		admin.GET("/todolist", adminController.TodoList)
 		admin.GET("/todolist/add", adminController.TodoListAdd)
 		admin.GET("/about", adminController.About)
+		admin.GET("/userinfo", adminController.UserInfo)
 	}
 }

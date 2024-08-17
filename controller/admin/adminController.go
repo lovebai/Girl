@@ -71,3 +71,9 @@ func About(c *gin.Context) {
 		"title": "关于",
 	})
 }
+
+func UserInfo(c *gin.Context) {
+	c.HTML(http.StatusOK, "admin/userInfo", gin.H{
+		"title": "用户信息",
+	})
+}
