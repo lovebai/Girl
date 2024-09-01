@@ -9,16 +9,17 @@
   <div id="pjax-container">
     <div class="central">
         <div class="title">
-            <h1>hpdeci1有人</h1>
+            <h1>{{.info.CardOneDesc}}</h1>
         </div>
         <div class="row central central-800">
             <!-- php 帖子列表 -->
+            {{range $key,$post := .article}}
                 <div
                     class="card col-lg-12 col-md-12 col-sm-12 col-sm-x-12">
                     <!-- class="card col-lg-12 col-md-12 col-sm-12 col-sm-x-12 animated fadeInUp delay-03s"> -->
                     <div class="little_texts">
-                        <a href="Little/{:id}">
-                            <div class="top-title textOneHide">php 标题
+                        <a href="Little/{{$post.ArticleId}}">
+                            <div class="top-title textOneHide">{{$post.ArticleTitle}}
                                 <svg class="little_icon" aria-hidden="true">
                                     <use xlink:href="#icon-zhankai"></use>
                                 </svg>
@@ -29,10 +30,11 @@
                                 <svg class="little_icon" aria-hidden="true">
                                     <use xlink:href="#icon-shoucang"></use>
                                 </svg>
-                                php 作者 <i>记录于</i> php 日期</span>
+                                {{$post.ArticleAuthor}} <i>记录于</i> {{$post.ArticleTime}}</span> 
                         </div>
                     </div>
                 </div>
+                {{end}}
         </div>
     </div>
 </div>

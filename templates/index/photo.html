@@ -9,22 +9,22 @@
   <div id="pjax-container">
     <h4 class="text-ce central">记录下你的最美瞬间</h4>
     <div class="row central">
-       <!-- php while  -->
+        {{range $key,$img := .list }}
             <idv
                 class="img_card col-lg-4 col-md-6 col-sm-12 col-sm-x-12 animated zoomIn delay-03s">
                 <!-- class="img_card col-lg-4 col-md-6 col-sm-12 col-sm-x-12"> -->
                 <div class="love_img">
-                    <img data-funlazy="php echo list imgUrl " alt="php echo list imgText"
-                        data-description="php echo list imgDatd">
+                    <img data-funlazy="{{$img.ImgUrl}}" alt="{{$img.ImgText}}"
+                        data-description="{{$img.ImgTime|formatDate}}">
 
                     <div class="words">
-                        <i>Date：php echo list imgDatd</i>
-                        <span>php echo list imgText'</span>
+                        <i>Date：{{$img.ImgTime|formatDate}}</i>
+                        <span>{{$img.ImgText}}</span>
                     </div>
 
                 </div>
             </idv>
-          <!-- 循环结束 -->
+          {{end}}
     </div>
 </div>
   {{template "index/footer" .}}

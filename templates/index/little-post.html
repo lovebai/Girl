@@ -15,7 +15,7 @@
             <div
                 class="card col-lg-12 col-md-12 col-sm-12 col-sm-x-12 animated fadeInUp delay-03s">
                 <div class="little_texts">
-                    <div class="top-title f2">php echo $articletitle {{.id}}
+                    <div class="top-title f2">{{.post.ArticleTitle}}
                         <svg class="little_icon" aria-hidden="true">
                             <use xlink:href="#icon-zhankai"></use>
                         </svg>
@@ -25,11 +25,11 @@
                             <svg class="little_icon" aria-hidden="true">
                                 <use xlink:href="#icon-shoucang"></use>
                             </svg>
-                            php echo $articlename  <i>记录于</i> php echo $articletime </span>
+                            {{.post.ArticleAuthor}}  <i>记录于</i> {{.post.ArticleTime}} </span>
                     </div>
                     <div class="line-top"></div>
                     <div id="md-view" class="file">
-                       php echo articletext
+                       {{.centext}}
 
                     </div>
 

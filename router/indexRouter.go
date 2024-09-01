@@ -14,6 +14,7 @@ func IndexRouter(router *gin.Engine) {
 		index.GET("/Little", indexController.Little)
 		index.GET("/Little/:id", indexController.LittlePost)
 		index.GET("/Lenving", indexController.Leaving)
+		index.POST("/LenvingAdd", indexController.LeavingAdd)
 		index.GET("/Photo", indexController.Photo)
 		index.GET("/TodoList", indexController.TodoList)
 		index.GET("/About", indexController.About)

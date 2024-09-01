@@ -10,39 +10,45 @@
   <div id="pjax-container">
     <div class="central central-800 bg">
         <div class="title mt-2rem">
-            <h1>php 留言提示标题</h1>
+            <h1>{{.info.CardTwoDesc}}</h1>
         </div>
-        <h3>已收到 <b>php 多少</b> 条祝福留言<i class="jiequ">（显示最新 php 多少 条）</i></h3>
+        <h3>已收到 <b> {{.count}} </b> 条祝福留言<i class="jiequ">（显示最新 {{.info.LenvingSum }} 多少 条）</i></h3>
 
         <div class="row">
             <div class="card col-lg-12 col-md-12 col-sm-12 col-sm-x-12">
                 <!-- 列表循环 -->
+                 {{range $key,$list := .lenvingList }}
                     <!-- <div class="leavform"> -->
                     <div class="leavform animated fadeInUp delay-03s">
                         <div class="textinfo">
                             <div class="MsgTopInfo">
                                 <i class="time">
-                                    php 时间<b class="yuan"></b>
-                                    <!-- php echo city ? city : '未知'; 评论ip地址 -->
+                                    {{$list.LenvingTime|formatDate}}<b class="yuan"></b>
+                                    {{if eq $list.LenvingCity "" }} 
+                                    未知 
+                                    {{else}} 
+                                    {{$list.LenvingCity}} 
+                                    {{end}}
                                 </i>
                             </div>
 
                             <div class="user_info">
-                                <img src="https://q1.qlogo.cn/g?b=qq&nk=php 评论者QQ&s=100">
-                                <span class="name">php name 评论者</span>
+                                <img src="https://q1.qlogo.cn/g?b=qq&nk={{$list.LenvingQq}}&s=100">
+                                <span class="name">{{$list.LenvingName}}</span>
                             </div>
-                            <div class="text">评论内容</div>
+                            <div class="text">{{$list.LenvingText}}</div>
                         </div>
                     </div>
                     <!-- 列表结束 -->
-                <form action="admin/leavingPost.php" method="post">
+                     {{end}}
+                <form action="/LenvingAdd" method="post">
                     <!-- 提交评论要改地址 -->
                     <div class="inputbox">
                         <img src="https://q1.qlogo.cn/g?b=qq&nk=1234567&s=100" alt="" class="avatar">
                         <input id="QQ" type="text" name="qq" placeholder="请输入QQ号码" class="rig">
                         <input id="nickname" type="text" name="name" placeholder="输入QQ号码后自动获取" class="let">
                     </div>
-                    <textarea name="text" id="wenben" rows="8" placeholder="请输入您的留言内容（恶意留言会封禁IP...）"></textarea>
+                    <textarea name="text" id="wenben" rows="8" placeholder="请输入您的留言内容（恶意留言会封禁IP哦！）"></textarea>
                     <div class="input-sub">
                         <button type="button" id="leavingPost" class="tijiao">提交留言
                             <svg style="width:1.3em;height: 1.3em;" t="1717899795089" class="icon"
@@ -142,7 +148,7 @@
             $('#leavingPost').text('留言提交中...');
             $("#leavingPost").attr("disabled", "disabled");
             $.ajax({
-                url: "admin/leavingPost.php",//后面在改吧
+                url: "/LenvingAdd",//后面在改吧
                 data: {
                     qq: qq,
                     name: name,
@@ -154,23 +160,13 @@
                     setInterval(() => {
                         $('#leavingPost').removeAttr("disabled");
                     }, 5000);
-                    if (res == 1) {
+                    // console.log(res)
+                    res = JSON.parse(res)
+                    if (res.code == 200) {
                         toastr["success"]("留言提交成功 请刷新本页查看！", "Like_Girl");
                         $('#leavingPost').text('留言成功');
-                    } else if (res == 0) {
+                    } else if (res.code == 201) {
                         toastr["error"]("留言提交失败！", "Like_Girl");
-                        $('#leavingPost').text('留言失败');
-                    } else if (res == 3 || res == 30) {
-                        toastr["error"]("留言失败——QQ号码格式错", "Like_Girl");
-                        $('#leavingPost').text('留言失败');
-                    } else if (res == 4 || res == 40) {
-                        toastr["error"]("留言失败——IP格式错误", "Like_Girl");
-                        $('#leavingPost').text('留言失败');
-                    } else if (res == 5 || res == 50) {
-                        toastr["error"]("留言失败——参数错误", "Like_Girl");
-                        $('#leavingPost').text('留言失败');
-                    } else if (res == 8) {
-                        toastr["error"]("留言失败——你今天已经留言过了~", "Like_Girl");
                         $('#leavingPost').text('留言失败');
                     } else {
                         toastr["error"]("未知错误！", "Like_Girl");

@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     {{template "index/head" .}}
-    <link rel="stylesheet" href="static/css/index.css?LikeGirl={{.version}}">
+    <link rel="stylesheet" href="static/css/index.css">
 </head>
 <body>
   {{template "index/header" .}}
@@ -23,24 +23,24 @@
                     class="card col-lg-4 col-sm-12 col-sm-x-12 flex-h animated fadeInUp ">
                     <img src="static/img/diandian.png">
                     <div class="text">
-                        <span><a target="_self" href="/Little">card1</a></span>
-                        <p>php deci1</p>
+                        <span><a target="_self" href="/Little">{{.info.CardOne}}</a></span>
+                        <p>{{.info.CardOneDesc}}</p>
                     </div>
                 </div>
                 <div
                     class="card col-lg-4 col-sm-12 col-sm-x-12 flex-h animated fadeInUp">
                     <img src="static/img/liuyan.png" alt="">
                     <div class="text">
-                        <span><a target="_self" href="/Lenving">php card2  php </a></span>
-                        <p>php deci2  php </p>
+                        <span><a target="_self" href="/Lenving">{{.info.CardTwo}} </a></span>
+                        <p>{{.info.CardTwoDesc}} </p>
                     </div>
                 </div>
                 <div
                     class="card col-lg-4 col-sm-12 col-sm-x-12 flex-h animated fadeInUp">
                     <img src="static/img/about.png" alt="">
                     <div class="text">
-                        <span><a target="_self" href="/About">php card3  php </a></span>
-                        <p>php deci3  php </p>
+                        <span><a target="_self" href="/About">{{.info.CardThree}}</a></span>
+                        <p>{{.info.CardThreeDesc}} </p>
                     </div>
                 </div>
                 <div
