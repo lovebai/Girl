@@ -62,6 +62,38 @@
             </div>
         </div>
     </div>
+    <script>
+        function show_date_time() {
+            window.setTimeout("show_date_time()", 1000);
+            // BirthDay = new Date("{{.info.StartTime}}");
+            today = new Date();
+            // timeold = (today.getTime() - BirthDay.getTime());
+            timeold = (today.getTime() - {{.info.StartTime}});
+            sectimeold = timeold / 1000;
+            secondsold = Math.floor(sectimeold);
+            msPerDay = 24 * 60 * 60 * 1000;
+            e_daysold = timeold / msPerDay;
+            daysold = Math.floor(e_daysold);
+            e_hrsold = (e_daysold - daysold) * 24;
+            hrsold = Math.floor(e_hrsold);
+            e_minsold = (e_hrsold - hrsold) * 60;
+            minsold = Math.floor((e_hrsold - hrsold) * 60);
+            seconds = Math.floor((e_minsold - minsold) * 60);
+            let timeKi = document.getElementById('span_dt_dt');
+            if (timeKi !== null) {
+                span_dt_dt.innerHTML = "这是我们一起走过的";
+                tian.innerHTML = daysold + '天';
+                shi.innerHTML = hrsold + '时';
+                fen.innerHTML = minsold + '分';
+                if (seconds < 10) {
+                    seconds = "0" + seconds
+                }
+                miao.innerHTML = seconds + '秒';
+            }
+        }
+    
+        show_date_time();
+    </script>
 
     {{template "index/footer" .}}
 

@@ -130,8 +130,7 @@
                 return false;
             }
             let nonub = /^[0-9]+$/;
-            // let weifan = new RegExp("php 拦截字符");
-            let weifan = new RegExp("php 拦截字符");
+            let weifan = new RegExp("{{.info.SiteRegexp}}");
             if (nonub.test(text)) {
                 toastr["warning"]("内容为纯数字 已被拦截！", "Like_Girl");
                 return false;

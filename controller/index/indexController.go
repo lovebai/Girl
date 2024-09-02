@@ -94,9 +94,11 @@ func TodoList(c *gin.Context) {
 
 func About(c *gin.Context) {
 	siteinfo := dao.Mgr.GetSetting()
+	about := dao.Mgr.GetAbout()
 	c.HTML(http.StatusOK, "index/about", gin.H{
 		"title": "关于 - " + siteinfo.SiteName,
 		"info":  siteinfo,
+		"about": about,
 	})
 
 }

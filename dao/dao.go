@@ -16,6 +16,7 @@ type Manager interface {
 	AddLenving(data model.Lenving) bool
 	GetPhotoList() []model.Photo
 	GetTodoList() []model.TodoList
+	GetAbout() model.About
 }
 
 type manager struct {
@@ -49,7 +50,7 @@ func (mgr *manager) GetSetting() model.Siteinfo {
 // 前台获取文章列表
 func (mgr *manager) GetArticleList() []model.Article {
 	articels := make([]model.Article, 10)
-	mgr.db.Order("ariticle_id desc").Find(&articels)
+	mgr.db.Order("article_id desc").Find(&articels)
 	return articels
 }
 
@@ -92,8 +93,15 @@ func (mgr *manager) GetPhotoList() []model.Photo {
 }
 
 // 获取todolist
-func (mar *manager) GetTodoList() []model.TodoList {
+func (mgr *manager) GetTodoList() []model.TodoList {
 	todolist := make([]model.TodoList, 10)
-	mar.db.Order("list_id desc").Find(&todolist)
+	mgr.db.Order("list_id desc").Find(&todolist)
 	return todolist
+}
+
+// 获取关于
+func (mgr *manager) GetAbout() model.About {
+	about := model.About{}
+	mgr.db.First(&about)
+	return about
 }

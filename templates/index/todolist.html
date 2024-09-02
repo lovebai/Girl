@@ -16,7 +16,7 @@
             <div class="card col-lg-12 col-md-12 col-sm-12 col-sm-x-12">
                 <div
                     class="list_texts animated fadeInUp delay-03s">
-                    <div class="lovelist ">
+                    <ul class="lovelist ">
                         {{range $key,$list := .todolist}}
                             <li class="cike">
                                 {{if eq $list.ListStatus 1}}
@@ -39,7 +39,7 @@
                                 </li>
                             </ul>
                           {{end}}
-                    </div>
+                    </ul>
                 </div>
             </div>
         </div>

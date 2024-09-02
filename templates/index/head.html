@@ -33,8 +33,7 @@
     <meta charset="utf-8" />
     
     <!-- 自定义头部代码及 pajax开关-->
-   {{ if eq .SitePajx 1 }}
-    
+   {{ if eq .info.SitePajx 1 }}
         <script>
             $(document).pjax('a[target!=_blank]', '#pjax-container', { fragment: '#pjax-container', timeout: 15000 });
             $(document).on('pjax:send', function () {
@@ -67,54 +66,20 @@
                     placeholder: "/static/img/Loading2.gif",
                     effect: "show",
                     strictLazyMode: false,
-                    useErrorImagePlaceholder: "https://img.gejiba.com/images/dbc7f2562e051afc3c39f916689ba5f0.png"
+                    useErrorImagePlaceholder: "/static/img/dbc7f2562e051afc3c39f916689ba5f0.png"
                 })
             });
         </script> 
     {{end}}
 
-    <script>
-        console.log("%c Blog| https://bducds.com", "color:#fff;background:#000;padding:8px 15px;font-weight: 700;border-radius:15px");
-        console.log("%c Like Girl for GoLang 1.0.0 | Powered by 酷酷的白", "color:#fff;font-weight: 700;background:linear-gradient(270deg,#986fee,#8695e6,#68b7dd,#18d7d3);padding:8px 15px;border-radius:15px");
-        function show_date_time() {
-            window.setTimeout("show_date_time()", 1000);
-            BirthDay = new Date("{{.info.StartTime}}");//数据库获取改时间哦
-            today = new Date();
-            timeold = (today.getTime() - BirthDay.getTime());
-            sectimeold = timeold / 1000;
-            secondsold = Math.floor(sectimeold);
-            msPerDay = 24 * 60 * 60 * 1000;
-            e_daysold = timeold / msPerDay;
-            daysold = Math.floor(e_daysold);
-            e_hrsold = (e_daysold - daysold) * 24;
-            hrsold = Math.floor(e_hrsold);
-            e_minsold = (e_hrsold - hrsold) * 60;
-            minsold = Math.floor((e_hrsold - hrsold) * 60);
-            seconds = Math.floor((e_minsold - minsold) * 60);
-            let timeKi = document.getElementById('span_dt_dt');
-            if (timeKi !== null) {
-                span_dt_dt.innerHTML = "这是我们一起走过的";
-                tian.innerHTML = daysold + '天';
-                shi.innerHTML = hrsold + '时';
-                fen.innerHTML = minsold + '分';
-                if (seconds < 10) {
-                    seconds = "0" + seconds
-                }
-                miao.innerHTML = seconds + '秒';
-            }
-        }
-    
-        show_date_time();
-    </script>
-    
     <script src="/static/js/nprogress.js"></script>
     <link href="/static/css/nprogress.css" rel="stylesheet" type="text/css">
 
     
 <style>
     .bg-img {
-        background: url(https://img.gejiba.com/images/f4b1de284e9dcb9057553642d9fee764.png) no-repeat center !important;
-        /* background: url(数据库获取背景图) no-repeat center !important; */
+        /* background: url(https://img.gejiba.com/images/f4b1de284e9dcb9057553642d9fee764.png) no-repeat center !important; */
+        background: url({{.info.BgimgUrl}}) no-repeat center !important;
         background-size: cover !important;
     }
 
@@ -156,7 +121,7 @@
     }
 </style>
 <style>
-    php 自定义css 样式
+    {{.info.SiteHeadStyle}}
 </style>
 
 {{end}}

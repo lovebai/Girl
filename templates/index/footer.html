@@ -52,12 +52,15 @@
                 placeholder: "/static/img/Loading2.gif",
                 effect: "show",
                 strictLazyMode: false,
-                useErrorImagePlaceholder: "https://img.gejiba.com/images/dbc7f2562e051afc3c39f916689ba5f0.png"
+                useErrorImagePlaceholder: "/static/img/dbc7f2562e051afc3c39f916689ba5f0.png"
             })
 
         })
 
-
+    </script>
+    <script>
+                console.log("%c Blog| https://bducds.com", "color:#fff;background:#000;padding:8px 15px;font-weight: 700;border-radius:15px");
+                console.log("%c Like Girl for GoLang 1.0.0 | Powered by 酷酷的白", "color:#fff;font-weight: 700;background:linear-gradient(270deg,#986fee,#8695e6,#68b7dd,#18d7d3);padding:8px 15px;border-radius:15px");
     </script>
     <style>
         .icon {
@@ -96,21 +99,14 @@
         }
     </style>
 </div>
-
-<!-- php 判断是否显示 -->
     <div class="footer-warp">
         <div class="footer">
             
-                <p><a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">{{.info.SiteIcp}}</a></p>
-                <p><a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">{{.info.SiteGaIcp}}</a></p>
+            {{if ne .info.SiteIcp ""}}<p><a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">{{.info.SiteIcp}}</a></p>{{end}}
+            {{if ne .info.SiteGaIcp ""}} <p><a href="https://beian.mps.gov.cn/#/query/webSearch" target="_blank">{{.info.SiteGaIcp}}</a></p>{{end}}
 
-                <p>{{.info.SiteCopyright}}</p>
+            {{if ne .info.SiteCopyright ""}}<p>{{.info.SiteCopyright}}</p>{{end}}
             
         </div>
     </div>
-
-
-
-<!-- php 自定义底部代码 -->
-
 {{end}}

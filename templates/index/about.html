@@ -10,7 +10,7 @@
   <div id="pjax-container">
     <style>
         .central-600 {
-            background: url(https://img.gejiba.com/images/7c5f1a655788c0d6ff0cae50232dde65.jpg) no-repeat center top;
+            background: url({{.about.Aboutimg}}) no-repeat center top;
             /* background: url(php 数据库获取) no-repeat center top; */
             background-size: cover;
         }
@@ -20,7 +20,7 @@
         }
     </style>
 
-    <h4 class="text-ce central">与 <i>php about title </i>小站对话中...</h4>
+    <h4 class="text-ce central">与 <i>{{.about.Title}}</i>小站对话中...</h4>
     <div class="central central-600 animated fadeInUp delay-03s">
         <div class="botui-app-container" id="botui-app">
             <bot-ui></bot-ui>
@@ -31,26 +31,26 @@
         var botui = new BotUI("botui-app");
         botui.message.bot({
             delay: 200,
-            content: "php echo about info1php"
+            content: "{{.about.Info1}}"
         }).then(function () {
             return botui.message.bot({
                 delay: 1000,
-                content: "php echo about info2php"
+                content: "{{.about.Info2}}"
             })
         }).then(function () {
             return botui.message.bot({
                 delay: 1000,
-                content: "php echo about info3php"
+                content: "{{.about.Info3}}"
             })
         }).then(function () {
             return botui.action.button({
                 delay: 1500,
                 action: [{
-                    text: "php echo about btn1php",
+                    text: "{{.about.Btn1}}",
                     value: "and"
                 },
                 {
-                    text: "php echo about btn2php",
+                    text: "{{.about.Btn2}}",
                     value: "gg"
                 }]
             })
@@ -61,7 +61,7 @@
             if (res.value == "gg") {
                 return botui.message.bot({
                     delay: 1500,
-                    content: " ![告辞](https://img.gejiba.com/images/4f6983d663bea83530b8ac3a8a6b9220.jpg) "
+                    content: " ![告辞](/static/img/4f6983d663bea83530b8ac3a8a6b9220.jpg) "
                 })
             }
         });
@@ -69,92 +69,92 @@
         var other = function () {
             botui.message.bot({
                 delay: 1500,
-                content: "php echo about infox1php"
+                content: "{{.about.Infox1}}"
             }).then(function () {
                 return botui.message.bot({
                     delay: 1500,
-                    content: "php echo about infox2php"
+                    content: "{{.about.Infox2}}"
                 })
             }).then(function () {
                 return botui.message.bot({
                     delay: 1500,
-                    content: "php echo about infox3php"
+                    content: "{{.about.Infox3}}"
                 })
             }).then(function () {
                 return botui.message.bot({
                     delay: 1500,
-                    content: "php echo about infox4php"
+                    content: "{{.about.Infox4}}"
                 })
             }).then(function () {
                 return botui.message.bot({
                     delay: 1500,
-                    content: "php echo about infox5php"
+                    content: "{{.about.Infox5}}"
                 })
             }).then(function () {
                 return botui.message.bot({
                     delay: 1500,
-                    content: "php echo about infox6php"
+                    content: "{{.about.Infox6}}"
                 })
             }).then(function () {
                 return botui.action.button({
                     delay: 1500,
                     action: [{
-                        text: "php echo about btnx2php",
+                        text: "{{.about.Btnx2}}",
                         value: "next"
                     }]
                 })
             }).then(function (res) {
                 return botui.message.bot({
                     delay: 1500,
-                    content: "php echo about infof1php"
+                    content: "{{.about.Infof1}}"
                 })
             }).then(function (res) {
                 return botui.message.bot({
                     delay: 1500,
-                    content: "php echo about infof2php"
+                    content: "{{.about.Infof2}}"
                 })
             }).then(function (res) {
                 return botui.message.bot({
                     delay: 1500,
-                    content: "php echo about infof3php"
+                    content: "{{.about.Infof3}}"
                 })
             }).then(function (res) {
                 return botui.message.bot({
                     delay: 1500,
-                    content: "php echo about infof4php"
+                    content: "{{.about.Infof4}}"
                 })
             }).then(function () {
                 return botui.action.button({
                     delay: 1500,
                     action: [{
-                        text: "php echo about btnf3php",
+                        text: "{{.about.Btnf3}}",
                         value: "next"
                     }]
                 })
             }).then(function (res) {
                 return botui.message.bot({
                     delay: 1500,
-                    content: "php echo about infod1php"
+                    content: "{{.about.Infod1}}"
                 })
             }).then(function (res) {
                 return botui.message.bot({
                     delay: 1500,
-                    content: "php echo about infod2php"
+                    content: "{{.about.Infod2}}"
                 })
             }).then(function (res) {
                 return botui.message.bot({
                     delay: 1500,
-                    content: "php echo about infod3php"
+                    content: "{{.about.Infod3}}"
                 })
             }).then(function (res) {
                 return botui.message.bot({
                     delay: 1500,
-                    content: "php echo about infod4php"
+                    content: "{{.about.Infod4}}"
                 })
             }).then(function (res) {
                 return botui.message.bot({
                     delay: 1500,
-                    content: "php echo about infod5php"
+                    content: "{{.about.Infod5}}"
                 })
             }).then(function (res) {
                 return botui.message.bot({
@@ -164,7 +164,7 @@
             }).then(function () {
                 return botui.message.bot({
                     delay: 1500,
-                    content: "  "
+                    content: "欢迎下次再来哦✨"
                 })
             });
         }

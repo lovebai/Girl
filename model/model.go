@@ -26,6 +26,8 @@ type Siteinfo struct {
 	SiteGaIcp     string
 	SiteCopyright string
 	LenvingSum    int
+	SiteHeadStyle string
+	SiteRegexp    string
 }
 
 //文章
@@ -61,6 +63,34 @@ type TodoList struct {
 	ListImgurl string
 }
 
+type About struct {
+	Id       int
+	Title    string
+	Aboutimg string
+	Info1    string
+	Info2    string
+	Info3    string
+	Btn1     string
+	Btn2     string
+	Btnx2    string
+	Btnf3    string
+	Infox1   string
+	Infox2   string
+	Infox3   string
+	Infox4   string
+	Infox5   string
+	Infox6   string
+	Infof1   string
+	Infof2   string
+	Infof3   string
+	Infof4   string
+	Infod1   string
+	Infod2   string
+	Infod3   string
+	Infod4   string
+	Infod5   string
+}
+
 func (Siteinfo) TableName() string {
 	return "siteinfo"
 }
@@ -79,6 +109,10 @@ func (Photo) TableName() string {
 
 func (TodoList) TableName() string {
 	return "todolist"
+}
+
+func (About) TableName() string {
+	return "about"
 }
 
 // 后台用户
