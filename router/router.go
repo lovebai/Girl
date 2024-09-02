@@ -20,6 +20,9 @@ func Start() {
 	//后台路由
 	AdminRouter(router)
 
+	//Api路由
+	ApiRouter(router)
+
 	router.Run(":8100")
 
 }

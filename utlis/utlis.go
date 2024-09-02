@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"math/rand"
 	"net"
 	"net/http"
 	"regexp"
@@ -16,8 +17,7 @@ import (
 	"golang.org/x/text/transform"
 )
 
-//unix 时间格式化
-
+// unix 时间格式化
 func FormatAsDate(unix int64) string {
 	t := time.Unix(unix, 0)
 	var t1 = t.Format("2006-01-02")
@@ -102,4 +102,11 @@ func GetIPFromRequest(c *gin.Context) string {
 
 	clientIP := getIP(c.Request)
 	return clientIP
+}
+
+// 随机返回数组中的一个字符串元素
+func GetRandomElement(arr []string) string {
+	rand.Seed(time.Now().UnixNano())
+	index := rand.Intn(len(arr))
+	return arr[index]
 }
