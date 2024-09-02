@@ -54,6 +54,13 @@ type Photo struct {
 	ImgTime int64
 }
 
+type TodoList struct {
+	ListId     int
+	ListStatus int
+	ListText   string
+	ListImgurl string
+}
+
 func (Siteinfo) TableName() string {
 	return "siteinfo"
 }
@@ -68,6 +75,10 @@ func (Lenving) TableName() string {
 
 func (Photo) TableName() string {
 	return "photo"
+}
+
+func (TodoList) TableName() string {
+	return "todolist"
 }
 
 // 后台用户

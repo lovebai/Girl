@@ -15,6 +15,7 @@ type Manager interface {
 	GetLenvingCount() int64
 	AddLenving(data model.Lenving) bool
 	GetPhotoList() []model.Photo
+	GetTodoList() []model.TodoList
 }
 
 type manager struct {
@@ -88,4 +89,11 @@ func (mgr *manager) GetPhotoList() []model.Photo {
 	photos := make([]model.Photo, 10)
 	mgr.db.Order("img_id desc").Find(&photos)
 	return photos
+}
+
+// 获取todolist
+func (mar *manager) GetTodoList() []model.TodoList {
+	todolist := make([]model.TodoList, 10)
+	mar.db.Order("list_id desc").Find(&todolist)
+	return todolist
 }

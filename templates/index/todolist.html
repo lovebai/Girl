@@ -17,24 +17,28 @@
                 <div
                     class="list_texts animated fadeInUp delay-03s">
                     <div class="lovelist ">
-                        <!-- php while  -->
+                        {{range $key,$list := .todolist}}
                             <li class="cike">
-                                php list icon<i class="iconfont icon-chenggong2 com"></i> list end
-                                php icon<i class="iconfont icon-chenggong2 air"></i> list
-                                <span>php echo list eventname </span>
-                                phplist imgurl
+                                {{if eq $list.ListStatus 1}}
+                                <i class="iconfont icon-chenggong2 com"></i> 
+                                {{else}}
+                                <i class="iconfont icon-chenggong2 air"></i> 
+                                {{end}}
+                                <span>{{$list.ListText}}</span>
+                                {{if ne $list.ListImgurl ""}}
                                     <svg class="icon" aria-hidden="true">
                                         <use xlink:href="#icon-tupian"></use>
-                                    </svg>php imgurl end
+                                    </svg>
+                                {{end}}
                             </li>
                             <ul>
                                 <li>
-                                    phplist imgurl
-                                        <img data-funlazy="php echo list imgurl" alt="php echo list eventname"> 
-                                    php list imgurl end
+                                    {{if ne $list.ListImgurl ""}}
+                                        <img data-funlazy="{{$list.ListImgurl}}" alt="{{$list.ListText}}"> 
+                                    {{end}}
                                 </li>
                             </ul>
-                           <!-- end -->
+                          {{end}}
                     </div>
                 </div>
             </div>

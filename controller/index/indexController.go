@@ -83,9 +83,11 @@ func Photo(c *gin.Context) {
 
 func TodoList(c *gin.Context) {
 	siteinfo := dao.Mgr.GetSetting()
+	todolist := dao.Mgr.GetTodoList()
 	c.HTML(http.StatusOK, "index/todolist", gin.H{
-		"title": "恋爱列表 - " + siteinfo.SiteName,
-		"info":  siteinfo,
+		"title":    "恋爱事件 - " + siteinfo.SiteName,
+		"info":     siteinfo,
+		"todolist": todolist,
 	})
 
 }
