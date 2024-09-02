@@ -12,33 +12,31 @@
                     <div class="form-group mb-3">
                         <label for="validationCustom01">站点标题</label>
                         <input type="text" class="form-control"  placeholder="请输入站点标题"
-                               name="title" value="php echo $text['title']php" required>
+                               name="title" value="{{.info.SiteName}}" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom02">站点LOGO</label>
                         <input type="text" class="form-control" placeholder="请填写站点LOGO文字"
-                               name="logo" value="php echo $text['logo']php" required>
+                               name="logo" value="{{.info.SiteLogo}}" required>
 
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom03">站点文案</label>
                         <input type="text" class="form-control"  placeholder="显示在顶部的文案"
-                               name="writing" value="php echo $text['writing']php" required>
+                               name="writing" value="{{.info.SiteDesc}}" required>
                     </div>
                     <div class="form-group">
                         <label for="validationCustom06">是否关闭头像背景高斯模糊</label>
                         <select class="form-control" id="example-select" name="WebBlur">
-                            <option value="1" selected >开启</option>
-                            <!-- 判断 -->
-                            <option value="2">关闭</option>
+                            <option value="1" {{if eq .info.SiteBlur 1}} selected {{end}}>开启</option>
+                            <option value="0" {{if eq .info.SiteBlur 0}} selected {{end}}>关闭</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="validationCustom07">是否开启前端无刷新加载</label>
                         <select class="form-control" id="example-select" name="WebPjax">
-                            <option value="1" selected>开启</option>
-                             <!-- 判断 -->
-                            <option value="2" >关闭</option>
+                            <option value="1" {{if eq .info.SitePajx  1}} selected {{end}}>开启</option>
+                            <option value="0" {{if eq .info.SitePajx  0}} selected {{end}}>关闭</option>
                         </select>
                     </div>
                     <div class="form-group mb-3 text_right">
@@ -59,30 +57,30 @@
                     <div class="form-group mb-3">
                         <label for="validationCustom01">男主Nanme</label>
                         <input type="text" class="form-control"  placeholder="请输入男主Name"
-                               name="boy" value="php echo $text['boy']php" required>
+                               name="boy" value="{{.info.BoyName}}" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom02">女主Name</label>
                         <input type="text" class="form-control" placeholder="请输入女主Name"
-                               name="girl" value="php echo $text['girl']php" required>
+                               name="girl" value="{{.info.GirlName}}" required>
 
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom03">男主QQ</label>
                         <input type="text" class="form-control"  placeholder="请输入男主QQ（用于显示头像）"
-                               name="boyimg" value="php echo $text['boyimg']php" required>
+                               name="boyimg" value="{{.info.BoyQq}}" required>
 
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom04">女主QQ</label>
                         <input type="text" class="form-control"  placeholder="请输入女主QQ（用于显示头像）"
-                               name="girlimg" value="php echo $text['girlimg']php" required>
+                               name="girlimg" value="{{.info.GirlQq}}" required>
 
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom05">起始时间</label>
                         <input type="datetime-local" class="form-control"  placeholder="请输入起始时间"
-                               name="startTime" value="php echo $text['startTime']php" required>
+                               name="startTime" value="{{.info.StartTime|ConvertTimestampToString}}" required>
                     </div>
                     <div class="form-group mb-3 text_right">
                         <button class="btn btn-primary" type="button" id="loveadminPost">提交修改</button>
@@ -101,51 +99,56 @@
                 <form class="needs-validation" action="CardadminPost.php" method="post" novalidate>
                     <div class="form-group mb-3">
                         <label for="validationCustom01">背景图片URL地址</label>
-                        <input type="text" class="form-control"  placeholder="请输入卡片Name"
-                               name="bgimg" value="php echo $text['bgimg']php" required>
+                        <input type="text" class="form-control"  placeholder="请输入图片地址"
+                               name="bgimg" value="{{.info.BgimgUrl}}" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom01">卡片1Name</label>
                         <input type="text" class="form-control"  placeholder="请输入卡片Name"
-                               name="card1" value="php echo $text['card1']php" required>
+                               name="card1" value="{{.info.CardOne}}" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom02">卡片1描述</label>
                         <input type="text" class="form-control" placeholder="请输入卡片描述"
-                               name="deci1" value="php echo $text['deci1']php" required>
+                               name="deci1" value="{{.info.CardOneDesc}}" required>
 
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom03">卡片2Name</label>
                         <input type="text" class="form-control"  placeholder="请输入卡片Name"
-                               name="card2" value="php echo $text['card2']php" required>
+                               name="card2" value="{{.info.CardTwo}}" required>
 
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom04">卡片2描述</label>
                         <input type="text" class="form-control"  placeholder="请输入卡片描述"
-                               name="deci2" value="php echo $text['deci2']php" required>
+                               name="deci2" value="{{.info.CardTwoDesc}}" required>
 
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom05">卡片3Name</label>
                         <input type="text" class="form-control"  placeholder="请输入卡片Name"
-                               name="card3" value="php echo $text['card3']php" required>
+                               name="card3" value="{{.info.CardThree}}" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom05">卡片3描述</label>
                         <input type="text" class="form-control"  placeholder="请输入卡片描述"
-                               name="deci3" value="php echo $text['deci3']php" required>
+                               name="deci3" value="{{.info.CardThreeDesc}}" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom05">域名备案号</label>
                         <input type="text" class="form-control"  placeholder="没有请留空" name="icp"
-                               value="php echo $text['icp']php" required>
+                               value="{{.info.SiteIcp}}" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="validationCustom05">公安网域名备案号</label>
+                        <input type="text" class="form-control"  placeholder="没有请留空" name="gaicp"
+                               value="{{.info.SiteGaIcp}}" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom05">站点版权信息</label>
                         <input type="text" class="form-control"  placeholder="请输入站点版权信息"
-                               name="Copyright" value="php echo $text['Copyright']php" required>
+                               name="Copyright" value="{{.info.SiteCopyright}}" required>
                     </div>
                     <div class="form-group mb-3 text_right">
                         <button class="btn btn-primary" type="button" id="CardadminPost">提交修改</button>

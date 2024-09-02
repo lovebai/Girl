@@ -24,6 +24,53 @@ func FormatAsDate(unix int64) string {
 	return t1
 }
 
+// 时间戳格式化为什么什么之前
+func FormatAsTimeAgo(timestamp int64) string {
+	now := time.Now()
+	t := time.Unix(timestamp, 0)
+	diff := now.Sub(t)
+
+	years := int(diff.Hours() / 24 / 365)
+	months := int(diff.Hours() / 24 / 30)
+	days := int(diff.Hours() / 24)
+	hours := int(diff.Hours())
+	minutes := int(diff.Minutes())
+	seconds := int(diff.Seconds())
+
+	switch {
+	case years > 0:
+		return fmt.Sprintf("%d年之前", years)
+	case months > 0:
+		return fmt.Sprintf("%d个月之前", months)
+	case days > 0:
+		return fmt.Sprintf("%d天之前", days)
+	case hours > 0:
+		return fmt.Sprintf("%d小时前", hours)
+	case minutes > 0:
+		return fmt.Sprintf("%d分钟前", minutes)
+	default:
+		return fmt.Sprintf("%d秒之前", seconds)
+	}
+}
+
+// ConvertTimestampToString 将毫秒时间戳转换为指定格式的时间字符串
+func ConvertTimestampToString(timestampMillis int64) string {
+	timestamp := timestampMillis / 1000
+	t := time.Unix(timestamp, 0).In(time.Local)
+	layout := "2006-01-02T15:04"
+	return t.Format(layout)
+}
+
+// ConvertToTimestamp 将时间字符串转换为时间戳
+func ConvertToTimestamp(timeStr string) (int64, error) {
+	layout := "2006-01-02T15:04"
+	t, err := time.Parse(layout, timeStr)
+	if err != nil {
+		return 0, err
+	}
+	return t.Unix(), nil
+}
+
 type IPInfo struct {
 	IP          string `json:"ip"`
 	Pro         string `json:"pro"`

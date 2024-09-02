@@ -1,7 +1,5 @@
 package model
 
-import "gorm.io/gorm"
-
 //站点设置
 type Siteinfo struct {
 	OptionId      int
@@ -14,7 +12,7 @@ type Siteinfo struct {
 	GirlName      string
 	BoyQq         string
 	GirlQq        string
-	StartTime     string
+	StartTime     int64
 	BgimgUrl      string
 	CardOne       string
 	CardOneDesc   string
@@ -115,10 +113,10 @@ func (About) TableName() string {
 	return "about"
 }
 
-// 后台用户
-type User struct {
-	gorm.Model
-
-	Username string
-	Password string
+// 内部
+type SumCount struct {
+	Lenving  int64
+	Article  int64
+	Photo    int64
+	TodoList int64
 }

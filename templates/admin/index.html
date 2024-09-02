@@ -151,7 +151,7 @@
                 <div class="row align-items-center">
                     <div class="col-6">
                         <h5 class="text-muted font-weight-normal mt-0 text-truncate" title="Campaign Sent">留言祝福</h5>
-                        <h3 class="my-2 py-1">php echo shu<i>条</i></h3>
+                        <h3 class="my-2 py-1">{{.countSum.Lenving}}<i>条</i></h3>
                     </div>
                     <div class="col-6" style="text-align: center;">
                         <svg t="1717913183813" class="icon" viewBox="0 0 1178 1024" version="1.1"
@@ -175,7 +175,7 @@
                 <div class="row align-items-center">
                     <div class="col-6">
                         <h5 class="text-muted font-weight-normal mt-0 text-truncate" title="New Leads">点点滴滴</h5>
-                        <h3 class="my-2 py-1">php echo diannub <i>条</i></h3>
+                        <h3 class="my-2 py-1">{{.countSum.Article}}<i>条</i></h3>
 
 
                     </div>
@@ -201,7 +201,7 @@
                 <div class="row align-items-center">
                     <div class="col-6">
                         <h5 class="text-muted font-weight-normal mt-0 text-truncate" title="Deals">恋爱清单</h5>
-                        <h3 class="my-2 py-1">php echo listnub <i>条</i></h3>
+                        <h3 class="my-2 py-1">{{.countSum.TodoList}}<i>条</i></h3>
 
                     </div>
                     <div class="col-6" style="text-align: center;">
@@ -248,35 +248,35 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- php while  -->
+                           {{range $key,$list := .leavingList}}
                                 <tr>
                                     <td>
                                         <div class="textHide index">
-                                            php echo infotext]
+                                            {{$list.LenvingText}}
                                         </div>
                                     </td>
                                     <td>
-                                        <small class="text-muted">php echo date
-                                            <div class="color">php echo time_tran</div>
+                                        <small class="text-muted">{{$list.LenvingTime|formatDate}}
+                                            <div class="color">{{$list.LenvingTime|FormatAsTimeAgo}}</div>
                                         </small>
                                     </td>
                                     <td>
                                         <h5><span class="badge badge-success-lighten"><i
                                                     class="mdi mdi-account-circle mr-1 rihjt-0"></i>
-                                                php echo infoname</span>
+                                                    {{$list.LenvingName}}</span>
                                         </h5>
                                     </td>
                                     <td>
-                                        php echo infoQQ
+                                        {{$list.LenvingQq}}
                                     </td>
                                     <td>
                                         <h5>
                                             <span
-                                                class="badge badge-danger-lighten">php 127.0.0.1</span>
+                                                class="badge badge-danger-lighten">{{$list.LenvingIp}}</span>
                                         </h5>
                                     </td>
                                 </tr>
-                               <!-- end -->
+                               {{end}}
 
                         </tbody>
                     </table>

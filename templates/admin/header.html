@@ -43,12 +43,12 @@
         <div class="container-fluid">
 
             <!-- LOGO -->
-            <a href="/admin/index.php" class="topnav-logo">
+            <a href="/{{.admin_url}}" class="topnav-logo">
                 <span class="topnav-logo-lg">
-                    php echo text[title]
+                    {{.info.SiteLogo}}
                 </span>
                 <span class="topnav-logo-sm">
-                    php echo text[title
+                    {{.info.SiteLogo}}
                 </span>
             </a>
 
@@ -56,7 +56,7 @@
 
 
                 <li class="dropdown notification-list">
-                    <a class="nav-link right-bar-toggle" href="/admin/user.php">
+                    <a class="nav-link right-bar-toggle" href="/{{.admin_url}}/userinfo">
                         <i class="dripicons-gear noti-icon"></i>
                     </a>
                 </li>
@@ -78,10 +78,10 @@
 
 
                         <!-- item-->
-                        <a href="user.php" class="dropdown-item notify-item">
+                        <!-- <a href="" class="dropdown-item notify-item">
                             <i class="mdi mdi-account-circle mr-1"></i>
                             <span>全局设置</span>
-                        </a>
+                        </a> -->
 
                         <!-- item-->
                         <a href="loginOut.php" class="dropdown-item notify-item">
@@ -126,14 +126,14 @@
                 <ul class="metismenu side-nav">
 
                     <li class="side-nav-item">
-                        <a href="/admin/index.php" class="side-nav-link">
+                        <a href="/{{.admin_url}}/" class="side-nav-link">
                             <i class="dripicons-direction"></i>
                             <span> 后台首页 </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="/admin/setting" class="side-nav-link">
+                        <a href="/{{.admin_url}}/setting" class="side-nav-link">
                             <i class="dripicons-meter"></i>
                             <span class="badge badge-success float-right"><i class="dripicons-gear margin_0"></i></span>
                             <span> 基本设置 </span>
@@ -141,43 +141,43 @@
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="/admin/leavSet.php" class="side-nav-link">
+                        <a href="/{{.admin_url}}/leaving" class="side-nav-link">
                             <i class="dripicons-view-apps"></i>
                             <span> 留言管理
-                                <span class="badge badge-danger float-right">php echo shu </span>
+                                <span class="badge badge-danger float-right">{{.countSum.Lenving}}</span>
                             </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="/admin/littleSet.php" class="side-nav-link">
+                        <a href="/{{.admin_url}}/little" class="side-nav-link">
                             <i class="dripicons-copy"></i>
                             <span> 点点滴滴
-                                <span class="badge badge-danger float-right">php echo diannub</span>
+                                <span class="badge badge-danger float-right">{{.countSum.Article}}</span>
                             </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="/admin/loveImgSet.php" class="side-nav-link">
+                        <a href="/{{.admin_url}}/photo" class="side-nav-link">
                             <i class="dripicons-photo-group"></i>
                             <span> 恋爱相册
-                                <span class="badge badge-danger float-right">php echo imgnub </span>
+                                <span class="badge badge-danger float-right">{{.countSum.Photo}}</span>
                             </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="/admin/lovelist.php" class="side-nav-link">
+                        <a href="/{{.admin_url}}/todolist" class="side-nav-link">
                             <i class="dripicons-location"></i>
                             <span> 恋爱清单
-                                <span class="badge badge-danger float-right">php echo $listnub </span>
+                                <span class="badge badge-danger float-right">{{.countSum.TodoList}}</span>
                             </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="/admin/aboutSet.php" class="side-nav-link">
+                        <a href="/{{.admin_url}}/about" class="side-nav-link">
                             <i class="dripicons-tags"></i>
                             <span> 关于页面</span>
                             <span class="menu-arrow"></span>

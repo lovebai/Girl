@@ -10,7 +10,10 @@ import (
 func Start() {
 	router := gin.Default()
 	router.SetTrustedProxies([]string{"127.0.0.1"})
-	router.SetFuncMap(template.FuncMap{"formatDate": utlis.FormatAsDate})
+	router.SetFuncMap(template.FuncMap{
+		"formatDate":               utlis.FormatAsDate,
+		"FormatAsTimeAgo":          utlis.FormatAsTimeAgo,
+		"ConvertTimestampToString": utlis.ConvertTimestampToString})
 	router.LoadHTMLGlob("templates/**/*")
 	router.Static("/static", "./static")
 

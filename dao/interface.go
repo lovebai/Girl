@@ -17,4 +17,14 @@ type Index interface {
 
 //后台
 type Manager interface {
+	GetLenvingCountSum() int64
+	GetArticleCountSum() int64
+	GetTodoListCountSum() int64
+	GetPhotoCountSum() int64
+	GetLenvingListAdmin() []model.Lenving
+	GetSettingInfo() model.Siteinfo
+	GetArticleListAdmin() []model.Article
+	GetPhotoListAdmin() []model.Photo
+	GetTodoListAdmin() []model.TodoList
+	GetAboutAdmin() model.About
 }
