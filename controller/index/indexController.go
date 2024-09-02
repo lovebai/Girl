@@ -14,7 +14,7 @@ import (
 )
 
 func Index(c *gin.Context) {
-	siteinfo := dao.Mgr.GetSetting()
+	siteinfo := dao.Inx.GetSetting()
 	c.HTML(http.StatusOK, "index/index", gin.H{
 		"title": siteinfo.SiteName,
 		"info":  siteinfo,
@@ -22,8 +22,8 @@ func Index(c *gin.Context) {
 }
 
 func Little(c *gin.Context) {
-	siteinfo := dao.Mgr.GetSetting()
-	article := dao.Mgr.GetArticleList()
+	siteinfo := dao.Inx.GetSetting()
+	article := dao.Inx.GetArticleList()
 	c.HTML(http.StatusOK, "index/little", gin.H{
 		"title":   "点点滴滴 - " + siteinfo.SiteName,
 		"info":    siteinfo,
@@ -33,9 +33,9 @@ func Little(c *gin.Context) {
 }
 
 func Leaving(c *gin.Context) {
-	siteinfo := dao.Mgr.GetSetting()
-	count := dao.Mgr.GetLenvingCount()
-	lenvingList := dao.Mgr.GetLenvingList()
+	siteinfo := dao.Inx.GetSetting()
+	count := dao.Inx.GetLenvingCount()
+	lenvingList := dao.Inx.GetLenvingList()
 	c.HTML(http.StatusOK, "index/leaving", gin.H{
 		"title":       "留言 - " + siteinfo.SiteName,
 		"info":        siteinfo,
@@ -47,7 +47,7 @@ func Leaving(c *gin.Context) {
 
 // 添加留言
 func LeavingAdd(c *gin.Context) {
-	count := dao.Mgr.GetLenvingCount()
+	count := dao.Inx.GetLenvingCount()
 	name := c.PostForm("name")
 	qq := c.PostForm("qq")
 	text := c.PostForm("text")
@@ -60,7 +60,7 @@ func LeavingAdd(c *gin.Context) {
 		LenvingIp:   utlis.GetIPFromRequest(c),
 		LenvingCity: utlis.Get_ip_city(utlis.GetIPFromRequest(c)),
 	}
-	status := dao.Mgr.AddLenving(data)
+	status := dao.Inx.AddLenving(data)
 	// fmt.Println(status)
 	if status {
 		c.JSON(http.StatusOK, gin.H{"code": 200})
@@ -71,8 +71,8 @@ func LeavingAdd(c *gin.Context) {
 }
 
 func Photo(c *gin.Context) {
-	siteinfo := dao.Mgr.GetSetting()
-	imgList := dao.Mgr.GetPhotoList()
+	siteinfo := dao.Inx.GetSetting()
+	imgList := dao.Inx.GetPhotoList()
 	c.HTML(http.StatusOK, "index/photo", gin.H{
 		"title": "相册 - " + siteinfo.SiteName,
 		"info":  siteinfo,
@@ -82,8 +82,8 @@ func Photo(c *gin.Context) {
 }
 
 func TodoList(c *gin.Context) {
-	siteinfo := dao.Mgr.GetSetting()
-	todolist := dao.Mgr.GetTodoList()
+	siteinfo := dao.Inx.GetSetting()
+	todolist := dao.Inx.GetTodoList()
 	c.HTML(http.StatusOK, "index/todolist", gin.H{
 		"title":    "恋爱事件 - " + siteinfo.SiteName,
 		"info":     siteinfo,
@@ -93,8 +93,8 @@ func TodoList(c *gin.Context) {
 }
 
 func About(c *gin.Context) {
-	siteinfo := dao.Mgr.GetSetting()
-	about := dao.Mgr.GetAbout()
+	siteinfo := dao.Inx.GetSetting()
+	about := dao.Inx.GetAbout()
 	c.HTML(http.StatusOK, "index/about", gin.H{
 		"title": "关于 - " + siteinfo.SiteName,
 		"info":  siteinfo,
@@ -110,9 +110,9 @@ func LittlePost(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"tip": "参数有误！"})
 		return
 	}
-	post := dao.Mgr.GetArticle(aid)
+	post := dao.Inx.GetArticle(aid)
 	content := blackfriday.Run([]byte(post.ArticleContext))
-	siteinfo := dao.Mgr.GetSetting()
+	siteinfo := dao.Inx.GetSetting()
 	c.HTML(http.StatusOK, "index/little-post", gin.H{
 		"id":      id,
 		"title":   post.ArticleTitle,
