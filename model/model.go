@@ -34,7 +34,7 @@ type Article struct {
 	ArticleTitle   string
 	ArticleContext string
 	ArticleAuthor  string
-	ArticleTime    string
+	ArticleTime    int64
 }
 
 type Lenving struct {

@@ -17,9 +17,14 @@ import (
 	"golang.org/x/text/transform"
 )
 
+// 获取当前时间戳
+func GetTimeUnix() int64 {
+	return time.Now().Unix() * 1000
+}
+
 // unix 时间格式化
 func FormatAsDate(unix int64) string {
-	t := time.Unix(unix, 0)
+	t := time.Unix(unix/1000, 0).In(time.Local)
 	var t1 = t.Format("2006-01-02")
 	return t1
 }
@@ -62,13 +67,13 @@ func ConvertTimestampToString(timestampMillis int64) string {
 }
 
 // ConvertToTimestamp 将时间字符串转换为时间戳
-func ConvertToTimestamp(timeStr string) (int64, error) {
+func ConvertToTimestamp(timeStr string) int64 {
 	layout := "2006-01-02T15:04"
 	t, err := time.Parse(layout, timeStr)
 	if err != nil {
-		return 0, err
+		return 0
 	}
-	return t.Unix(), nil
+	return t.Unix() * 1000
 }
 
 type IPInfo struct {

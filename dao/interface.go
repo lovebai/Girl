@@ -29,9 +29,20 @@ type Manager interface {
 	GetTodoListAdmin() []model.TodoList
 	GetAboutAdmin() model.About
 
+	GetArticleAdminByID(id int) model.Article
+	GetPhotoAdminByID(id int) model.Photo
+
 	//删
 	DeleteLenving(id int) int64
 	DeleteLittle(id int) int64
 	DeletePhoto(id int) int64
 	DeleteTodoList(id int) int64
+
+	//增
+	AddLittle(id int, name string, title string, text string) int64
+	AddPhoto(id int, t string, text string, url string) int64
+
+	//更新
+	UpdateLittles(id int, title string, text string) int64
+	UpdatePhotos(ph model.Photo) int64
 }

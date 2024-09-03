@@ -2,6 +2,7 @@ package dao
 
 import (
 	"Girl/model"
+	"Girl/utlis"
 )
 
 // 获取留言总数
@@ -31,7 +32,7 @@ func (mgr *manager) GetTodoListCountSum() int64 {
 // 获取图片总数
 func (mgr *manager) GetPhotoCountSum() int64 {
 	var count int64
-	photo := model.TodoList{}
+	photo := model.Photo{}
 	mgr.db.Model(&photo).Count(&count)
 	return count
 }
@@ -79,6 +80,18 @@ func (mgr *manager) GetAboutAdmin() model.About {
 	return about
 }
 
+func (mgr *manager) GetArticleAdminByID(id int) model.Article {
+	article := model.Article{}
+	mgr.db.First(&article, id)
+	return article
+}
+
+func (mgr *manager) GetPhotoAdminByID(id int) model.Photo {
+	ph := model.Photo{}
+	mgr.db.First(&ph, id)
+	return ph
+}
+
 // 删除
 func (mgr *manager) DeleteLenving(id int) int64 {
 	del := model.Lenving{}
@@ -106,5 +119,55 @@ func (mgr *manager) DeletePhoto(id int) int64 {
 func (mgr *manager) DeleteTodoList(id int) int64 {
 	del := model.TodoList{}
 	rsu := mgr.db.Delete(&del, id)
+	return rsu.RowsAffected
+}
+
+// 新增
+func (mgr *manager) AddLittle(id int, name string, title string, text string) int64 {
+	al := model.Article{
+		ArticleId:      id,
+		ArticleTitle:   title,
+		ArticleContext: text,
+		ArticleAuthor:  name,
+		ArticleTime:    utlis.GetTimeUnix(),
+	}
+	rsu := mgr.db.Create(&al)
+	return rsu.RowsAffected
+}
+
+func (mgr *manager) AddPhoto(id int, t string, text string, url string) int64 {
+	ap := model.Photo{
+		ImgId:   id,
+		ImgText: text,
+		ImgUrl:  url,
+		ImgTime: utlis.ConvertToTimestamp(t),
+	}
+	rsu := mgr.db.Create(&ap)
+	return rsu.RowsAffected
+}
+
+func (mgr *manager) AddTodoList(id int) int64 {
+	del := model.TodoList{}
+	rsu := mgr.db.Delete(&del, id)
+	return rsu.RowsAffected
+}
+
+// 更新
+func (mgr *manager) UpdateLittles(id int, title string, text string) int64 {
+	up := model.Article{}
+	mgr.db.First(&up, id)
+	up.ArticleTitle = title
+	up.ArticleContext = text
+	rsu := mgr.db.Where("article_id = ?", id).Save(&up)
+	return rsu.RowsAffected
+}
+
+func (mgr *manager) UpdatePhotos(ph model.Photo) int64 {
+	p := model.Photo{}
+	mgr.db.First(&p, ph.ImgId)
+	p.ImgText = ph.ImgText
+	p.ImgUrl = ph.ImgUrl
+	p.ImgTime = ph.ImgTime
+	rsu := mgr.db.Where("img_id = ?", ph.ImgId).Save(&p)
 	return rsu.RowsAffected
 }

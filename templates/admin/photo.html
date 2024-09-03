@@ -18,13 +18,13 @@
                         <th style="width:150px;">操作</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody>{{$url := .admin_url}}
                     {{range $key,$list := .photoList}}
                         <tr>
                             <td>{{$list.ImgText}}</td>
-                            <td>{{$list.ImgTime}}</td>
+                            <td>{{$list.ImgTime|formatDate}}</td>
                             <td>
-                                <a href="modImg.php?id={{$list.ImgId}}">
+                                <a href="/{{$url}}/photo/update/{{$list.ImgId}}">
                                     <button type="button" class="btn btn-secondary btn-rounded">
                                         <i class=" mdi mdi-clipboard-text-play-outline mr-1"></i>修改
                                     </button>

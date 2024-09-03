@@ -180,27 +180,33 @@
         )
     })
 
-    $("#littleupda").click(function () {
-        var id = $("input[name='id']").val();
+    $("#littleUpdate").click(function () {
+        var id = $("input[name='aid']").val();
         var articletitle = $("input[name='articletitle']").val();
         var articletext = $("textarea[name='articletext']").val();
+        if (articletitle.trim().length===0 || articletext.trim().length===0)  {
+            toastr["warning"]("文章标题或内容不能为空", "Like_Girl_Golang");
+            return false
+        }
 
         $.ajax({
-            url: "littleupda.php",
+            url: "/{{.admin_url}}/little/update",
             data: {
                 articletitle: articletitle,
                 articletext: articletext,
                 id: id,
             },
             type: "POST",
-            dataType: "text",
+            dataType: "json",
             success: function (res) {
-                if (res == 1) {
+                console.log(res);
+                
+                if (res.code === 200 ) {
                     toastr["success"]("文章修改成功！", "Like_Girl_Golang");
-                    $('#littleupda').text('修改中...');
-                    $("#littleupda").attr("disabled", "disabled");
-                    setInterval("window.location.href='littleSet.php'", 1000);
-                } else if (res == 0) {
+                    $('#littleUpdate').text('修改中...');
+                    $("#littleUpdate").attr("disabled", "disabled");
+                    setInterval("window.location.href='/{{.admin_url}}/little'", 3000);
+                } else {
                     toastr["error"]("文章修改失败！", "Like_Girl_Golang");
                 }
             },
@@ -214,23 +220,28 @@
         var articlename = $("select[name='articlename']").val();
         var articletitle = $("input[name='articletitle']").val();
         var articletext = $("textarea[name='articletext']").val();
-
+        if (articletitle.trim().length===0 || articletext.trim().length===0)  {
+            toastr["warning"]("文章标题或内容不能为空", "Like_Girl_Golang");
+            return false
+        }
         $.ajax({
-            url: "littleAddPost.php",
+            url: "/{{.admin_url}}/little/add",
             data: {
                 articletitle: articletitle,
                 articletext: articletext,
                 articlename: articlename,
             },
             type: "POST",
-            dataType: "text",
+            dataType: "json",
             success: function (res) {
-                if (res == 1) {
+                console.log(res);
+                
+                if (res.code === 200) {
                     toastr["success"]("新增文章成功！", "Like_Girl_Golang");
                     $('#littleAddPost').text('发布中...');
                     $("#littleAddPost").attr("disabled", "disabled");
-                    setInterval("window.location.href='littleSet.php'", 1000);
-                } else if (res == 0) {
+                    setInterval("window.location.href='/{{.admin_url}}/little'", 3000);
+                } else {
                     toastr["error"]("新增文章失败！", "Like_Girl_Golang");
                 }
             },
@@ -240,14 +251,18 @@
         }
         )
     })
-    $("#ImgUpdaPost").click(function () {
+    $("#ImgUpdate").click(function () {
         var imgDatd = $("input[name='imgDatd']").val();
         var imgText = $("input[name='imgText']").val();
-        var id = $("input[name='id']").val();
+        var id = $("input[name='iid']").val();
         var imgUrl = $("input[name='imgUrl']").val();
+        if (imgDatd.trim().length===0 || imgText.trim().length===0 || imgUrl.trim().length===0)  {
+            toastr["warning"]("图片发布日期、描述、图片地址均不能为空", "Like_Girl_Golang");
+            return false
+        }
 
         $.ajax({
-            url: "ImgUpdaPost.php",
+            url: "/{{.admin_url}}/photo/update",
             data: {
                 imgDatd: imgDatd,
                 imgText: imgText,
@@ -255,14 +270,16 @@
                 id: id,
             },
             type: "POST",
-            dataType: "text",
+            dataType: "json",
             success: function (res) {
-                if (res == 1) {
+                console.log(res);
+                
+                if (res.code === 200) {
                     toastr["success"]("相册修改成功！", "Like_Girl_Golang");
-                    $('#ImgUpdaPost').text('修改中...');
-                    $("#ImgUpdaPost").attr("disabled", "disabled");
-                    setInterval("window.location.href='loveImgSet.php'", 1000);
-                } else if (res == 0) {
+                    $('#ImgUpdate').text('修改中...');
+                    $("#ImgUpdate").attr("disabled", "disabled");
+                    setInterval("window.location.href='/{{.admin_url}}/photo'", 3000);
+                } else  {
                     toastr["error"]("相册修改失败！", "Like_Girl_Golang");
                 }
             },
@@ -272,27 +289,33 @@
         }
         )
     })
-    $("#ImgAddPost").click(function () {
+    $("#ImgAdd").click(function () {
         var imgDatd = $("input[name='imgDatd']").val();
         var imgText = $("input[name='imgText']").val();
         var imgUrl = $("input[name='imgUrl']").val();
+        if (imgDatd.trim().length===0 || imgText.trim().length===0 || imgUrl.trim().length===0)  {
+            toastr["warning"]("图片发布日期、描述、图片地址均不能为空", "Like_Girl_Golang");
+            return false
+        }
 
         $.ajax({
-            url: "ImgAddPost.php",
+            url: "/{{.admin_url}}/photo/add",
             data: {
                 imgDatd: imgDatd,
                 imgText: imgText,
                 imgUrl: imgUrl,
             },
             type: "POST",
-            dataType: "text",
+            dataType: "json",
             success: function (res) {
-                if (res == 1) {
+                console.log(res);
+                
+                if (res.code === 200) {
                     toastr["success"]("新增相册成功！", "Like_Girl_Golang");
-                    $('#ImgUpdaPost').text('新增中...');
-                    $("#ImgUpdaPost").attr("disabled", "disabled");
-                    setInterval("window.location.href='loveImgSet.php'", 1000);
-                } else if (res == 0) {
+                    $('#ImgAdd').text('新增中...');
+                    $("#ImgAdd").attr("disabled", "disabled");
+                    setInterval("window.location.href='/{{.admin_url}}/photo'", 3000);
+                } else  {
                     toastr["error"]("新增相册失败！", "Like_Girl_Golang");
                 }
             },
@@ -500,6 +523,7 @@
                 console.log(res.code)
                 if (res.code == 200) {
                     toastr["success"]("已成功删除,请手动刷新页面！", "Like_Girl_Golang");
+                    setTimeout('window.location.reload()',5090)
                 } else {
                     toastr["error"](res.msg, "Like_Girl_Golang");
                 }
