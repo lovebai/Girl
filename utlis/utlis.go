@@ -96,7 +96,7 @@ func convertGBKToUTF8(input []byte) ([]byte, error) {
 
 // 根据ip 获取城市
 func Get_ip_city(ip string) string {
-	api_url := "https://whois.pconline.com.cn/ipJson.jsp?ip=101.34.54.23"
+	api_url := "https://whois.pconline.com.cn/ipJson.jsp?ip=" + ip
 	res, err := http.Get(api_url)
 	if err != nil {
 		return "0.0.0.0"

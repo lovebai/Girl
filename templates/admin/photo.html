@@ -29,7 +29,7 @@
                                         <i class=" mdi mdi-clipboard-text-play-outline mr-1"></i>修改
                                     </button>
                                 </a>
-                                <a href="javascript:del({{$list.ImgId}},'{{$list.ImgText}} ');">
+                                <a href="javascript:del('photo',{{$list.ImgId}},'{{$list.ImgText}} ');">
                                     <button type="button" class="btn btn-danger btn-rounded">
                                         <i class=" mdi mdi-delete-empty mr-1"></i>删除
                                     </button>
@@ -44,17 +44,7 @@
     </div><!-- end col-->
 </div>
 
-
-<script>
-    function del(id, imgText) {
-        if (confirm('您确认要删除描述为 ' + imgText + ' 的相册图片吗')) {
-            location.href = 'delImg.php?id=' + id + '&imgText' + imgText;
-        }
-    }
-
-</script>
-
-{{template "admin/footer"}}
+{{template "admin/footer" .}}
 
 </body>
 </html>

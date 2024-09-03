@@ -65,7 +65,7 @@
                                         <i>{{if eq $list.LenvingCity ""}} 未知 {{else}} {{$list.LenvingCity}} {{end}} </i>
                                     </td>
                                     <td>
-                                        <a href="javascript:del({{$list.LenvingIp}},'{{$list.LenvingName}}');">
+                                        <a href="javascript:del('leaving',{{$list.LenvingId}},'{{$list.LenvingText}}');">
                                             <button style="white-space: nowrap;" type="button"
                                                 class="btn btn-danger btn-rounded">
                                                 <i class=" mdi mdi-delete-empty mr-1"></i>删除
@@ -90,16 +90,8 @@
         white-space: nowrap;
     }
 </style>
-<script>
-    function del(id, text) {
-        if (confirm('您确认要删除 ' + text + ' 内容吗')) {
-            location.href = 'delleav.php?id=' + id + '&text' + text;
-        }
-    }
-</script>
 
-
-{{template "admin/footer"}}
+{{template "admin/footer" .}}
 
 </body>
 </html>

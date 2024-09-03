@@ -1,6 +1,8 @@
 package dao
 
-import "Girl/model"
+import (
+	"Girl/model"
+)
 
 // 获取留言总数
 func (mgr *manager) GetLenvingCountSum() int64 {
@@ -10,7 +12,7 @@ func (mgr *manager) GetLenvingCountSum() int64 {
 	return count
 }
 
-//获取文章总数
+// 获取文章总数
 func (mgr *manager) GetArticleCountSum() int64 {
 	var count int64
 	ariticles := model.Article{}
@@ -18,7 +20,7 @@ func (mgr *manager) GetArticleCountSum() int64 {
 	return count
 }
 
-//获取清单总数
+// 获取清单总数
 func (mgr *manager) GetTodoListCountSum() int64 {
 	var count int64
 	todolists := model.TodoList{}
@@ -26,7 +28,7 @@ func (mgr *manager) GetTodoListCountSum() int64 {
 	return count
 }
 
-//获取图片总数
+// 获取图片总数
 func (mgr *manager) GetPhotoCountSum() int64 {
 	var count int64
 	photo := model.TodoList{}
@@ -75,4 +77,34 @@ func (mgr *manager) GetAboutAdmin() model.About {
 	about := model.About{}
 	mgr.db.First(&about)
 	return about
+}
+
+// 删除
+func (mgr *manager) DeleteLenving(id int) int64 {
+	del := model.Lenving{}
+	rsu := mgr.db.Delete(&del, id)
+	return rsu.RowsAffected
+	// if status.RowsAffected == 0 {
+	// 	return false
+	// } else {
+	// 	return true
+	// }
+}
+
+func (mgr *manager) DeleteLittle(id int) int64 {
+	del := model.Article{}
+	rsu := mgr.db.Delete(&del, id)
+	return rsu.RowsAffected
+}
+
+func (mgr *manager) DeletePhoto(id int) int64 {
+	del := model.Photo{}
+	rsu := mgr.db.Delete(&del, id)
+	return rsu.RowsAffected
+}
+
+func (mgr *manager) DeleteTodoList(id int) int64 {
+	del := model.TodoList{}
+	rsu := mgr.db.Delete(&del, id)
+	return rsu.RowsAffected
 }

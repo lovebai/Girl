@@ -4,6 +4,7 @@ import (
 	"Girl/dao"
 	"Girl/model"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -154,4 +155,38 @@ func UserInfo(c *gin.Context) {
 		"countSum":  getAllCount(),
 		"info":      siteinfo,
 	})
+}
+
+// 删除
+func DeleteByid(c *gin.Context) {
+	id := c.PostForm("id")
+	text := c.PostForm("text")
+	ty := c.PostForm("type")
+	if len(text) < 2 || len(ty) < 2 {
+		c.JSON(http.StatusOK, gin.H{"code": 204, "msg": "传递参数有误！"})
+		return
+	}
+	lid, err := strconv.Atoi(id)
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{"code": 204, "msg": "传递参数有误！"})
+		return
+	}
+	var status int64
+	switch string(ty) {
+	case "leaving":
+		status = dao.Mgr.DeleteLenving(lid)
+	case "article":
+		status = dao.Mgr.DeleteLittle(lid)
+	case "photo":
+		status = dao.Mgr.DeletePhoto(lid)
+	case "todolist":
+		status = dao.Mgr.DeleteTodoList(lid)
+	default:
+	}
+
+	if status == 0 {
+		c.JSON(http.StatusOK, gin.H{"code": 203, "msg": "删除失败!"})
+	} else {
+		c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "删除成功!"})
+	}
 }
