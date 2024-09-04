@@ -118,11 +118,3 @@ func (TodoList) TableName() string {
 func (About) TableName() string {
 	return "about"
 }
-
-// 内部
-type SumCount struct {
-	Lenving  int64
-	Article  int64
-	Photo    int64
-	TodoList int64
-}

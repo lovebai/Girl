@@ -46,3 +46,11 @@ type SettingF struct {
 	SiteHeadStyle string `json:"siteheadstyle"`
 	SiteFootJs    string `json:"sitefootjs"`
 }
+
+// 内部
+type SumCount struct {
+	Lenving  int64
+	Article  int64
+	Photo    int64
+	TodoList int64
+}
