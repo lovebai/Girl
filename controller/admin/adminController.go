@@ -133,6 +133,7 @@ func TodoListAddPage(c *gin.Context) {
 	siteinfo := dao.Mgr.GetSettingInfo()
 	c.HTML(http.StatusOK, "admin/todoListAdd", gin.H{
 		"title":     "添加事件",
+		"h4":        "添加",
 		"admin_url": getAdminUrl(),
 		"countSum":  getAllCount(),
 		"info":      siteinfo,
@@ -199,7 +200,28 @@ func UpdatePhotoPage(c *gin.Context) {
 	})
 }
 
-// 删除
+func UpdateTodoListPage(c *gin.Context) {
+	id := c.Param("id")
+	lid, err := strconv.Atoi(id)
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{"code": 204, "msg": "传递参数有误！"})
+		return
+	}
+	siteinfo := dao.Mgr.GetSettingInfo()
+	tl := dao.Mgr.GetTodoListAdminByID(lid)
+	c.HTML(http.StatusOK, "admin/todoListAdd", gin.H{
+		"title":     "添加事件",
+		"h4":        "修改",
+		"admin_url": getAdminUrl(),
+		"countSum":  getAllCount(),
+		"tl":        tl,
+		"info":      siteinfo,
+	})
+}
+
+/**  删除 **/
+
+// 根据ID删除
 func DeleteByid(c *gin.Context) {
 	id := c.PostForm("id")
 	text := c.PostForm("text")
@@ -232,6 +254,8 @@ func DeleteByid(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "删除成功!"})
 	}
 }
+
+/** 新增内容 **/
 
 // 增加新文章
 func AddLittle(c *gin.Context) {
@@ -269,22 +293,29 @@ func AddPhoto(c *gin.Context) {
 
 // 增加新事件
 func AddTodoList(c *gin.Context) {
-	articletitle := c.PostForm("articletitle")
-	articletext := c.PostForm("articletext")
-	articlename := c.PostForm("articlename")
-	if len(articlename) < 2 || len(articletext) < 2 || len(articletitle) < 2 {
+	text := c.PostForm("text")
+	state := c.PostForm("state")
+	imgurl := c.PostForm("imgurl")
+	if len(text) < 2 {
 		c.JSON(http.StatusOK, gin.H{"code": 204, "msg": "传递参数有误！"})
 		return
 	}
-	id := getAllCount().Article + 1
-	if dao.Mgr.AddLittle(int(id), articlename, articletitle, articletext) == 0 {
+	st, err := strconv.Atoi(state)
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{"code": 205, "msg": "传递参数有误！"})
+		return
+	}
+	id := getAllCount().TodoList + 1
+	if dao.Mgr.AddTodoList(int(id), st, text, imgurl) == 0 {
 		c.JSON(http.StatusOK, gin.H{"code": 203, "msg": "新增文章失败!"})
 	} else {
 		c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "新增文章成功!"})
 	}
 }
 
-// 更新
+/**  更新 **/
+
+// Post 更新点滴（文章）
 func UpdateLittle(c *gin.Context) {
 	articleid := c.PostForm("id")
 	articletitle := c.PostForm("articletitle")
@@ -305,7 +336,8 @@ func UpdateLittle(c *gin.Context) {
 	}
 }
 
-func UpdateLPhoto(c *gin.Context) {
+// Post 更新图片
+func UpdatePhoto(c *gin.Context) {
 	pid := c.PostForm("id")
 	pt := c.PostForm("imgText")
 	pd := c.PostForm("imgDatd")
@@ -327,6 +359,39 @@ func UpdateLPhoto(c *gin.Context) {
 		ImgTime: utlis.ConvertToTimestamp(string(pd)),
 	}
 	if dao.Mgr.UpdatePhotos(ph) == 0 {
+		c.JSON(http.StatusOK, gin.H{"code": 203, "msg": "修改失败!"})
+	} else {
+		c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "修改成功!"})
+	}
+}
+
+// Post 更新清单
+func UpdateTolist(c *gin.Context) {
+	tid := c.PostForm("id")
+	text := c.PostForm("text")
+	state := c.PostForm("state")
+	imgurl := c.PostForm("imgurl")
+	if len(text) < 2 {
+		c.JSON(http.StatusOK, gin.H{"code": 204, "msg": "传递参数有误！"})
+		return
+	}
+	id, err := strconv.Atoi(tid)
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{"code": 205, "msg": "传递参数有误！"})
+		return
+	}
+	st, err1 := strconv.Atoi(state)
+	if err1 != nil {
+		c.JSON(http.StatusOK, gin.H{"code": 205, "msg": "传递参数有误！"})
+		return
+	}
+	tl := model.TodoList{
+		ListId:     id,
+		ListStatus: st,
+		ListText:   text,
+		ListImgurl: imgurl,
+	}
+	if dao.Mgr.UpdateTodolists(tl) == 0 {
 		c.JSON(http.StatusOK, gin.H{"code": 203, "msg": "修改失败!"})
 	} else {
 		c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "修改成功!"})

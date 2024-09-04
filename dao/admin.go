@@ -5,6 +5,7 @@ import (
 	"Girl/utlis"
 )
 
+/** 查询 **/
 // 获取留言总数
 func (mgr *manager) GetLenvingCountSum() int64 {
 	var count int64
@@ -80,19 +81,29 @@ func (mgr *manager) GetAboutAdmin() model.About {
 	return about
 }
 
+// 根据ID查询文章（点滴）
 func (mgr *manager) GetArticleAdminByID(id int) model.Article {
 	article := model.Article{}
 	mgr.db.First(&article, id)
 	return article
 }
 
+// 根据ID查询图片
 func (mgr *manager) GetPhotoAdminByID(id int) model.Photo {
 	ph := model.Photo{}
 	mgr.db.First(&ph, id)
 	return ph
 }
 
-// 删除
+// 根据ID查询清单
+func (mgr *manager) GetTodoListAdminByID(id int) model.TodoList {
+	t := model.TodoList{}
+	mgr.db.First(&t, id)
+	return t
+}
+
+/** 删除 **/
+// admin dao根据id 删除留言
 func (mgr *manager) DeleteLenving(id int) int64 {
 	del := model.Lenving{}
 	rsu := mgr.db.Delete(&del, id)
@@ -104,25 +115,29 @@ func (mgr *manager) DeleteLenving(id int) int64 {
 	// }
 }
 
+// admin dao根据id 删除点滴
 func (mgr *manager) DeleteLittle(id int) int64 {
 	del := model.Article{}
 	rsu := mgr.db.Delete(&del, id)
 	return rsu.RowsAffected
 }
 
+// admin dao根据id 删除图片
 func (mgr *manager) DeletePhoto(id int) int64 {
 	del := model.Photo{}
 	rsu := mgr.db.Delete(&del, id)
 	return rsu.RowsAffected
 }
 
+// admin dao根据id 删除清单
 func (mgr *manager) DeleteTodoList(id int) int64 {
 	del := model.TodoList{}
 	rsu := mgr.db.Delete(&del, id)
 	return rsu.RowsAffected
 }
 
-// 新增
+/** 新增 **/
+// dao 新增点滴
 func (mgr *manager) AddLittle(id int, name string, title string, text string) int64 {
 	al := model.Article{
 		ArticleId:      id,
@@ -135,6 +150,7 @@ func (mgr *manager) AddLittle(id int, name string, title string, text string) in
 	return rsu.RowsAffected
 }
 
+// dao 新增图片
 func (mgr *manager) AddPhoto(id int, t string, text string, url string) int64 {
 	ap := model.Photo{
 		ImgId:   id,
@@ -146,13 +162,20 @@ func (mgr *manager) AddPhoto(id int, t string, text string, url string) int64 {
 	return rsu.RowsAffected
 }
 
-func (mgr *manager) AddTodoList(id int) int64 {
-	del := model.TodoList{}
-	rsu := mgr.db.Delete(&del, id)
+// dao 新增清单
+func (mgr *manager) AddTodoList(id int, status int, title string, imgUrl string) int64 {
+	tl := model.TodoList{
+		ListId:     id,
+		ListStatus: status,
+		ListText:   title,
+		ListImgurl: imgUrl,
+	}
+	rsu := mgr.db.Create(&tl)
 	return rsu.RowsAffected
 }
 
-// 更新
+/** 更新 **/
+// dao 根据id更新点滴
 func (mgr *manager) UpdateLittles(id int, title string, text string) int64 {
 	up := model.Article{}
 	mgr.db.First(&up, id)
@@ -162,6 +185,7 @@ func (mgr *manager) UpdateLittles(id int, title string, text string) int64 {
 	return rsu.RowsAffected
 }
 
+// dao 根据id更新图片
 func (mgr *manager) UpdatePhotos(ph model.Photo) int64 {
 	p := model.Photo{}
 	mgr.db.First(&p, ph.ImgId)
@@ -169,5 +193,16 @@ func (mgr *manager) UpdatePhotos(ph model.Photo) int64 {
 	p.ImgUrl = ph.ImgUrl
 	p.ImgTime = ph.ImgTime
 	rsu := mgr.db.Where("img_id = ?", ph.ImgId).Save(&p)
+	return rsu.RowsAffected
+}
+
+// dao 根据id更新清单
+func (mgr *manager) UpdateTodolists(tl model.TodoList) int64 {
+	t := model.TodoList{}
+	mgr.db.First(&t, tl.ListId)
+	t.ListText = tl.ListText
+	t.ListStatus = tl.ListStatus
+	t.ListImgurl = tl.ListImgurl
+	rsu := mgr.db.Where("list_id = ?", tl.ListId).Save(&t)
 	return rsu.RowsAffected
 }

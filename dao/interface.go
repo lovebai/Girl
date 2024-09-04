@@ -31,6 +31,7 @@ type Manager interface {
 
 	GetArticleAdminByID(id int) model.Article
 	GetPhotoAdminByID(id int) model.Photo
+	GetTodoListAdminByID(id int) model.TodoList
 
 	//删
 	DeleteLenving(id int) int64
@@ -41,8 +42,10 @@ type Manager interface {
 	//增
 	AddLittle(id int, name string, title string, text string) int64
 	AddPhoto(id int, t string, text string, url string) int64
+	AddTodoList(id int, status int, title string, imgUrl string) int64
 
 	//更新
 	UpdateLittles(id int, title string, text string) int64
 	UpdatePhotos(ph model.Photo) int64
+	UpdateTodolists(tl model.TodoList) int64
 }
