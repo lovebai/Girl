@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"html/template"
 	"io/ioutil"
 	"math/rand"
 	"net"
@@ -13,6 +14,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/russross/blackfriday/v2"
 	"golang.org/x/text/encoding/simplifiedchinese"
 	"golang.org/x/text/transform"
 )
@@ -161,4 +163,15 @@ func GetRandomElement(arr []string) string {
 	rand.Seed(time.Now().UnixNano())
 	index := rand.Intn(len(arr))
 	return arr[index]
+}
+
+// 输出html
+func ToHtml(str string) template.HTML {
+	content := blackfriday.Run([]byte(str))
+	return template.HTML(content)
+}
+
+// 输出html
+func ToHtmlTable(str string) template.HTML {
+	return template.HTML(str)
 }

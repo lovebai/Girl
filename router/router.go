@@ -13,7 +13,9 @@ func Start() {
 	router.SetFuncMap(template.FuncMap{
 		"formatDate":               utlis.FormatAsDate,
 		"FormatAsTimeAgo":          utlis.FormatAsTimeAgo,
-		"ConvertTimestampToString": utlis.ConvertTimestampToString})
+		"ConvertTimestampToString": utlis.ConvertTimestampToString,
+		"ToHtml":                   utlis.ToHtml,
+		"ToHtmlTable":              utlis.ToHtmlTable})
 	router.LoadHTMLGlob("templates/**/*")
 	router.Static("/static", "./static")
 

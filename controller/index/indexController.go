@@ -4,13 +4,11 @@ import (
 	"Girl/dao"
 	"Girl/model"
 	"Girl/utlis"
-	"html/template"
 	"net/http"
 	"strconv"
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/russross/blackfriday/v2"
 )
 
 func Index(c *gin.Context) {
@@ -111,13 +109,11 @@ func LittlePost(c *gin.Context) {
 		return
 	}
 	post := dao.Inx.GetArticle(aid)
-	content := blackfriday.Run([]byte(post.ArticleContext))
 	siteinfo := dao.Inx.GetSetting()
 	c.HTML(http.StatusOK, "index/little-post", gin.H{
-		"id":      id,
-		"title":   post.ArticleTitle,
-		"post":    post,
-		"centext": template.HTML(content),
-		"info":    siteinfo,
+		"id":    id,
+		"title": post.ArticleTitle,
+		"post":  post,
+		"info":  siteinfo,
 	})
 }
