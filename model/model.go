@@ -63,30 +63,30 @@ type TodoList struct {
 
 type About struct {
 	Id       int
-	Title    string
-	Aboutimg string
-	Info1    string
-	Info2    string
-	Info3    string
-	Btn1     string
-	Btn2     string
-	Btnx2    string
-	Btnf3    string
-	Infox1   string
-	Infox2   string
-	Infox3   string
-	Infox4   string
-	Infox5   string
-	Infox6   string
-	Infof1   string
-	Infof2   string
-	Infof3   string
-	Infof4   string
-	Infod1   string
-	Infod2   string
-	Infod3   string
-	Infod4   string
-	Infod5   string
+	Title    string `json:"title"`
+	Aboutimg string `json:"aboutimg"`
+	Info1    string `json:"info1"`
+	Info2    string `json:"info2"`
+	Info3    string `json:"info3"`
+	Btn1     string `json:"btn1"`
+	Btn2     string `json:"btn2"`
+	Btnx2    string `json:"btnx2"`
+	Btnf3    string `json:"btnf3"`
+	Infox1   string `json:"infox1"`
+	Infox2   string `json:"infox2"`
+	Infox3   string `json:"infox3"`
+	Infox4   string `json:"infox4"`
+	Infox5   string `json:"infox5"`
+	Infox6   string `json:"infox6"`
+	Infof1   string `json:"infof1"`
+	Infof2   string `json:"infof2"`
+	Infof3   string `json:"infof3"`
+	Infof4   string `json:"infof4"`
+	Infod1   string `json:"infod1"`
+	Infod2   string `json:"infod2"`
+	Infod3   string `json:"infod3"`
+	Infod4   string `json:"infod4"`
+	Infod5   string `json:"infod5"`
 }
 
 func (Siteinfo) TableName() string {

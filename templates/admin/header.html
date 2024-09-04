@@ -56,6 +56,12 @@
 
 
                 <li class="dropdown notification-list">
+                    <a class="nav-link right-bar-toggle" href="/" target="_blank">
+                        <i class="dripicons-home noti-icon"></i>
+                    </a>
+                </li>
+
+                <li class="dropdown notification-list">
                     <a class="nav-link right-bar-toggle" href="/{{.admin_url}}/userinfo">
                         <i class="dripicons-gear noti-icon"></i>
                     </a>
@@ -68,13 +74,10 @@
                             <img src="https://q1.qlogo.cn/g?b=qq&nk=php echo textuserQQ &s=640" alt="user-image"
                                 class="rounded-circle">
                         </span>
-                        <span>
-                            <span class="account-user-name">php echo textuserName</span>
-                            <span class="account-position">操作</span>
-                        </span>
+                            <span class="account-user-name" style="margin-top: .5rem;">php echo textuserName</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown"
-                        aria-labelledby="topbar-userdrop">
+                        aria-labelledby="topbar-userdrop" style="width: 96%;">
 
 
                         <!-- item-->
@@ -213,13 +216,13 @@
                 <!-- Help Box -->
                 <div class="help-box text-center">
                     <a href="javascript: void(0);" class="float-right close-btn text-body">
-                        <i class="mdi mdi-close"></i>
+                        <!-- <i class="mdi mdi-close"></i> -->
                     </a>
                     <img src="/static/images/help-icon.svg" height="90" alt="Helper Icon Image" />
                     <h5 class="mt-3">{{.info.SiteName}} V5.1.0</h5>
                     <p class="mb-3">花有重开日 人无再少年</p>
-                    <a href="https://blog.kikiw.cn/index.php/archives/65/" target="_blank"
-                        class="btn btn-outline-primary btn-sm">购买Pro版本</a>
+                    <a href="" target="_blank"
+                        class="btn btn-outline-primary btn-sm">帮助文档</a>
                 </div>
                 <!-- end Help Box -->
                 <!-- End Sidebar -->

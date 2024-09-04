@@ -206,3 +206,15 @@ func (mgr *manager) UpdateTodolists(tl model.TodoList) int64 {
 	rsu := mgr.db.Where("list_id = ?", tl.ListId).Save(&t)
 	return rsu.RowsAffected
 }
+
+// dao 根据id更新关于
+func (mgr *manager) UpdateAbouts(ab model.About) int64 {
+	// a := model.About{}
+	// mgr.db.First(&a, 1)
+	// a = ab
+	// a.Id = 1
+	// rsu := mgr.db.Where("id = ?", 1).Save(&a)
+	ab.Id = 1
+	rsu := mgr.db.Where("id = ?", 1).Save(&ab)
+	return rsu.RowsAffected
+}

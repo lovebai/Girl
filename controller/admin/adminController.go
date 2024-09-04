@@ -397,3 +397,18 @@ func UpdateTolist(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "修改成功!"})
 	}
 }
+
+// Post 更新关于对话
+func UpdateAbout(c *gin.Context) {
+	var data model.About
+	if err := c.BindJSON(&data); err != nil {
+		c.JSON(http.StatusOK, gin.H{"code": 204, "msg": "传递参数有误！"})
+		return
+	}
+	if dao.Mgr.UpdateAbouts(data) == 0 {
+		c.JSON(http.StatusOK, gin.H{"code": 203, "msg": "修改失败!"})
+	} else {
+		c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "修改成功!"})
+	}
+
+}

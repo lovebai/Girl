@@ -38,5 +38,6 @@ func AdminRouter(router *gin.Engine) {
 		admin.POST("/photo/update", adminController.UpdatePhoto)
 		admin.GET("/todolist/update/:id", adminController.UpdateTodoListPage)
 		admin.POST("/todolist/update", adminController.UpdateTolist)
+		admin.POST("/about/update", adminController.UpdateAbout)
 	}
 }

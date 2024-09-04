@@ -431,7 +431,7 @@
         )
     })
     
-    $("#aboutPost").click(function () {
+    $("#aboutUpdate").click(function () {
         var title = $("input[name='title']").val();
         var aboutimg = $("input[name='aboutimg']").val();
         var info1 = $("input[name='info1']").val();
@@ -458,8 +458,8 @@
         var infod5 = $("input[name='infod5']").val();
 
         $.ajax({
-            url: "aboutPost.php",
-            data: {
+            url: "/{{.admin_url}}/about/update",
+            data: JSON.stringify({
                 title: title,
                 aboutimg: aboutimg,
                 info1: info1,
@@ -484,14 +484,15 @@
                 infod3: infod3,
                 infod4: infod4,
                 infod5: infod5,
-            },
+            }),
             type: "POST",
-            dataType: "text",
+            dataType: "json",
             success: function (res) {
-                if (res == 1) {
-                    toastr["success"]("修改对话配置成功！", "{{.info.SiteName}}");
-                } else if (res == 0) {
-                    toastr["error"]("修改对话配置失败！", "{{.info.SiteName}}");
+                if (res.code === 200) {
+                    toastr["success"]("修改关于对话配置成功！", "{{.info.SiteName}}");
+                    setInterval("window.location.reload()", 5002);
+                } else  {
+                    toastr["error"]("修改关于对话配置失败！", "{{.info.SiteName}}");
                 }
             },
             error: function (err) {

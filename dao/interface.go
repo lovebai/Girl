@@ -48,4 +48,5 @@ type Manager interface {
 	UpdateLittles(id int, title string, text string) int64
 	UpdatePhotos(ph model.Photo) int64
 	UpdateTodolists(tl model.TodoList) int64
+	UpdateAbouts(ab model.About) int64
 }
