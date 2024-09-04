@@ -1,184 +1,194 @@
 {{define "admin/footer"}}
 
 <script>
-    $("#userPost").click(function () {
-        var Webanimation = $("select[name='Webanimation']").val();
-        var userName = $("input[name='userName']").val();
-        var userQQ = $("input[name='userQQ']").val();
-        var adminName = $("input[name='adminName']").val();
-        var pw = $("input[name='pw']").val();
-        var SCode = $("input[name='SCode']").val();
-        var cssCon = $("textarea[name='cssCon']").val();
-        var headCon = $("textarea[name='headCon']").val();
-        var footerCon = $("textarea[name='footerCon']").val();
+    //setting
+    $("#updateSetA").click(()=>{
+        let sitename = $("input[name='SiteName']").val()
+        let sitelogo = $("input[name='SiteLogo']").val()
+        let sitedesc = $("input[name='SiteDesc']").val()
+        let siteblur = $("select[name='SiteBlur']").val().trim()
+        let sitepajx = $("select[name='SitePajx']").val().trim()
+
         $.ajax({
-            url: "userPost.php",
-            data: {
-                Webanimation: Webanimation,
-                userName: userName,
-                userQQ: userQQ,
-                adminName: adminName,
-                pw: pw,
-                SCode: SCode,
-                cssCon: cssCon,
-                headCon: headCon,
-                footerCon: footerCon,
-            },
+            url: "/{{.admin_url}}/siteinfo/updateA",
+            data: JSON.stringify({sitename,sitelogo,sitedesc,siteblur:parseInt(siteblur),sitepajx:parseInt(sitepajx)}),
             type: "POST",
-            dataType: "text",
+            dataType: "json",
             success: function (res) {
-                if (res == 135) {
-                    toastr["success"]("更新登录信息成功！", "{{.info.SiteName}}");
-                    toastr["success"]("更新全局信息成功", "{{.info.SiteName}}");
-                    toastr["success"]("更新自定义内容成功", "{{.info.SiteName}}");
-                } else if (res == 046) {
-                    toastr["error"]("更新登录信息失败！", "{{.info.SiteName}}");
-                    toastr["error"]("更新全局信息失败！", "{{.info.SiteName}}");
-                    toastr["error"]("更新自定义内容失败！", "{{.info.SiteName}}");
-                } else if (res == 7) {
-                    toastr["error"]("安全码错误！", "{{.info.SiteName}}");
+                console.log(res);
+                
+                if (res.code === 200 ) {
+                    toastr["success"]("修改成功！", "{{.info.SiteName}}");
+                    // $('##updateSetA').text('修改中...');
+                    // $("##updateSetA").attr("disabled", "disabled");
+                    // setInterval("window.location.href=''", 3000);
                 } else {
-                    toastr["error"]("未知错误！", "{{.info.SiteName}}");
+                    toastr["error"]("修改失败！", "{{.info.SiteName}}");
                 }
             },
             error: function (err) {
                 toastr["error"]("网络错误 请稍后重试！", "{{.info.SiteName}}");
             }
-        }
-        )
+        })
     })
-    $("#adminPost").click(function () {
-        var title = $("input[name='title']").val();
-        var logo = $("input[name='logo']").val();
-        var writing = $("input[name='writing']").val();
-        var WebBlur = $("select[name='WebBlur']").val();
-        var WebPjax = $("select[name='WebPjax']").val();
+
+    $("#updateSetB").click(()=>{
+        let boy = $("input[name='boy']").val();
+        let girl = $("input[name='girl']").val();
+        let boyqq = $("input[name='boyqq']").val();
+        let girlqq = $("input[name='girlqq']").val();
+        let startTime = $("input[name='startTime']").val();
 
         $.ajax({
-            url: "adminPost.php",
-            data: {
-                title: title,
-                logo: logo,
-                writing: writing,
-                WebBlur: WebBlur,
-                WebPjax: WebPjax,
-            },
+            url: "/{{.admin_url}}/siteinfo/updateB",
+            data: JSON.stringify({
+                boyname:boy,
+                girlname:girl,
+                boyqq:boyqq,
+                girlqq:girlqq,
+                starttime:startTime,
+                }),
             type: "POST",
-            dataType: "text",
+            dataType: "json",
             success: function (res) {
-                if (res == 13) {
-                    toastr["success"]("基本信息修改成功！", "{{.info.SiteName}}");
-                    toastr["success"]("开关设置成功！", "{{.info.SiteName}}");
-                } else if (res == 04) {
-                    toastr["error"]("基本信息修改失败！", "{{.info.SiteName}}");
-                    toastr["error"]("开关设置修改失败！", "{{.info.SiteName}}");
+                console.log(res);
+                
+                if (res.code === 200 ) {
+                    toastr["success"]("修改成功！", "{{.info.SiteName}}");
                 } else {
-                    toastr["error"]("未知错误！", "{{.info.SiteName}}");
+                    toastr["error"]("修改失败！", "{{.info.SiteName}}");
                 }
             },
             error: function (err) {
                 toastr["error"]("网络错误 请稍后重试！", "{{.info.SiteName}}");
             }
-        }
-        )
-    })
-    $("#loveadminPost").click(function () {
-        var boy = $("input[name='boy']").val();
-        var girl = $("input[name='girl']").val();
-        var boyimg = $("input[name='boyimg']").val();
-        var girlimg = $("input[name='girlimg']").val();
-        var startTime = $("input[name='startTime']").val();
-
-        $.ajax({
-            url: "loveadminPost.php",
-            data: {
-                boy: boy,
-                girl: girl,
-                boyimg: boyimg,
-                girlimg: girlimg,
-                startTime: startTime,
-            },
-            type: "POST",
-            dataType: "text",
-            success: function (res) {
-                if (res == 1) {
-                    toastr["success"]("情侣信息修改成功！", "{{.info.SiteName}}");
-                } else if (res == 0) {
-                    toastr["error"]("情侣信息修改失败！", "{{.info.SiteName}}");
-                } else if (res == 3) {
-                    toastr["error"]("QQ号码格式错误！", "{{.info.SiteName}}");
-                }
-            },
-            error: function (err) {
-                toastr["error"]("网络错误 请稍后重试！", "{{.info.SiteName}}");
-            }
-        }
-        )
+        })
     })
 
-    $("#CardadminPost").click(function () {
-        var bgimg = $("input[name='bgimg']").val();
-        var card1 = $("input[name='card1']").val();
-        var deci1 = $("input[name='deci1']").val();
-        var card2 = $("input[name='card2']").val();
-        var deci2 = $("input[name='deci2']").val();
-        var card3 = $("input[name='card3']").val();
-        var deci3 = $("input[name='deci3']").val();
-        var icp = $("input[name='icp']").val();
-        var Copyright = $("input[name='Copyright']").val();
+    $("#updateSetC").click(()=>{
+        let bgimgurl = $("input[name='bgimg']").val();
+        let cardone = $("input[name='card1']").val();
+        let cardonedesc = $("input[name='deci1']").val();
+        let cardtwo = $("input[name='card2']").val();
+        let cardtwodesc = $("input[name='deci2']").val();
+        let cardthree = $("input[name='card3']").val();
+        let cardthreedesc = $("input[name='deci3']").val();
+        let siteicp= $("input[name='icp']").val();
+        let sitegaicp= $("input[name='gaicp']").val();
+        let sitecopyright = $("input[name='Copyright']").val();
+
         $.ajax({
-            url: "CardadminPost.php",
-            data: {
-                bgimg: bgimg,
-                card1: card1,
-                deci1: deci1,
-                card2: card2,
-                deci2: deci2,
-                card3: card3,
-                deci3: deci3,
-                icp: icp,
-                Copyright: Copyright,
-            },
+            url: "/{{.admin_url}}/siteinfo/updateC",
+            data: JSON.stringify({
+                bgimgurl,
+                cardone,
+                cardonedesc,
+                cardtwo,
+                cardtwodesc,
+                cardthree,
+                cardthreedesc,
+                siteicp,
+                sitegaicp,
+                sitecopyright
+                }),
             type: "POST",
-            dataType: "text",
+            dataType: "json",
             success: function (res) {
-                if (res == 1) {
-                    toastr["success"]("卡片信息修改成功！", "{{.info.SiteName}}");
-                } else if (res == 0) {
-                    toastr["error"]("卡片信息修改失败！", "{{.info.SiteName}}");
+                console.log(res);
+                
+                if (res.code === 200 ) {
+                    toastr["success"]("修改成功！", "{{.info.SiteName}}");
+                } else {
+                    toastr["error"]("修改失败！", "{{.info.SiteName}}");
                 }
             },
             error: function (err) {
                 toastr["error"]("网络错误 请稍后重试！", "{{.info.SiteName}}");
             }
-        }
-        )
+        })
     })
 
-    $("#leavPPost").click(function () {
-        var jiequ = $("input[name='jiequ']").val();
-        var lanjiezf = $("textarea[name='lanjiezf']").val();
+    $("#updateSetD").click(()=>{
+        let avatershowtype = $("select[name='AvaterShowType']").val().trim();
+        let linktype = $("select[name='LinkType']").val().trim();
+        let linkapiurl = $("input[name='LinkApiUrl']").val();
+        let linkapitoken = $("input[name='LinkApiToken']").val();
         $.ajax({
-            url: "leavPPost.php",
-            data: {
-                jiequ: jiequ,
-                lanjiezf: lanjiezf,
-            },
+            url: "/{{.admin_url}}/siteinfo/updateD",
+            data: JSON.stringify({
+                avatershowtype:parseInt(avatershowtype),
+                linktype:parseInt(linktype),
+                linkapiurl,
+                linkapitoken,
+                }),
             type: "POST",
-            dataType: "text",
+            dataType: "json",
             success: function (res) {
-                if (res == 1) {
-                    toastr["success"]("留言设置修改成功！", "{{.info.SiteName}}");
-                } else if (res == 0) {
-                    toastr["error"]("留言设置修改失败！", "{{.info.SiteName}}");
+                console.log(res);
+                
+                if (res.code === 200 ) {
+                    toastr["success"]("修改成功！", "{{.info.SiteName}}");
+                } else {
+                    toastr["error"]("修改失败！", "{{.info.SiteName}}");
                 }
             },
             error: function (err) {
                 toastr["error"]("网络错误 请稍后重试！", "{{.info.SiteName}}");
             }
-        }
-        )
+        })
     })
+
+    $("#updateSetE").click(()=>{
+        let lenvingsum = $("input[name='lenvingsum']").val();
+        let blockword = $("textarea[name='blockword']").val();
+        let siteregexp =  $("textarea[name='siteregexp']").val();
+
+        $.ajax({
+            url: "/{{.admin_url}}/siteinfo/updateE",
+            data: JSON.stringify({lenvingsum:parseInt(lenvingsum),blockword,siteregexp}),
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                console.log(res);
+                
+                if (res.code === 200 ) {
+                    toastr["success"]("修改成功！", "{{.info.SiteName}}");
+                } else {
+                    toastr["error"]("修改失败！", "{{.info.SiteName}}");
+                }
+            },
+            error: function (err) {
+                toastr["error"]("网络错误 请稍后重试！", "{{.info.SiteName}}");
+            }
+        })
+    })
+
+    $("#updateSetF").click(()=>{
+        let siteheadstyle = $("textarea[name='siteheadstyle']").val();
+        let siteheadlink = $("textarea[name='siteheadlink']").val();
+        let sitefootjs = $("textarea[name='sitefootjs']").val();
+        let sitefootlink = $("textarea[name='sitefootlink']").val();
+
+        $.ajax({
+            url: "/{{.admin_url}}/siteinfo/updateF",
+            data: JSON.stringify({siteheadstyle,siteheadlink,sitefootjs,sitefootlink}),
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                console.log(res);
+                
+                if (res.code === 200 ) {
+                    toastr["success"]("修改成功！", "{{.info.SiteName}}");
+                } else {
+                    toastr["error"]("修改失败！", "{{.info.SiteName}}");
+                }
+            },
+            error: function (err) {
+                toastr["error"]("网络错误 请稍后重试！", "{{.info.SiteName}}");
+            }
+        })
+    })
+
 
     $("#littleUpdate").click(function () {
         var id = $("input[name='aid']").val();
@@ -575,6 +585,37 @@
         };
 
     })
+
+$(document).ready(function() {
+  var $selectElement = $('#example-select1');
+  var $qweElements = $('.qwe');
+
+  $selectElement.on('change', function() {
+    var $selectedOptions = $('option:selected', this);
+    $selectedOptions.each(function() {
+      var selectedValue = $(this).val();
+      if (selectedValue === '2' ) {
+        $qweElements.show();
+      } else {
+        $qweElements.hide();
+        $("input[name='LinkApiUrl']").val("");
+        $("input[name='LinkApiToken']").val("");
+      }
+    });
+  });
+
+  // 页面加载时,根据 select 元素的初始选中值,显示或隐藏 qwe 类的元素
+  var $initialSelectedOptions = $selectElement.find('option:selected');
+  if ($initialSelectedOptions.length > 0) {
+    var initialSelectedValue = $initialSelectedOptions.val();
+    if (initialSelectedValue === '2') {
+      $qweElements.show();
+    } else {
+      $qweElements.hide();
+    }
+  }
+});
+
 
 </script>
 

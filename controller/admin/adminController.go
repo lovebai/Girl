@@ -162,6 +162,16 @@ func UserInfoPage(c *gin.Context) {
 	})
 }
 
+func OtherSetPage(c *gin.Context) {
+	siteinfo := dao.Mgr.GetSettingInfo()
+	c.HTML(http.StatusOK, "admin/otherSet", gin.H{
+		"title":     "其他设置",
+		"admin_url": getAdminUrl(),
+		"countSum":  getAllCount(),
+		"info":      siteinfo,
+	})
+}
+
 func UpdateLittlePage(c *gin.Context) {
 	id := c.Param("id")
 	lid, err := strconv.Atoi(id)
@@ -411,4 +421,88 @@ func UpdateAbout(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "修改成功!"})
 	}
 
+}
+
+// Post 更新设置A
+func UpdateSiteInfoA(c *gin.Context) {
+	var data model.SettingA
+	if err := c.BindJSON(&data); err != nil {
+		c.JSON(http.StatusOK, gin.H{"code": 204, "msg": "传递参数有误！"})
+		return
+	}
+	if dao.Mgr.UpdateSettingA(data) == 0 {
+		c.JSON(http.StatusOK, gin.H{"code": 203, "msg": "修改失败!"})
+	} else {
+		c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "修改成功!"})
+	}
+}
+
+// Post 更新设置B
+func UpdateSiteInfoB(c *gin.Context) {
+	var data model.SettingB
+	if err := c.BindJSON(&data); err != nil {
+		c.JSON(http.StatusOK, gin.H{"code": 204, "msg": "传递参数有误！"})
+		return
+	}
+	if dao.Mgr.UpdateSettingB(data) == 0 {
+		c.JSON(http.StatusOK, gin.H{"code": 203, "msg": "修改失败!"})
+	} else {
+		c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "修改成功!"})
+	}
+}
+
+// Post 更新设置C
+func UpdateSiteInfoC(c *gin.Context) {
+	var data model.SettingC
+	if err := c.BindJSON(&data); err != nil {
+		c.JSON(http.StatusOK, gin.H{"code": 204, "msg": "传递参数有误！"})
+		return
+	}
+	if dao.Mgr.UpdateSettingC(data) == 0 {
+		c.JSON(http.StatusOK, gin.H{"code": 203, "msg": "修改失败!"})
+	} else {
+		c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "修改成功!"})
+	}
+}
+
+// Post 更新设置D
+func UpdateSiteInfoD(c *gin.Context) {
+	var data model.SettingD
+	if err := c.BindJSON(&data); err != nil {
+		c.JSON(http.StatusOK, gin.H{"code": 204, "msg": "传递参数有误！"})
+		return
+	}
+	if dao.Mgr.UpdateSettingD(data) == 0 {
+		c.JSON(http.StatusOK, gin.H{"code": 203, "msg": "修改失败!"})
+	} else {
+		c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "修改成功!"})
+	}
+}
+
+// Post 更新设置E
+func UpdateSiteInfoE(c *gin.Context) {
+	var data model.SettingE
+	if err := c.BindJSON(&data); err != nil {
+		c.JSON(http.StatusOK, gin.H{"code": 204, "msg": "传递参数有误！"})
+		return
+	}
+	if dao.Mgr.UpdateSettingE(data) == 0 {
+		c.JSON(http.StatusOK, gin.H{"code": 203, "msg": "修改失败!"})
+	} else {
+		c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "修改成功!"})
+	}
+}
+
+// Post 更新设置F
+func UpdateSiteInfoF(c *gin.Context) {
+	var data model.SettingF
+	if err := c.BindJSON(&data); err != nil {
+		c.JSON(http.StatusOK, gin.H{"code": 204, "msg": "传递参数有误！"})
+		return
+	}
+	if dao.Mgr.UpdateSettingF(data) == 0 {
+		c.JSON(http.StatusOK, gin.H{"code": 203, "msg": "修改失败!"})
+	} else {
+		c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "修改成功!"})
+	}
 }

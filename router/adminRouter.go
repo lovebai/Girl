@@ -21,6 +21,7 @@ func AdminRouter(router *gin.Engine) {
 		admin.GET("/todolist/add", adminController.TodoListAddPage)
 		admin.GET("/about", adminController.AboutPage)
 		admin.GET("/userinfo", adminController.UserInfoPage)
+		admin.GET("/otherset", adminController.OtherSetPage)
 		//
 		admin.POST("/leaving/del", adminController.DeleteByid)
 		admin.POST("/little/del", adminController.DeleteByid)
@@ -39,5 +40,12 @@ func AdminRouter(router *gin.Engine) {
 		admin.GET("/todolist/update/:id", adminController.UpdateTodoListPage)
 		admin.POST("/todolist/update", adminController.UpdateTolist)
 		admin.POST("/about/update", adminController.UpdateAbout)
+		admin.POST("/siteinfo/updateA", adminController.UpdateSiteInfoA)
+		admin.POST("/siteinfo/updateB", adminController.UpdateSiteInfoB)
+		admin.POST("/siteinfo/updateC", adminController.UpdateSiteInfoC)
+		admin.POST("/siteinfo/updateD", adminController.UpdateSiteInfoD)
+		admin.POST("/siteinfo/updateE", adminController.UpdateSiteInfoE)
+		admin.POST("/siteinfo/updateF", adminController.UpdateSiteInfoF)
+
 	}
 }

@@ -49,4 +49,11 @@ type Manager interface {
 	UpdatePhotos(ph model.Photo) int64
 	UpdateTodolists(tl model.TodoList) int64
 	UpdateAbouts(ab model.About) int64
+
+	UpdateSettingA(st model.SettingA) int64
+	UpdateSettingB(st model.SettingB) int64
+	UpdateSettingC(st model.SettingC) int64
+	UpdateSettingD(st model.SettingD) int64
+	UpdateSettingE(st model.SettingE) int64
+	UpdateSettingF(st model.SettingF) int64
 }

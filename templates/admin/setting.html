@@ -8,39 +8,39 @@
             <div class="card-body">
                 <h4 class="header-title mb-3">基本设置</h4>
 
-                <form class="needs-validation" action="adminPost.php" method="post" onsubmit="return check()" novalidate>
+                <form class="needs-validation">
                     <div class="form-group mb-3">
                         <label for="validationCustom01">站点标题</label>
                         <input type="text" class="form-control"  placeholder="请输入站点标题"
-                               name="title" value="{{.info.SiteName}}" required>
+                               name="SiteName" value="{{.info.SiteName}}" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom02">站点LOGO</label>
                         <input type="text" class="form-control" placeholder="请填写站点LOGO文字"
-                               name="logo" value="{{.info.SiteLogo}}" required>
+                               name="SiteLogo" value="{{.info.SiteLogo}}" required>
 
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom03">站点文案</label>
                         <input type="text" class="form-control"  placeholder="显示在顶部的文案"
-                               name="writing" value="{{.info.SiteDesc}}" required>
+                               name="SiteDesc" value="{{.info.SiteDesc}}" required>
                     </div>
                     <div class="form-group">
                         <label for="validationCustom06">是否关闭头像背景高斯模糊</label>
-                        <select class="form-control" id="example-select" name="WebBlur">
+                        <select class="form-control" id="example-select" name="SiteBlur">
                             <option value="1" {{if eq .info.SiteBlur 1}} selected {{end}}>开启</option>
                             <option value="0" {{if eq .info.SiteBlur 0}} selected {{end}}>关闭</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="validationCustom07">是否开启前端无刷新加载</label>
-                        <select class="form-control" id="example-select" name="WebPjax">
+                        <select class="form-control" id="example-select" name="SitePajx">
                             <option value="1" {{if eq .info.SitePajx  1}} selected {{end}}>开启</option>
                             <option value="0" {{if eq .info.SitePajx  0}} selected {{end}}>关闭</option>
                         </select>
                     </div>
                     <div class="form-group mb-3 text_right">
-                        <button class="btn btn-primary" type="button" id="adminPost">提交修改</button>
+                        <button class="btn btn-primary" type="button" id="updateSetA">提交修改</button>
                     </div>
                 </form>
 
@@ -53,7 +53,7 @@
             <div class="card-body">
                 <h4 class="header-title mb-3">情侣配置</h4>
 
-                <form class="needs-validation" action="loveadminPost.php" method="post" novalidate>
+                <form class="needs-validation">
                     <div class="form-group mb-3">
                         <label for="validationCustom01">男主Nanme</label>
                         <input type="text" class="form-control"  placeholder="请输入男主Name"
@@ -68,13 +68,13 @@
                     <div class="form-group mb-3">
                         <label for="validationCustom03">男主QQ</label>
                         <input type="text" class="form-control"  placeholder="请输入男主QQ（用于显示头像）"
-                               name="boyimg" value="{{.info.BoyQq}}" required>
+                               name="boyqq" value="{{.info.BoyQq}}" required>
 
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom04">女主QQ</label>
                         <input type="text" class="form-control"  placeholder="请输入女主QQ（用于显示头像）"
-                               name="girlimg" value="{{.info.GirlQq}}" required>
+                               name="girlqq" value="{{.info.GirlQq}}" required>
 
                     </div>
                     <div class="form-group mb-3">
@@ -83,7 +83,7 @@
                                name="startTime" value="{{.info.StartTime|ConvertTimestampToString}}" required>
                     </div>
                     <div class="form-group mb-3 text_right">
-                        <button class="btn btn-primary" type="button" id="loveadminPost">提交修改</button>
+                        <button class="btn btn-primary" type="button" id="updateSetB">提交修改</button>
                     </div>
                 </form>
 
@@ -95,8 +95,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="header-title mb-3">卡片配置&版权配置</h4>
-
-                <form class="needs-validation" action="CardadminPost.php" method="post" novalidate>
+                <form class="needs-validation">
                     <div class="form-group mb-3">
                         <label for="validationCustom01">背景图片URL地址</label>
                         <input type="text" class="form-control"  placeholder="请输入图片地址"
@@ -151,7 +150,7 @@
                                name="Copyright" value="{{.info.SiteCopyright}}" required>
                     </div>
                     <div class="form-group mb-3 text_right">
-                        <button class="btn btn-primary" type="button" id="CardadminPost">提交修改</button>
+                        <button class="btn btn-primary" type="button" id="updateSetC">提交修改</button>
                     </div>
                 </form>
 

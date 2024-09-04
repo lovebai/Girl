@@ -218,3 +218,82 @@ func (mgr *manager) UpdateAbouts(ab model.About) int64 {
 	rsu := mgr.db.Where("id = ?", 1).Save(&ab)
 	return rsu.RowsAffected
 }
+
+// dao 根据id更新设置A
+func (mgr *manager) UpdateSettingA(st model.SettingA) int64 {
+	info := model.Siteinfo{}
+	mgr.db.First(&info, 1)
+	info.SiteName = st.SiteName
+	info.SiteLogo = st.SiteLogo
+	info.SiteDesc = st.SiteDesc
+	info.SiteBlur = st.SiteBlur
+	info.SitePajx = st.SitePajx
+	rsu := mgr.db.Where("option_id = ?", info.OptionId).Save(&info)
+	return rsu.RowsAffected
+}
+
+// dao 根据id更新设置B
+func (mgr *manager) UpdateSettingB(st model.SettingB) int64 {
+	info := model.Siteinfo{}
+	mgr.db.First(&info, 1)
+	info.BoyName = st.BoyName
+	info.GirlName = st.GirlName
+	info.BoyQq = st.BoyQq
+	info.GirlQq = st.GirlQq
+	info.StartTime = utlis.ConvertToTimestamp(st.StartTime)
+	rsu := mgr.db.Where("option_id = ?", info.OptionId).Save(&info)
+	return rsu.RowsAffected
+}
+
+// dao 根据id更新设置C
+func (mgr *manager) UpdateSettingC(st model.SettingC) int64 {
+	info := model.Siteinfo{}
+	mgr.db.First(&info, 1)
+	info.BgimgUrl = st.BgimgUrl
+	info.CardOne = st.CardOne
+	info.CardOneDesc = st.CardOneDesc
+	info.CardTwo = st.CardTwo
+	info.CardTwoDesc = st.CardTwoDesc
+	info.CardThree = st.CardThree
+	info.CardThreeDesc = st.CardThreeDesc
+	info.SiteIcp = st.SiteIcp
+	info.SiteGaIcp = st.SiteGaIcp
+	info.SiteCopyright = st.SiteCopyright
+	rsu := mgr.db.Where("option_id = ?", info.OptionId).Save(&info)
+	return rsu.RowsAffected
+}
+
+// dao 根据id更新设置D
+func (mgr *manager) UpdateSettingD(st model.SettingD) int64 {
+	info := model.Siteinfo{}
+	mgr.db.First(&info, 1)
+	info.AvaterShowType = st.AvaterShowType
+	info.LinkType = st.LinkType
+	info.LinkApiUrl = st.LinkApiUrl
+	info.LinkApiToken = st.LinkApiToken
+	rsu := mgr.db.Where("option_id = ?", info.OptionId).Save(&info)
+	return rsu.RowsAffected
+}
+
+// dao 根据id更新设置E
+func (mgr *manager) UpdateSettingE(st model.SettingE) int64 {
+	info := model.Siteinfo{}
+	mgr.db.First(&info, 1)
+	info.LenvingSum = st.LenvingSum
+	info.BlockWord = st.BlockWord
+	info.SiteRegexp = st.SiteRegexp
+	rsu := mgr.db.Where("option_id = ?", info.OptionId).Save(&info)
+	return rsu.RowsAffected
+}
+
+// dao 根据id更新设置F
+func (mgr *manager) UpdateSettingF(st model.SettingF) int64 {
+	info := model.Siteinfo{}
+	mgr.db.First(&info, 1)
+	info.SiteHeadStyle = st.SiteHeadStyle
+	info.SiteHeadLink = st.SiteHeadLink
+	info.SiteFootJs = st.SiteFootJs
+	info.SiteFootLink = st.SiteFootLink
+	rsu := mgr.db.Where("option_id = ?", info.OptionId).Save(&info)
+	return rsu.RowsAffected
+}

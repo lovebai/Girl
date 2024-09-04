@@ -2,30 +2,38 @@ package model
 
 //站点设置
 type Siteinfo struct {
-	OptionId      int
-	SiteName      string
-	SiteLogo      string
-	SiteDesc      string
-	SiteBlur      int
-	SitePajx      int
-	BoyName       string
-	GirlName      string
-	BoyQq         string
-	GirlQq        string
-	StartTime     int64
-	BgimgUrl      string
-	CardOne       string
-	CardOneDesc   string
-	CardTwo       string
-	CardTwoDesc   string
-	CardThree     string
-	CardThreeDesc string
-	SiteIcp       string
-	SiteGaIcp     string
-	SiteCopyright string
-	LenvingSum    int
-	SiteHeadStyle string
-	SiteRegexp    string
+	OptionId       int
+	SiteName       string
+	SiteLogo       string
+	SiteDesc       string
+	SiteBlur       int
+	SitePajx       int
+	BoyName        string
+	GirlName       string
+	BoyQq          string
+	GirlQq         string
+	StartTime      int64
+	BgimgUrl       string
+	CardOne        string
+	CardOneDesc    string
+	CardTwo        string
+	CardTwoDesc    string
+	CardThree      string
+	CardThreeDesc  string
+	SiteIcp        string
+	SiteGaIcp      string
+	SiteCopyright  string
+	LenvingSum     int
+	SiteHeadStyle  string
+	SiteHeadLink   string
+	SiteFootJs     string
+	SiteFootLink   string
+	SiteRegexp     string
+	BlockWord      string
+	AvaterShowType int
+	LinkType       int
+	LinkApiUrl     string
+	LinkApiToken   string
 }
 
 //文章

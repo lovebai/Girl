@@ -1,0 +1,125 @@
+{{define "admin/otherSet"}}
+{{template "admin/header" .}}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mb-3">站点图片配置</h4>
+
+                <form class="needs-validation" novalidate>
+                    <div class="form-group">
+                        <label for="validationCustom01">头像显示方式</label>
+                        <select class="form-control" id="example-select" name="AvaterShowType">
+                            <option value="0" {{if eq .info.AvaterShowType 0}} selected {{end}}> 获取 QQ 头像</option>
+                            <option value="1" {{if eq .info.AvaterShowType 1}} selected {{end}} >使用图片链接</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="validationCustom01">设置图片方式</label>
+                        <select class="form-control" id="example-select1" name="LinkType">
+                            <option value="0" {{if eq .info.LinkType 0}} selected {{end}} >外部链接</option>
+                            <option value="1" {{if eq .info.LinkType 1}} selected {{end}}  >本地上传</option>
+                            <option value="2" {{if eq .info.LinkType 2}} selected {{end}}  >简单图床</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3 qwe">
+                        <label for="validationCustom05">简单图床Api地址</label>
+                        <span class="badge badge-success-lighten"style="font-size: 0.8rem;">使用手册：https://i.obai.cc/docs/#/</span>
+                        <input type="text" class="form-control" id="validationCustom05" placeholder="请输入Api调用地址，如：https://i.obai.cc/api/index.php"
+                               name="LinkApiUrl" value="{{.info.LinkApiUrl}}" required>
+                    </div>
+                    <div class="form-group mb-3 qwe">
+                        <label for="validationCustom05">简单图床密钥</label>
+                        <input type="text" class="form-control" id="validationCustom05" placeholder="请输入简单图床Token"
+                               name="LinkApiToken" value="{{.info.LinkApiToken}}" required>
+                    </div>
+                    <div class="form-group mb-3 text_right">
+                        <button class="btn btn-primary"  type="button" id="updateSetD">提交修改</button>
+                    </div>
+                </form>
+
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mb-3">前端留言页配置</h4>
+
+                <form class="needs-validation">
+                    <div class="form-group mb-3">
+                        <label for="validationCustom05">前端显示最新N条留言
+                            <span class="badge badge-danger-lighten"> 请填纯数字 截取数量太多会影响加载速度</span></label>
+                        <input type="text" class="form-control" id="validationCustom05" placeholder="请输入需要截取的数量 如：20"
+                               name="lenvingsum" value="{{.info.LenvingSum}}" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="validationCustom05">拦截违禁词
+                            <span class="badge badge-danger-lighten"> 可以填入需要拦截的词语，通过“|”符合分割</span></label>
+                        <textarea name="blockword" data-toggle="maxlength" class="form-control" maxlength="225" rows="5"
+                                  placeholder="请输入违禁词">{{.info.BlockWord}}</textarea>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="validationCustom05">拦截非法字符
+                            <span class="badge badge-danger-lighten"> 特殊字符拦截可以防止xss注入</span></label>
+                        <textarea data-toggle="maxlength" class="form-control" maxlength="225" rows="5" name="siteregexp"
+                                  placeholder="请输入非法字符（请务必设置 否则无法过滤特殊字符 会存在xss漏洞注入）">{{.info.SiteRegexp}}</textarea>
+                    </div>
+                    <div class="form-group mb-3 text_right">
+                        <button class="btn btn-primary" type="button" id="updateSetE">提交修改</button>
+                    </div>
+                </form>
+
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mb-3">其他配置</h4>
+                <form class="needs-validation">
+                    <div class="form-group mb-3">
+                        <label for="validationCustom05">自定义前台全局CSS样式
+                            <span class="badge badge-primary-lighten">请按CSS格式填写你的代码</span></label>
+                        <textarea name="siteheadstyle"  class="form-control"  rows="5"
+                                  placeholder="">{{.info.SiteHeadStyle}} </textarea>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="validationCustom05">自定义头部标签
+                            <span class="badge badge-primary-lighten">可填写HTML标签 CSS外链</span></label>
+                        <textarea name="siteheadlink"  class="form-control"  rows="5"
+                                  placeholder="">{{.info.SiteHeadLink}}</textarea>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="validationCustom05">自定义前台全局Javascript
+                            <span class="badge badge-primary-lighten">请按Javascript格式填写你的代码</span></label>
+                        <textarea name="sitefootjs"  class="form-control"  rows="5"
+                                  placeholder="">{{.info.SiteFootJs}}</textarea>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="validationCustom05">自定义底部标签
+                            <span class="badge badge-primary-lighten">可填写HTML标签 js外链</span></label>
+                        <textarea name="sitefootlink"  class="form-control"  rows="5"
+                                  placeholder="">{{.info.SiteFootLink}}</textarea>
+                    </div>
+
+                    <div class="form-group mb-3 text_right">
+                        <button class="btn btn-primary"  type="button" id="updateSetF">提交修改</button>
+                    </div>
+                </form>
+
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+
+</div>
+
+{{template "admin/footer" .}}
+
+</body>
+</html>
+{{end}}
