@@ -41,34 +41,6 @@ func LoginPage(c *gin.Context) {
 	})
 }
 
-func Login(c *gin.Context) {
-	username := c.PostForm("username")
-	password := c.PostForm("password")
-	fmt.Printf("username: %v\n", username)
-	fmt.Printf("password: %v\n", password)
-	if len(username) == 0 || len(password) == 0 {
-		c.JSON(http.StatusOK, gin.H{"code": 204, "msg": "用户名和密码不能为空！"})
-		return
-	}
-
-	state, user := dao.Mgr.GetUserinfoByName(username)
-	if state == 0 {
-		c.JSON(http.StatusOK, gin.H{"code": 203, "msg": "用户名不存在！"})
-		return
-	}
-
-	if user.Password != utlis.MD5Encrypt(password) {
-		c.JSON(http.StatusOK, gin.H{"code": 202, "msg": "密码错误！"})
-		return
-	}
-
-	session := sessions.Default(c)
-	session.Options(sessions.Options{Path: "/", Domain: "localhost", MaxAge: 3600 * 12}) //12小时过期
-	session.Set("username", username)
-	session.Save()
-	c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "恭喜，登录成功啦！"})
-}
-
 func IndexPage(c *gin.Context) {
 	siteinfo := dao.Mgr.GetSettingInfo()
 	leavingList := dao.Mgr.GetLenvingListAdmin()
@@ -537,4 +509,62 @@ func UpdateSiteInfoF(c *gin.Context) {
 	} else {
 		c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "修改成功!"})
 	}
+}
+
+// 登录
+func Login(c *gin.Context) {
+	username := c.PostForm("username")
+	password := c.PostForm("password")
+	fmt.Printf("username: %v\n", username)
+	fmt.Printf("password: %v\n", password)
+	if len(username) == 0 || len(password) == 0 {
+		c.JSON(http.StatusOK, gin.H{"code": 204, "msg": "用户名和密码不能为空！"})
+		return
+	}
+
+	state, user := dao.Mgr.GetUserinfoByName(username)
+	if state == 0 {
+		c.JSON(http.StatusOK, gin.H{"code": 203, "msg": "用户名不存在！"})
+		return
+	}
+
+	if user.Password != utlis.MD5Encrypt(password) {
+		c.JSON(http.StatusOK, gin.H{"code": 202, "msg": "密码错误！"})
+		return
+	}
+
+	session := sessions.Default(c)
+	session.Options(sessions.Options{Path: "/", Domain: "localhost", MaxAge: 3600 * 12}) //12小时过期
+	session.Set("username", username)
+	session.Save()
+	c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "恭喜，登录成功啦！"})
+}
+
+// 退出登录
+func Logout(c *gin.Context) {
+	username := c.PostForm("username")
+	password := c.PostForm("password")
+	fmt.Printf("username: %v\n", username)
+	fmt.Printf("password: %v\n", password)
+	if len(username) == 0 || len(password) == 0 {
+		c.JSON(http.StatusOK, gin.H{"code": 204, "msg": "用户名和密码不能为空！"})
+		return
+	}
+
+	state, user := dao.Mgr.GetUserinfoByName(username)
+	if state == 0 {
+		c.JSON(http.StatusOK, gin.H{"code": 203, "msg": "用户名不存在！"})
+		return
+	}
+
+	if user.Password != utlis.MD5Encrypt(password) {
+		c.JSON(http.StatusOK, gin.H{"code": 202, "msg": "密码错误！"})
+		return
+	}
+
+	session := sessions.Default(c)
+	session.Options(sessions.Options{Path: "/", Domain: "localhost", MaxAge: 3600 * 12}) //12小时过期
+	session.Set("username", username)
+	session.Save()
+	c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "恭喜，登录成功啦！"})
 }

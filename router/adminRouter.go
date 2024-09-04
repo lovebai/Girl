@@ -53,5 +53,7 @@ func AdminRouter(router *gin.Engine) {
 		admin.POST("/siteinfo/updateE", adminController.UpdateSiteInfoE)
 		admin.POST("/siteinfo/updateF", adminController.UpdateSiteInfoF)
 
+		admin.GET("/logout", adminController.Logout)
+
 	}
 }
