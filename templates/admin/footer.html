@@ -28,21 +28,21 @@
             dataType: "text",
             success: function (res) {
                 if (res == 135) {
-                    toastr["success"]("更新登录信息成功！", "Like_Girl_Golang");
-                    toastr["success"]("更新全局信息成功", "Like_Girl_Golang");
-                    toastr["success"]("更新自定义内容成功", "Like_Girl_Golang");
+                    toastr["success"]("更新登录信息成功！", "{{.info.SiteName}}");
+                    toastr["success"]("更新全局信息成功", "{{.info.SiteName}}");
+                    toastr["success"]("更新自定义内容成功", "{{.info.SiteName}}");
                 } else if (res == 046) {
-                    toastr["error"]("更新登录信息失败！", "Like_Girl_Golang");
-                    toastr["error"]("更新全局信息失败！", "Like_Girl_Golang");
-                    toastr["error"]("更新自定义内容失败！", "Like_Girl_Golang");
+                    toastr["error"]("更新登录信息失败！", "{{.info.SiteName}}");
+                    toastr["error"]("更新全局信息失败！", "{{.info.SiteName}}");
+                    toastr["error"]("更新自定义内容失败！", "{{.info.SiteName}}");
                 } else if (res == 7) {
-                    toastr["error"]("安全码错误！", "Like_Girl_Golang");
+                    toastr["error"]("安全码错误！", "{{.info.SiteName}}");
                 } else {
-                    toastr["error"]("未知错误！", "Like_Girl_Golang");
+                    toastr["error"]("未知错误！", "{{.info.SiteName}}");
                 }
             },
             error: function (err) {
-                toastr["error"]("网络错误 请稍后重试！", "Like_Girl_Golang");
+                toastr["error"]("网络错误 请稍后重试！", "{{.info.SiteName}}");
             }
         }
         )
@@ -67,17 +67,17 @@
             dataType: "text",
             success: function (res) {
                 if (res == 13) {
-                    toastr["success"]("基本信息修改成功！", "Like_Girl_Golang");
-                    toastr["success"]("开关设置成功！", "Like_Girl_Golang");
+                    toastr["success"]("基本信息修改成功！", "{{.info.SiteName}}");
+                    toastr["success"]("开关设置成功！", "{{.info.SiteName}}");
                 } else if (res == 04) {
-                    toastr["error"]("基本信息修改失败！", "Like_Girl_Golang");
-                    toastr["error"]("开关设置修改失败！", "Like_Girl_Golang");
+                    toastr["error"]("基本信息修改失败！", "{{.info.SiteName}}");
+                    toastr["error"]("开关设置修改失败！", "{{.info.SiteName}}");
                 } else {
-                    toastr["error"]("未知错误！", "Like_Girl_Golang");
+                    toastr["error"]("未知错误！", "{{.info.SiteName}}");
                 }
             },
             error: function (err) {
-                toastr["error"]("网络错误 请稍后重试！", "Like_Girl_Golang");
+                toastr["error"]("网络错误 请稍后重试！", "{{.info.SiteName}}");
             }
         }
         )
@@ -102,15 +102,15 @@
             dataType: "text",
             success: function (res) {
                 if (res == 1) {
-                    toastr["success"]("情侣信息修改成功！", "Like_Girl_Golang");
+                    toastr["success"]("情侣信息修改成功！", "{{.info.SiteName}}");
                 } else if (res == 0) {
-                    toastr["error"]("情侣信息修改失败！", "Like_Girl_Golang");
+                    toastr["error"]("情侣信息修改失败！", "{{.info.SiteName}}");
                 } else if (res == 3) {
-                    toastr["error"]("QQ号码格式错误！", "Like_Girl_Golang");
+                    toastr["error"]("QQ号码格式错误！", "{{.info.SiteName}}");
                 }
             },
             error: function (err) {
-                toastr["error"]("网络错误 请稍后重试！", "Like_Girl_Golang");
+                toastr["error"]("网络错误 请稍后重试！", "{{.info.SiteName}}");
             }
         }
         )
@@ -143,13 +143,13 @@
             dataType: "text",
             success: function (res) {
                 if (res == 1) {
-                    toastr["success"]("卡片信息修改成功！", "Like_Girl_Golang");
+                    toastr["success"]("卡片信息修改成功！", "{{.info.SiteName}}");
                 } else if (res == 0) {
-                    toastr["error"]("卡片信息修改失败！", "Like_Girl_Golang");
+                    toastr["error"]("卡片信息修改失败！", "{{.info.SiteName}}");
                 }
             },
             error: function (err) {
-                toastr["error"]("网络错误 请稍后重试！", "Like_Girl_Golang");
+                toastr["error"]("网络错误 请稍后重试！", "{{.info.SiteName}}");
             }
         }
         )
@@ -168,13 +168,13 @@
             dataType: "text",
             success: function (res) {
                 if (res == 1) {
-                    toastr["success"]("留言设置修改成功！", "Like_Girl_Golang");
+                    toastr["success"]("留言设置修改成功！", "{{.info.SiteName}}");
                 } else if (res == 0) {
-                    toastr["error"]("留言设置修改失败！", "Like_Girl_Golang");
+                    toastr["error"]("留言设置修改失败！", "{{.info.SiteName}}");
                 }
             },
             error: function (err) {
-                toastr["error"]("网络错误 请稍后重试！", "Like_Girl_Golang");
+                toastr["error"]("网络错误 请稍后重试！", "{{.info.SiteName}}");
             }
         }
         )
@@ -185,7 +185,7 @@
         var articletitle = $("input[name='articletitle']").val();
         var articletext = $("textarea[name='articletext']").val();
         if (articletitle.trim().length===0 || articletext.trim().length===0)  {
-            toastr["warning"]("文章标题或内容不能为空", "Like_Girl_Golang");
+            toastr["warning"]("文章标题或内容不能为空", "{{.info.SiteName}}");
             return false
         }
 
@@ -202,16 +202,16 @@
                 console.log(res);
                 
                 if (res.code === 200 ) {
-                    toastr["success"]("文章修改成功！", "Like_Girl_Golang");
+                    toastr["success"]("文章修改成功！", "{{.info.SiteName}}");
                     $('#littleUpdate').text('修改中...');
                     $("#littleUpdate").attr("disabled", "disabled");
                     setInterval("window.location.href='/{{.admin_url}}/little'", 3000);
                 } else {
-                    toastr["error"]("文章修改失败！", "Like_Girl_Golang");
+                    toastr["error"]("文章修改失败！", "{{.info.SiteName}}");
                 }
             },
             error: function (err) {
-                toastr["error"]("网络错误 请稍后重试！", "Like_Girl_Golang");
+                toastr["error"]("网络错误 请稍后重试！", "{{.info.SiteName}}");
             }
         }
         )
@@ -221,7 +221,7 @@
         var articletitle = $("input[name='articletitle']").val();
         var articletext = $("textarea[name='articletext']").val();
         if (articletitle.trim().length===0 || articletext.trim().length===0)  {
-            toastr["warning"]("文章标题或内容不能为空", "Like_Girl_Golang");
+            toastr["warning"]("文章标题或内容不能为空", "{{.info.SiteName}}");
             return false
         }
         $.ajax({
@@ -237,16 +237,16 @@
                 console.log(res);
                 
                 if (res.code === 200) {
-                    toastr["success"]("新增文章成功！", "Like_Girl_Golang");
+                    toastr["success"]("新增文章成功！", "{{.info.SiteName}}");
                     $('#littleAddPost').text('发布中...');
                     $("#littleAddPost").attr("disabled", "disabled");
                     setInterval("window.location.href='/{{.admin_url}}/little'", 3000);
                 } else {
-                    toastr["error"]("新增文章失败！", "Like_Girl_Golang");
+                    toastr["error"]("新增文章失败！", "{{.info.SiteName}}");
                 }
             },
             error: function (err) {
-                toastr["error"]("网络错误 请稍后重试！", "Like_Girl_Golang");
+                toastr["error"]("网络错误 请稍后重试！", "{{.info.SiteName}}");
             }
         }
         )
@@ -257,7 +257,7 @@
         var id = $("input[name='iid']").val();
         var imgUrl = $("input[name='imgUrl']").val();
         if (imgDatd.trim().length===0 || imgText.trim().length===0 || imgUrl.trim().length===0)  {
-            toastr["warning"]("图片发布日期、描述、图片地址均不能为空", "Like_Girl_Golang");
+            toastr["warning"]("图片发布日期、描述、图片地址均不能为空", "{{.info.SiteName}}");
             return false
         }
 
@@ -275,16 +275,16 @@
                 console.log(res);
                 
                 if (res.code === 200) {
-                    toastr["success"]("相册修改成功！", "Like_Girl_Golang");
+                    toastr["success"]("相册修改成功！", "{{.info.SiteName}}");
                     $('#ImgUpdate').text('修改中...');
                     $("#ImgUpdate").attr("disabled", "disabled");
                     setInterval("window.location.href='/{{.admin_url}}/photo'", 3000);
                 } else  {
-                    toastr["error"]("相册修改失败！", "Like_Girl_Golang");
+                    toastr["error"]("相册修改失败！", "{{.info.SiteName}}");
                 }
             },
             error: function (err) {
-                toastr["error"]("网络错误 请稍后重试！", "Like_Girl_Golang");
+                toastr["error"]("网络错误 请稍后重试！", "{{.info.SiteName}}");
             }
         }
         )
@@ -294,7 +294,7 @@
         var imgText = $("input[name='imgText']").val();
         var imgUrl = $("input[name='imgUrl']").val();
         if (imgDatd.trim().length===0 || imgText.trim().length===0 || imgUrl.trim().length===0)  {
-            toastr["warning"]("图片发布日期、描述、图片地址均不能为空", "Like_Girl_Golang");
+            toastr["warning"]("图片发布日期、描述、图片地址均不能为空", "{{.info.SiteName}}");
             return false
         }
 
@@ -311,16 +311,16 @@
                 console.log(res);
                 
                 if (res.code === 200) {
-                    toastr["success"]("新增相册成功！", "Like_Girl_Golang");
+                    toastr["success"]("新增相册成功！", "{{.info.SiteName}}");
                     $('#ImgAdd').text('新增中...');
                     $("#ImgAdd").attr("disabled", "disabled");
                     setInterval("window.location.href='/{{.admin_url}}/photo'", 3000);
                 } else  {
-                    toastr["error"]("新增相册失败！", "Like_Girl_Golang");
+                    toastr["error"]("新增相册失败！", "{{.info.SiteName}}");
                 }
             },
             error: function (err) {
-                toastr["error"]("网络错误 请稍后重试！", "Like_Girl_Golang");
+                toastr["error"]("网络错误 请稍后重试！", "{{.info.SiteName}}");
             }
         }
         )
@@ -330,7 +330,7 @@
         var icon = $("input[name='icon']").val();
         var imgurl = $("input[name='imgurl']").val();
         if (eventname.trim().length===0 )  {
-            toastr["warning"]("事件标题不能为空", "Like_Girl_Golang");
+            toastr["warning"]("事件标题不能为空", "{{.info.SiteName}}");
             return false
         }
 
@@ -346,16 +346,16 @@
             success: function (res) {
                 console.log(res);
                 if (res.code === 200) {
-                    toastr["success"]("新增事件成功！", "Like_Girl_Golang");
+                    toastr["success"]("新增事件成功！", "{{.info.SiteName}}");
                     $('#todolistadd').text('新增中...');
                     $("#todolistadd").attr("disabled", "disabled");
                     setInterval("window.location.href='/{{.admin_url}}/todolist'", 3000);
                 } else  {
-                    toastr["error"]("新增事件失败！", "Like_Girl_Golang");
+                    toastr["error"]("新增事件失败！", "{{.info.SiteName}}");
                 }
             },
             error: function (err) {
-                toastr["error"]("网络错误 请稍后重试！", "Like_Girl_Golang");
+                toastr["error"]("网络错误 请稍后重试！", "{{.info.SiteName}}");
             }
         }
         )
@@ -367,11 +367,11 @@
         var imgurl = $("input[name='imgurl']").val();
         var id = $("input[name='id']").val();
         if (eventname.trim().length===0 )  {
-            toastr["warning"]("事件标题不能为空", "Like_Girl_Golang");
+            toastr["warning"]("事件标题不能为空", "{{.info.SiteName}}");
             return false
         }
         if (id.trim().length===0 ||id === undefined)  {
-            toastr["warning"]("ID不能为空", "Like_Girl_Golang");
+            toastr["warning"]("ID不能为空", "{{.info.SiteName}}");
             return false
         }
         $.ajax({
@@ -388,16 +388,16 @@
                 console.log(res);
                 
                 if (res.code === 200) {
-                    toastr["success"]("修改事件成功！", "Like_Girl_Golang");
+                    toastr["success"]("修改事件成功！", "{{.info.SiteName}}");
                     $('#todolistupdate').text('修改中...');
                     $("#todolistupdate").attr("disabled", "disabled");
                     setInterval("window.location.href='/{{.admin_url}}/todolist'", 3000);
                 } else {
-                    toastr["error"]("修改事件失败！", "Like_Girl_Golang");
+                    toastr["error"]("修改事件失败！", "{{.info.SiteName}}");
                 }
             },
             error: function (err) {
-                toastr["error"]("网络错误 请稍后重试！", "Like_Girl_Golang");
+                toastr["error"]("网络错误 请稍后重试！", "{{.info.SiteName}}");
             }
         }
         )
@@ -416,16 +416,16 @@
             dataType: "text",
             success: function (res) {
                 if (res == 1) {
-                    toastr["success"]("IP封禁成功！", "Like_Girl_Golang");
+                    toastr["success"]("IP封禁成功！", "{{.info.SiteName}}");
                     $('#listupda').text('提交中...');
                     $("#listupda").attr("disabled", "disabled");
                     setInterval("window.location.href='ipList.php'", 1000);
                 } else if (res == 0) {
-                    toastr["error"]("IP封禁失败！", "Like_Girl_Golang");
+                    toastr["error"]("IP封禁失败！", "{{.info.SiteName}}");
                 }
             },
             error: function (err) {
-                toastr["error"]("网络错误 请稍后重试！", "Like_Girl_Golang");
+                toastr["error"]("网络错误 请稍后重试！", "{{.info.SiteName}}");
             }
         }
         )
@@ -489,13 +489,13 @@
             dataType: "text",
             success: function (res) {
                 if (res == 1) {
-                    toastr["success"]("修改对话配置成功！", "Like_Girl_Golang");
+                    toastr["success"]("修改对话配置成功！", "{{.info.SiteName}}");
                 } else if (res == 0) {
-                    toastr["error"]("修改对话配置失败！", "Like_Girl_Golang");
+                    toastr["error"]("修改对话配置失败！", "{{.info.SiteName}}");
                 }
             },
             error: function (err) {
-                toastr["error"]("网络错误 请稍后重试！", "Like_Girl_Golang");
+                toastr["error"]("网络错误 请稍后重试！", "{{.info.SiteName}}");
             }
         }
         )
@@ -540,14 +540,14 @@
                 console.log(res)
                 console.log(res.code)
                 if (res.code == 200) {
-                    toastr["success"]("已成功删除！", "Like_Girl_Golang");
+                    toastr["success"]("已成功删除！", "{{.info.SiteName}}");
                     setTimeout('window.location.reload()',5000)
                 } else {
-                    toastr["error"](res.msg, "Like_Girl_Golang");
+                    toastr["error"](res.msg, "{{.info.SiteName}}");
                 }
             },
             error: function (err) {
-                toastr["error"]("网络错误 请稍后重试！", "Like_Girl_Golang");
+                toastr["error"]("网络错误 请稍后重试！", "{{.info.SiteName}}");
             }
         })
         }

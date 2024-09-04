@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8"/>
-    <title>{{.title}} - 后台管理登录_Like_Girl_Golang</title>
+    <title>{{.title}} - 后台管理登录_{{.info.SiteName}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
     <meta content="Coderthemes" name="author"/>
@@ -57,14 +57,14 @@
                     <!-- Logo -->
                     <div class="card-header pt-4 pb-4 text-center bg-primary">
                         <a href="##">
-                            <span style="color: #fff;font-size: 1.2rem;">Like_Girl_Golang __ Login</span>
+                            <span style="color: #fff;font-size: 1.2rem;">{{.info.SiteName}} __ Login</span>
                         </a>
                     </div>
 
                     <div class="card-body p-4">
 
                         <div class="text-center w-75 m-auto">
-                            <h4 class="text-dark-50 text-center mt-0 font-weight-bold">Like_Girl_Golang 5.1.0</h4>
+                            <h4 class="text-dark-50 text-center mt-0 font-weight-bold">{{.info.SiteName}} 5.1.0</h4>
                             <p class="text-muted mb-4">花有重开日 人无再少年</p>
                         </div>
 
@@ -110,7 +110,7 @@
 <!-- end page -->
 
 <footer class="footer footer-alt">
-    Copyright © 2024 Ki. && <a href="https://blog.kikiw.cn/index.php/archives/65/" target="_blank">Like_Girl_Golang</a> All
+    Copyright © 2024 Ki. && <a href="https://blog.kikiw.cn/index.php/archives/65/" target="_blank">{{.info.SiteName}}</a> All
     Rights Reserved.
 </footer>
 
