@@ -25,9 +25,7 @@ type Siteinfo struct {
 	SiteCopyright  string
 	LenvingSum     int
 	SiteHeadStyle  string
-	SiteHeadLink   string
 	SiteFootJs     string
-	SiteFootLink   string
 	SiteRegexp     string
 	BlockWord      string
 	AvaterShowType int

@@ -44,7 +44,5 @@ type SettingE struct {
 
 type SettingF struct {
 	SiteHeadStyle string `json:"siteheadstyle"`
-	SiteHeadLink  string `json:"siteheadlink"`
 	SiteFootJs    string `json:"sitefootjs"`
-	SiteFootLink  string `json:"sitefootlink"`
 }

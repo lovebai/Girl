@@ -291,9 +291,7 @@ func (mgr *manager) UpdateSettingF(st model.SettingF) int64 {
 	info := model.Siteinfo{}
 	mgr.db.First(&info, 1)
 	info.SiteHeadStyle = st.SiteHeadStyle
-	info.SiteHeadLink = st.SiteHeadLink
 	info.SiteFootJs = st.SiteFootJs
-	info.SiteFootLink = st.SiteFootLink
 	rsu := mgr.db.Where("option_id = ?", info.OptionId).Save(&info)
 	return rsu.RowsAffected
 }

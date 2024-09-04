@@ -165,13 +165,11 @@
 
     $("#updateSetF").click(()=>{
         let siteheadstyle = $("textarea[name='siteheadstyle']").val();
-        let siteheadlink = $("textarea[name='siteheadlink']").val();
         let sitefootjs = $("textarea[name='sitefootjs']").val();
-        let sitefootlink = $("textarea[name='sitefootlink']").val();
 
         $.ajax({
             url: "/{{.admin_url}}/siteinfo/updateF",
-            data: JSON.stringify({siteheadstyle,siteheadlink,sitefootjs,sitefootlink}),
+            data: JSON.stringify({siteheadstyle,sitefootjs}),
             type: "POST",
             dataType: "json",
             success: function (res) {
