@@ -56,4 +56,7 @@ type Manager interface {
 	UpdateSettingD(st model.SettingD) int64
 	UpdateSettingE(st model.SettingE) int64
 	UpdateSettingF(st model.SettingF) int64
+
+	//用户
+	GetUserinfoByName(name string) (int64, model.User)
 }

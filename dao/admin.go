@@ -295,3 +295,10 @@ func (mgr *manager) UpdateSettingF(st model.SettingF) int64 {
 	rsu := mgr.db.Where("option_id = ?", info.OptionId).Save(&info)
 	return rsu.RowsAffected
 }
+
+// 根据用户名查用户
+func (mgr *manager) GetUserinfoByName(name string) (int64, model.User) {
+	user := model.User{}
+	rsu := mgr.db.First(&user, name)
+	return rsu.RowsAffected, user
+}

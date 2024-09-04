@@ -8,14 +8,9 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 )
-
-func Login(c *gin.Context) {
-	c.HTML(http.StatusOK, "admin/login", gin.H{
-		"title": "管理员登录页面",
-	})
-}
 
 // 获取所有总数相关数据
 func getAllCount() model.SumCount {
@@ -35,6 +30,43 @@ func getAllCount() model.SumCount {
 // 后台管理地址
 func getAdminUrl() string {
 	return "Admin"
+}
+
+func LoginPage(c *gin.Context) {
+	siteinfo := dao.Mgr.GetSettingInfo()
+	c.HTML(http.StatusOK, "admin/login", gin.H{
+		"title":     "管理员登录页面",
+		"admin_url": getAdminUrl(),
+		"info":      siteinfo,
+	})
+}
+
+func Login(c *gin.Context) {
+	username := c.PostForm("username")
+	password := c.PostForm("password")
+	fmt.Printf("username: %v\n", username)
+	fmt.Printf("password: %v\n", password)
+	if len(username) == 0 || len(password) == 0 {
+		c.JSON(http.StatusOK, gin.H{"code": 204, "msg": "用户名和密码不能为空！"})
+		return
+	}
+
+	state, user := dao.Mgr.GetUserinfoByName(username)
+	if state == 0 {
+		c.JSON(http.StatusOK, gin.H{"code": 203, "msg": "用户名不存在！"})
+		return
+	}
+
+	if user.Password != utlis.MD5Encrypt(password) {
+		c.JSON(http.StatusOK, gin.H{"code": 202, "msg": "密码错误！"})
+		return
+	}
+
+	session := sessions.Default(c)
+	session.Options(sessions.Options{Path: "/", Domain: "localhost", MaxAge: 3600 * 12}) //12小时过期
+	session.Set("username", username)
+	session.Save()
+	c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "恭喜，登录成功啦！"})
 }
 
 func IndexPage(c *gin.Context) {
@@ -352,7 +384,7 @@ func UpdatePhoto(c *gin.Context) {
 	pt := c.PostForm("imgText")
 	pd := c.PostForm("imgDatd")
 	pu := c.PostForm("imgUrl")
-	fmt.Println("====", pid, pt, pd, pu)
+	// fmt.Println("====", pid, pt, pd, pu)
 	if len(pt) < 2 || len(pd) < 2 || len(pu) < 2 {
 		c.JSON(http.StatusOK, gin.H{"code": 204, "msg": "传递参数有误！"})
 		return

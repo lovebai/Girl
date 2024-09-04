@@ -95,6 +95,12 @@ type About struct {
 	Infod5   string `json:"infod5"`
 }
 
+type User struct {
+	Id       int
+	Username string
+	Password string
+}
+
 func (Siteinfo) TableName() string {
 	return "siteinfo"
 }
@@ -117,4 +123,8 @@ func (TodoList) TableName() string {
 
 func (About) TableName() string {
 	return "about"
+}
+
+func (User) TableName() string {
+	return "user"
 }

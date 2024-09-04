@@ -4,6 +4,8 @@ import (
 	"Girl/utlis"
 	"text/template"
 
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 )
 
@@ -18,6 +20,10 @@ func Start() {
 		"ToHtmlTable":              utlis.ToHtmlTable})
 	router.LoadHTMLGlob("templates/**/*")
 	router.Static("/static", "./static")
+
+	//session cookie
+	store := cookie.NewStore([]byte("Girl"))
+	router.Use(sessions.Sessions("BoyAndGirl", store))
 
 	//前台路由
 	IndexRouter(router)
