@@ -18,14 +18,22 @@
             <div
                 class="middle animated fadeInDown {{if ne .info.SiteBlur 1}}Blurkg{{end}}">
                 <div class="img-male">
-                    <img src="https://q1.qlogo.cn/g?b=qq&nk={{.info.BoyQq}}&s=640" draggable="false">
+                    {{if eq .info.AvaterShowType 0 }}
+                    <img src="https://q1.qlogo.cn/g?b=qq&nk={{.boyQQ}}&s=640" draggable="false">
+                    {{else}}
+                    <img src="{{.info.BoyImgUrl}}" draggable="false">
+                    {{end}}
                     <span>{{.info.BoyName}}</span>
                 </div>
                 <div class="love-icon">
                     <img src="/static/img/like.svg" draggable="false">
                 </div>
                 <div class="img-female">
-                    <img src="https://q1.qlogo.cn/g?b=qq&nk={{.info.GirlQq}}&s=640" draggable="false">
+                    {{if eq .info.AvaterShowType 0 }}
+                    <img src="https://q1.qlogo.cn/g?b=qq&nk={{.girlQQ}}&s=640" draggable="false">
+                    {{else}}
+                    <img src="{{.info.GirlImgUrl}}" draggable="false">
+                    {{end}}
                     <span>{{.info.GirlName}}</span>
                 </div>
             </div>

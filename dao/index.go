@@ -68,3 +68,11 @@ func (mgr *manager) GetAbout() model.About {
 	mgr.db.First(&about)
 	return about
 }
+
+// 根据性别查用户
+func (mgr *manager) GetUserinfoBySex(sex int) model.User {
+	//男为1，女为0
+	user := model.User{}
+	mgr.db.Where("sex = ?", sex).First(&user)
+	return user
+}

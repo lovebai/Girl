@@ -13,6 +13,7 @@ type Index interface {
 	GetPhotoList() []model.Photo
 	GetTodoList() []model.TodoList
 	GetAbout() model.About
+	GetUserinfoBySex(sex int) model.User
 }
 
 //后台

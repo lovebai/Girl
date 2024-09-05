@@ -100,6 +100,7 @@ type User struct {
 	Username string
 	Password string
 	Qq       string
+	Sex      int
 }
 
 func (Siteinfo) TableName() string {

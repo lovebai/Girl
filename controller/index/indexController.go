@@ -13,9 +13,13 @@ import (
 
 func Index(c *gin.Context) {
 	siteinfo := dao.Inx.GetSetting()
+	boy := dao.Inx.GetUserinfoBySex(1)
+	girl := dao.Inx.GetUserinfoBySex(0)
 	c.HTML(http.StatusOK, "index/index", gin.H{
-		"title": siteinfo.SiteName,
-		"info":  siteinfo,
+		"title":  siteinfo.SiteName,
+		"info":   siteinfo,
+		"boyQQ":  boy.Qq,
+		"girlQQ": girl.Qq,
 	})
 }
 
