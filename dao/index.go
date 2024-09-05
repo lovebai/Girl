@@ -44,8 +44,10 @@ func (mgr *manager) AddLenving(data model.Lenving) bool {
 	r := mgr.db.Create(data).RowsAffected
 	if r == 0 {
 		return false
+	} else {
+		return true
 	}
-	return true
+
 }
 
 // 获取图片列表
