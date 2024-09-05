@@ -4,7 +4,6 @@ import (
 	"Girl/dao"
 	"Girl/model"
 	"Girl/utlis"
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -33,6 +32,16 @@ func getAdminUrl() string {
 }
 
 func LoginPage(c *gin.Context) {
+	session := sessions.Default(c)
+	un := session.Get("username")
+	// fmt.Printf("un: %v\n", un)
+	if un != nil {
+		res, _ := dao.Mgr.GetUserinfoByName(un.(string))
+		if res != 0 {
+			c.Redirect(http.StatusMovedPermanently, "")
+			return
+		}
+	}
 	siteinfo := dao.Mgr.GetSettingInfo()
 	c.HTML(http.StatusOK, "admin/login", gin.H{
 		"title":     "管理员登录页面",
@@ -515,8 +524,6 @@ func UpdateSiteInfoF(c *gin.Context) {
 func Login(c *gin.Context) {
 	username := c.PostForm("username")
 	password := c.PostForm("password")
-	fmt.Printf("username: %v\n", username)
-	fmt.Printf("password: %v\n", password)
 	if len(username) == 0 || len(password) == 0 {
 		c.JSON(http.StatusOK, gin.H{"code": 204, "msg": "用户名和密码不能为空！"})
 		return
@@ -534,7 +541,7 @@ func Login(c *gin.Context) {
 	}
 
 	session := sessions.Default(c)
-	session.Options(sessions.Options{Path: "/", Domain: "localhost", MaxAge: 3600 * 12}) //12小时过期
+	session.Options(sessions.Options{Path: "/", MaxAge: 3600 * 24}) //12小时过期
 	session.Set("username", username)
 	session.Save()
 	c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "恭喜，登录成功啦！"})
@@ -542,29 +549,15 @@ func Login(c *gin.Context) {
 
 // 退出登录
 func Logout(c *gin.Context) {
-	username := c.PostForm("username")
-	password := c.PostForm("password")
-	fmt.Printf("username: %v\n", username)
-	fmt.Printf("password: %v\n", password)
-	if len(username) == 0 || len(password) == 0 {
-		c.JSON(http.StatusOK, gin.H{"code": 204, "msg": "用户名和密码不能为空！"})
-		return
-	}
-
-	state, user := dao.Mgr.GetUserinfoByName(username)
-	if state == 0 {
-		c.JSON(http.StatusOK, gin.H{"code": 203, "msg": "用户名不存在！"})
-		return
-	}
-
-	if user.Password != utlis.MD5Encrypt(password) {
-		c.JSON(http.StatusOK, gin.H{"code": 202, "msg": "密码错误！"})
-		return
-	}
-
 	session := sessions.Default(c)
-	session.Options(sessions.Options{Path: "/", Domain: "localhost", MaxAge: 3600 * 12}) //12小时过期
+	username := session.Get("username")
+	if username == nil {
+		c.Redirect(http.StatusMovedPermanently, "/"+getAdminUrl()+"/login")
+		return
+	}
+	// fmt.Printf("==========username: %v\n", username)
+	session.Options(sessions.Options{Path: "/", MaxAge: -1}) //清除
 	session.Set("username", username)
 	session.Save()
-	c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "恭喜，登录成功啦！"})
+	c.Redirect(http.StatusMovedPermanently, "/"+getAdminUrl()+"/login")
 }

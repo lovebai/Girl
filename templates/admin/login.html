@@ -143,6 +143,7 @@
                 console.log(res);
                 if (res.code === 200 ) {
                     toastr["success"](res.msg, "{{.info.SiteName}}");
+                    setInterval("window.location.href='/{{.admin_url}}/'", 2000);
                 } else {
                     toastr["error"](res.msg, "{{.info.SiteName}}");
                 }
