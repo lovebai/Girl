@@ -123,6 +123,7 @@ func LittlePage(c *gin.Context) {
 func LittleAddPage(c *gin.Context) {
 	siteinfo := dao.Mgr.GetSettingInfo()
 	user := getuserinfo(c)
+	userAll := dao.Mgr.GetAllUserList()
 	c.HTML(http.StatusOK, "admin/littleAdd", gin.H{
 		"title":     "新增点滴",
 		"h4":        "新增",
@@ -130,6 +131,7 @@ func LittleAddPage(c *gin.Context) {
 		"countSum":  getAllCount(),
 		"info":      siteinfo,
 		"user":      user,
+		"userlist":  userAll,
 	})
 }
 
@@ -235,6 +237,7 @@ func UpdateLittlePage(c *gin.Context) {
 	siteinfo := dao.Mgr.GetSettingInfo()
 	art := dao.Mgr.GetArticleAdminByID(lid)
 	user := getuserinfo(c)
+	userAll := dao.Mgr.GetAllUserList()
 	c.HTML(http.StatusOK, "admin/littleAdd", gin.H{
 		"title":     "修改点滴",
 		"h4":        "修改",
@@ -243,6 +246,7 @@ func UpdateLittlePage(c *gin.Context) {
 		"art":       art,
 		"info":      siteinfo,
 		"user":      user,
+		"userlist":  userAll,
 	})
 }
 

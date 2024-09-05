@@ -30,6 +30,8 @@ type Manager interface {
 	GetTodoListAdmin() []model.TodoList
 	GetAboutAdmin() model.About
 
+	GetAllUserList() []model.User
+
 	GetArticleAdminByID(id int) model.Article
 	GetPhotoAdminByID(id int) model.Photo
 	GetTodoListAdminByID(id int) model.TodoList

@@ -302,3 +302,10 @@ func (mgr *manager) GetUserinfoByName(name string) (int64, model.User) {
 	rsu := mgr.db.Where("username = ?", name).First(&user)
 	return rsu.RowsAffected, user
 }
+
+// 查所有后台用户
+func (mgr *manager) GetAllUserList() []model.User {
+	user := make([]model.User, 10)
+	mgr.db.Find(&user)
+	return user
+}
