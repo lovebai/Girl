@@ -4,6 +4,7 @@ import (
 	"Girl/dao"
 	"Girl/model"
 	"Girl/utlis"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -704,4 +705,9 @@ func UpdateUserInfo(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "QQ账号修改成功!"})
 	}
 
+}
+
+func UploadImage(c *gin.Context) {
+	file, _ := c.FormFile("file")
+	fmt.Printf("file.Filename: %v\n", file.Filename)
 }

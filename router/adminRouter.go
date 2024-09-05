@@ -56,5 +56,7 @@ func AdminRouter(router *gin.Engine) {
 
 		admin.GET("/logout", adminController.Logout)
 
+		admin.POST("/upload/image", adminController.UploadImage)
+
 	}
 }
