@@ -60,6 +60,11 @@ type Manager interface {
 	UpdateSettingE(st model.SettingE) int64
 	UpdateSettingF(st model.SettingF) int64
 
+	UpdateNamePassQQ(id int, name string, pass string, qq string) int
+	UpdateUsername(id int, name string, qq string) int
+	UpdatePassword(id int, pass string, qq string) int
+	UpdateQQ(id int, qq string) int
+
 	//用户
 	GetUserinfoByName(name string) (int64, model.User)
 }

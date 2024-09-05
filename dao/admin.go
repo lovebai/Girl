@@ -309,3 +309,39 @@ func (mgr *manager) GetAllUserList() []model.User {
 	mgr.db.Find(&user)
 	return user
 }
+
+// 根据id更新用户信息
+func (mgr *manager) UpdateUsername(id int, name string, qq string) int {
+	user := model.User{}
+	mgr.db.Where("id = ? ", id).First(&user)
+	user.Username = name
+	user.Qq = qq
+	return int(mgr.db.Where("id = ? ", id).Save(&user).RowsAffected)
+}
+
+// 根据id更新用户信息
+func (mgr *manager) UpdatePassword(id int, pass string, qq string) int {
+	user := model.User{}
+	mgr.db.Where("id = ? ", id).First(&user)
+	user.Password = pass
+	user.Qq = qq
+	return int(mgr.db.Where("id = ? ", id).Save(&user).RowsAffected)
+}
+
+// 根据id更新用户信息
+func (mgr *manager) UpdateQQ(id int, qq string) int {
+	user := model.User{}
+	mgr.db.Where("id = ? ", id).First(&user)
+	user.Qq = qq
+	return int(mgr.db.Where("id = ? ", id).Save(&user).RowsAffected)
+}
+
+// 根据id更新用户信息
+func (mgr *manager) UpdateNamePassQQ(id int, name string, pass string, qq string) int {
+	user := model.User{}
+	mgr.db.Where("id = ? ", id).First(&user)
+	user.Username = name
+	user.Password = pass
+	user.Qq = qq
+	return int(mgr.db.Where("id = ? ", id).Save(&user).RowsAffected)
+}

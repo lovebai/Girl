@@ -593,6 +593,7 @@ func Login(c *gin.Context) {
 	session := sessions.Default(c)
 	session.Options(sessions.Options{Path: "/", MaxAge: 3600 * 24}) //12小时过期
 	session.Set("username", username)
+	session.Set("password", user.Password)
 	session.Save()
 	c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "恭喜，登录成功啦！"})
 }
@@ -601,13 +602,106 @@ func Login(c *gin.Context) {
 func Logout(c *gin.Context) {
 	session := sessions.Default(c)
 	username := session.Get("username")
-	if username == nil {
+	password := session.Get("password")
+	if username == nil || password == nil {
 		c.Redirect(http.StatusMovedPermanently, "/"+getAdminUrl()+"/login")
-		return
 	}
-	// fmt.Printf("==========username: %v\n", username)
+
 	session.Options(sessions.Options{Path: "/", MaxAge: -1}) //清除
 	session.Set("username", username)
+	session.Set("password", password)
 	session.Save()
 	c.Redirect(http.StatusMovedPermanently, "/"+getAdminUrl()+"/login")
+	// fmt.Println("退出登录，清理session...")
+}
+
+// 修改用户信息
+func UpdateUserInfo(c *gin.Context) {
+	uid := c.PostForm("id")
+	uname := c.PostForm("username")
+	upwd := c.PostForm("password")
+	cupwd := c.PostForm("cpassword")
+	uqq := c.PostForm("qq")
+	id, err1 := strconv.Atoi(uid)
+	if err1 != nil {
+		c.JSON(http.StatusOK, gin.H{"code": 205, "msg": "传递参数有误！"})
+		return
+	}
+
+	session := sessions.Default(c)
+	username := session.Get("username")
+	oldpwd := session.Get("password")
+	// _, user := dao.Mgr.GetUserinfoByName(username.(string))
+	if upwd != cupwd {
+		c.JSON(http.StatusOK, gin.H{"code": 203, "msg": "两个密码不一样！"})
+		return
+	}
+
+	if username != uname {
+		if len(uname) < 1 {
+			c.JSON(http.StatusOK, gin.H{"code": 204, "msg": "传递参数有误！"})
+			return
+		} else {
+			//改用户名
+			if dao.Mgr.UpdateUsername(id, uname, uqq) == 0 {
+				c.JSON(http.StatusOK, gin.H{"code": 202, "msg": "修改失败!"})
+				return
+			} else {
+				if oldpwd.(string) != utlis.MD5Encrypt(cupwd) && len(cupwd) != 0 {
+					//改
+					if len(cupwd) < 5 {
+						c.JSON(http.StatusOK, gin.H{"code": 202, "msg": "密码不能小于6位数！"})
+						return
+					} else {
+						if dao.Mgr.UpdateNamePassQQ(id, uname, utlis.MD5Encrypt(cupwd), uqq) == 0 {
+							c.JSON(http.StatusOK, gin.H{"code": 202, "msg": "修改失败!"})
+							return
+						} else {
+							c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "用户名和密码修改成功!"})
+							session.Options(sessions.Options{Path: "/", MaxAge: -1}) //清除
+							session.Set("username", username)
+							session.Set("password", utlis.MD5Encrypt(cupwd))
+							session.Save()
+							return
+						}
+					}
+
+				} else {
+					c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "用户名修改成功!"})
+					session.Options(sessions.Options{Path: "/", MaxAge: -1}) //清除
+					session.Set("username", username)
+					session.Save()
+					return
+				}
+			}
+		}
+	}
+
+	if oldpwd.(string) != utlis.MD5Encrypt(cupwd) && len(cupwd) != 0 {
+		//改
+		if len(cupwd) < 5 {
+			c.JSON(http.StatusOK, gin.H{"code": 202, "msg": "密码不能小于6位数！"})
+			return
+		} else {
+			if dao.Mgr.UpdatePassword(id, utlis.MD5Encrypt(cupwd), uqq) == 0 {
+				c.JSON(http.StatusOK, gin.H{"code": 202, "msg": "修改失败!"})
+				return
+			} else {
+				c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "密码修改成功!"})
+				session.Options(sessions.Options{Path: "/", MaxAge: -1}) //清除
+				session.Set("username", username)
+				session.Set("password", utlis.MD5Encrypt(cupwd))
+				session.Save()
+				return
+			}
+		}
+
+	}
+
+	if dao.Mgr.UpdateQQ(id, uqq) == 0 {
+		c.JSON(http.StatusOK, gin.H{"code": 202, "msg": "修改失败!"})
+	} else {
+		c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "QQ账号修改成功!"})
+	}
+
 }

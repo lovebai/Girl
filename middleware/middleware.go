@@ -13,16 +13,21 @@ func LoginStatus(c *gin.Context) {
 	// fmt.Printf("utlis.MD5Encrypt(\"123456\"): %v\n", utlis.MD5Encrypt("123456"))
 	session := sessions.Default(c)
 	username := session.Get("username")
+	pwd := session.Get("password")
 	if username == nil {
 		fmt.Printf(" !username: %v\n", username)
 		c.Redirect(http.StatusMovedPermanently, "/Admin/login")
 		return
 	}
-	res, _ := dao.Mgr.GetUserinfoByName(username.(string))
+	res, user := dao.Mgr.GetUserinfoByName(username.(string))
 
 	if res == 0 {
 		c.Redirect(http.StatusMovedPermanently, "/Admin/login")
 		return
+	}
+
+	if user.Password != pwd {
+		c.Redirect(http.StatusMovedPermanently, "/Admin/login")
 	}
 
 	// fmt.Printf("username: %v\n", username)

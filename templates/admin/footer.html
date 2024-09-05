@@ -504,6 +504,40 @@
         )
     })
     
+
+    $("#userUpdate").click(()=>{
+        let id = $("input[name='uid']").val()
+        let username = $("input[name='username']").val().trim()
+        let password = $("input[name='password']").val().trim()
+        let cpassword = $("input[name='cpassword']").val().trim()
+        let qq = $("input[name='qq']").val().trim()
+
+        if (password !== cpassword) {
+            toastr["warning"]("两次输入密码不一样！", "{{.info.SiteName}}");
+            return false
+        }
+
+        $.ajax({
+            url: "/{{.admin_url}}/userinfo/update",
+            data: {id,username,password,cpassword,qq},
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                if (res.code === 200 ) {
+                    toastr["success"](res.msg, "{{.info.SiteName}}");
+                    // $('##updateSetA').text('修改中...');
+                    // $("##updateSetA").attr("disabled", "disabled");
+                    setInterval("window.location.reload()", 3000);
+                } else {
+                    toastr["error"](res.msg, "{{.info.SiteName}}");
+                }
+            },
+            error: function (err) {
+                toastr["error"]("网络错误 请稍后重试！", "{{.info.SiteName}}");
+            }
+        })
+    })
+
     //删除项目
     function del(type,id, text) {
         let url;
