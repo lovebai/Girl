@@ -41,8 +41,8 @@ func (mgr *manager) GetLenvingCount() int64 {
 
 // 添加留言
 func (mgr *manager) AddLenving(data model.Lenving) bool {
-	e := mgr.db.Create(data)
-	if e == nil {
+	r := mgr.db.Create(data).RowsAffected
+	if r == 0 {
 		return false
 	}
 	return true
