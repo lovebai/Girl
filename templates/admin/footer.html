@@ -33,21 +33,15 @@
     })
 
     $("#updateSetB").click(()=>{
-        let boy = $("input[name='boy']").val();
-        let girl = $("input[name='girl']").val();
-        let boyqq = $("input[name='boyqq']").val();
-        let girlqq = $("input[name='girlqq']").val();
-        let startTime = $("input[name='startTime']").val();
+        let boyname = $("input[name='boy']").val();
+        let girlname = $("input[name='girl']").val();
+        let boyimgurl = $("input[name='boyimgurl']").val();
+        let girlimgurl = $("input[name='girlimgurl']").val();
+        let starttime = $("input[name='startTime']").val();
 
         $.ajax({
             url: "/{{.admin_url}}/siteinfo/updateB",
-            data: JSON.stringify({
-                boyname:boy,
-                girlname:girl,
-                boyqq:boyqq,
-                girlqq:girlqq,
-                starttime:startTime,
-                }),
+            data: JSON.stringify({boyname,girlname,boyimgurl,girlimgurl,starttime}),
             type: "POST",
             dataType: "json",
             success: function (res) {

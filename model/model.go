@@ -10,8 +10,8 @@ type Siteinfo struct {
 	SitePajx       int
 	BoyName        string
 	GirlName       string
-	BoyQq          string
-	GirlQq         string
+	BoyImgUrl      string
+	GirlImgUrl     string
 	StartTime      int64
 	BgimgUrl       string
 	CardOne        string
@@ -99,6 +99,7 @@ type User struct {
 	Id       int
 	Username string
 	Password string
+	Qq       string
 }
 
 func (Siteinfo) TableName() string {

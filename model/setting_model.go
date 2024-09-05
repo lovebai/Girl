@@ -9,11 +9,11 @@ type SettingA struct {
 }
 
 type SettingB struct {
-	BoyName   string `json:"boyname"`
-	GirlName  string `json:"girlname"`
-	BoyQq     string `json:"boyqq"`
-	GirlQq    string `json:"girlqq"`
-	StartTime string `json:"starttime"`
+	BoyName    string `json:"boyname"`
+	GirlName   string `json:"girlname"`
+	BoyImgUrl  string `json:"boyimgurl"`
+	GirlImgUrl string `json:"girlimgurl"`
+	StartTime  string `json:"starttime"`
 }
 
 type SettingC struct {

@@ -238,8 +238,8 @@ func (mgr *manager) UpdateSettingB(st model.SettingB) int64 {
 	mgr.db.First(&info, 1)
 	info.BoyName = st.BoyName
 	info.GirlName = st.GirlName
-	info.BoyQq = st.BoyQq
-	info.GirlQq = st.GirlQq
+	info.BoyImgUrl = st.BoyImgUrl
+	info.GirlImgUrl = st.GirlImgUrl
 	info.StartTime = utlis.ConvertToTimestamp(st.StartTime)
 	rsu := mgr.db.Where("option_id = ?", info.OptionId).Save(&info)
 	return rsu.RowsAffected
