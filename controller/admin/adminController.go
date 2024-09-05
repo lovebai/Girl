@@ -31,6 +31,22 @@ func getAdminUrl() string {
 	return "Admin"
 }
 
+// 后台用户
+func getuserinfo(c *gin.Context) model.User {
+	session := sessions.Default(c)
+	username := session.Get("username")
+	u := model.User{}
+	if username == nil {
+		c.Redirect(http.StatusMovedPermanently, "/"+getAdminUrl()+"/login")
+		return u
+	}
+	res, user := dao.Mgr.GetUserinfoByName(username.(string))
+	if res == 0 {
+		return u
+	}
+	return user
+}
+
 func LoginPage(c *gin.Context) {
 	session := sessions.Default(c)
 	un := session.Get("username")
@@ -53,135 +69,159 @@ func LoginPage(c *gin.Context) {
 func IndexPage(c *gin.Context) {
 	siteinfo := dao.Mgr.GetSettingInfo()
 	leavingList := dao.Mgr.GetLenvingListAdmin()
+	user := getuserinfo(c)
 	c.HTML(http.StatusOK, "admin/index", gin.H{
 		"title":       "首页",
 		"admin_url":   getAdminUrl(),
 		"countSum":    getAllCount(),
 		"leavingList": leavingList,
 		"info":        siteinfo,
+		"user":        user,
 	})
 }
 
 func SettingPage(c *gin.Context) {
 	siteinfo := dao.Mgr.GetSettingInfo()
+	user := getuserinfo(c)
 	c.HTML(http.StatusOK, "admin/setting", gin.H{
 		"title":     "设置",
 		"admin_url": getAdminUrl(),
 		"countSum":  getAllCount(),
 		"info":      siteinfo,
+		"user":      user,
 	})
 }
 
 func LeavingPage(c *gin.Context) {
 	siteinfo := dao.Mgr.GetSettingInfo()
 	leavingList := dao.Mgr.GetLenvingListAdmin()
+	user := getuserinfo(c)
 	c.HTML(http.StatusOK, "admin/leaving", gin.H{
 		"title":       "留言",
 		"admin_url":   getAdminUrl(),
 		"countSum":    getAllCount(),
 		"leavingList": leavingList,
 		"info":        siteinfo,
+		"user":        user,
 	})
 }
 
 func LittlePage(c *gin.Context) {
 	siteinfo := dao.Mgr.GetSettingInfo()
 	list := dao.Mgr.GetArticleListAdmin()
+	user := getuserinfo(c)
 	c.HTML(http.StatusOK, "admin/little", gin.H{
 		"title":      "点滴",
 		"admin_url":  getAdminUrl(),
 		"countSum":   getAllCount(),
 		"littleList": list,
 		"info":       siteinfo,
+		"user":       user,
 	})
 }
 
 func LittleAddPage(c *gin.Context) {
 	siteinfo := dao.Mgr.GetSettingInfo()
+	user := getuserinfo(c)
 	c.HTML(http.StatusOK, "admin/littleAdd", gin.H{
 		"title":     "新增点滴",
 		"h4":        "新增",
 		"admin_url": getAdminUrl(),
 		"countSum":  getAllCount(),
 		"info":      siteinfo,
+		"user":      user,
 	})
 }
 
 func PhotoPage(c *gin.Context) {
 	siteinfo := dao.Mgr.GetSettingInfo()
 	list := dao.Mgr.GetPhotoListAdmin()
+	user := getuserinfo(c)
 	c.HTML(http.StatusOK, "admin/photo", gin.H{
 		"title":     "相册",
 		"admin_url": getAdminUrl(),
 		"countSum":  getAllCount(),
 		"photoList": list,
 		"info":      siteinfo,
+		"user":      user,
 	})
 }
 
 func PhotoAddPage(c *gin.Context) {
 	siteinfo := dao.Mgr.GetSettingInfo()
+	user := getuserinfo(c)
 	c.HTML(http.StatusOK, "admin/photoAdd", gin.H{
 		"title":     "添加相册",
 		"h4":        "新增",
 		"admin_url": getAdminUrl(),
 		"countSum":  getAllCount(),
 		"info":      siteinfo,
+		"user":      user,
 	})
 }
 
 func TodoListPage(c *gin.Context) {
 	siteinfo := dao.Mgr.GetSettingInfo()
 	list := dao.Mgr.GetTodoListAdmin()
+	user := getuserinfo(c)
 	c.HTML(http.StatusOK, "admin/todolist", gin.H{
 		"title":     "恋爱清单",
 		"admin_url": getAdminUrl(),
 		"countSum":  getAllCount(),
 		"todoList":  list,
 		"info":      siteinfo,
+		"user":      user,
 	})
 }
 
 func TodoListAddPage(c *gin.Context) {
 	siteinfo := dao.Mgr.GetSettingInfo()
+	user := getuserinfo(c)
 	c.HTML(http.StatusOK, "admin/todoListAdd", gin.H{
 		"title":     "添加事件",
 		"h4":        "添加",
 		"admin_url": getAdminUrl(),
 		"countSum":  getAllCount(),
 		"info":      siteinfo,
+		"user":      user,
 	})
 }
 
 func AboutPage(c *gin.Context) {
 	siteinfo := dao.Mgr.GetSettingInfo()
 	about := dao.Mgr.GetAboutAdmin()
+	user := getuserinfo(c)
 	c.HTML(http.StatusOK, "admin/about", gin.H{
 		"title":     "关于",
 		"admin_url": getAdminUrl(),
 		"countSum":  getAllCount(),
 		"about":     about,
 		"info":      siteinfo,
+		"user":      user,
 	})
 }
 
 func UserInfoPage(c *gin.Context) {
 	siteinfo := dao.Mgr.GetSettingInfo()
+	user := getuserinfo(c)
 	c.HTML(http.StatusOK, "admin/userInfo", gin.H{
 		"title":     "用户信息",
 		"admin_url": getAdminUrl(),
 		"countSum":  getAllCount(),
 		"info":      siteinfo,
+		"user":      user,
 	})
 }
 
 func OtherSetPage(c *gin.Context) {
 	siteinfo := dao.Mgr.GetSettingInfo()
+	user := getuserinfo(c)
 	c.HTML(http.StatusOK, "admin/otherSet", gin.H{
 		"title":     "其他设置",
 		"admin_url": getAdminUrl(),
 		"countSum":  getAllCount(),
 		"info":      siteinfo,
+		"user":      user,
 	})
 }
 
@@ -194,6 +234,7 @@ func UpdateLittlePage(c *gin.Context) {
 	}
 	siteinfo := dao.Mgr.GetSettingInfo()
 	art := dao.Mgr.GetArticleAdminByID(lid)
+	user := getuserinfo(c)
 	c.HTML(http.StatusOK, "admin/littleAdd", gin.H{
 		"title":     "修改点滴",
 		"h4":        "修改",
@@ -201,6 +242,7 @@ func UpdateLittlePage(c *gin.Context) {
 		"countSum":  getAllCount(),
 		"art":       art,
 		"info":      siteinfo,
+		"user":      user,
 	})
 }
 
@@ -213,6 +255,7 @@ func UpdatePhotoPage(c *gin.Context) {
 	}
 	siteinfo := dao.Mgr.GetSettingInfo()
 	ph := dao.Mgr.GetPhotoAdminByID(lid)
+	user := getuserinfo(c)
 	c.HTML(http.StatusOK, "admin/photoAdd", gin.H{
 		"title":     "修改图片",
 		"h4":        "修改",
@@ -220,6 +263,7 @@ func UpdatePhotoPage(c *gin.Context) {
 		"countSum":  getAllCount(),
 		"ph":        ph,
 		"info":      siteinfo,
+		"user":      user,
 	})
 }
 
@@ -232,6 +276,7 @@ func UpdateTodoListPage(c *gin.Context) {
 	}
 	siteinfo := dao.Mgr.GetSettingInfo()
 	tl := dao.Mgr.GetTodoListAdminByID(lid)
+	user := getuserinfo(c)
 	c.HTML(http.StatusOK, "admin/todoListAdd", gin.H{
 		"title":     "添加事件",
 		"h4":        "修改",
@@ -239,6 +284,7 @@ func UpdateTodoListPage(c *gin.Context) {
 		"countSum":  getAllCount(),
 		"tl":        tl,
 		"info":      siteinfo,
+		"user":      user,
 	})
 }
 

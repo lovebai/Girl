@@ -71,10 +71,10 @@
                     <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown"
                         id="topbar-userdrop" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                         <span class="account-user-avatar">
-                            <img src="https://q1.qlogo.cn/g?b=qq&nk=php echo textuserQQ &s=640" alt="user-image"
+                            <img src="https://q1.qlogo.cn/g?b=qq&nk={{.user.Qq}}&s=640" alt="user-image"
                                 class="rounded-circle">
                         </span>
-                            <span class="account-user-name" style="margin-top: .5rem;">php echo textuserName</span>
+                            <span class="account-user-name" style="margin-top: .5rem;">{{.user.Username}}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown"
                         aria-labelledby="topbar-userdrop" style="width: 96%;">
@@ -119,9 +119,9 @@
             <div class="left-side-menu">
                 <div class="leftbar-user">
                     <a href="#">
-                        <img src="https://q1.qlogo.cn/g?b=qq&nk=php echo $textuserQQ &s=640" alt="user-image"
-                            height="42" class="rounded-circle shadow-sm">
-                        <span class="leftbar-user-name">php echo text title </span>
+                        <img src="https://q1.qlogo.cn/g?b=qq&nk={{.user.Qq}}&s=640" alt="user-image"
+                            height="100" class="rounded-circle shadow-sm">
+                        <span class="leftbar-user-name">{{.user.Username}}</span>
                     </a>
                 </div>
 
