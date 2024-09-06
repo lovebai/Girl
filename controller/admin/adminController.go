@@ -20,11 +20,13 @@ func getAllCount() model.SumCount {
 	atCount := dao.Mgr.GetArticleCountSum()
 	tlCount := dao.Mgr.GetTodoListCountSum()
 	phCount := dao.Mgr.GetPhotoCountSum()
+	blCount := dao.Mgr.GetIpBlackListCountSum()
 	sum := &model.SumCount{
-		Lenving:  lvCount,
-		Article:  atCount,
-		Photo:    phCount,
-		TodoList: tlCount,
+		Lenving:     lvCount,
+		Article:     atCount,
+		Photo:       phCount,
+		TodoList:    tlCount,
+		IpBlackList: blCount,
 	}
 	return *sum
 }
@@ -179,6 +181,32 @@ func TodoListPage(c *gin.Context) {
 	})
 }
 
+func IpBlackListPage(c *gin.Context) {
+	siteinfo := dao.Mgr.GetSettingInfo()
+	user := getuserinfo(c)
+	list := dao.Mgr.GetIpBlackListAdmin()
+	c.HTML(http.StatusOK, "admin/blacklist", gin.H{
+		"title":     "IP黑名单列表",
+		"admin_url": getAdminUrl(),
+		"countSum":  getAllCount(),
+		"info":      siteinfo,
+		"user":      user,
+		"iplist":    list,
+	})
+}
+
+func IpBlackListAddPage(c *gin.Context) {
+	siteinfo := dao.Mgr.GetSettingInfo()
+	user := getuserinfo(c)
+	c.HTML(http.StatusOK, "admin/blacklistadd", gin.H{
+		"title":     "IP黑名单列表",
+		"admin_url": getAdminUrl(),
+		"countSum":  getAllCount(),
+		"info":      siteinfo,
+		"user":      user,
+	})
+}
+
 func TodoListAddPage(c *gin.Context) {
 	siteinfo := dao.Mgr.GetSettingInfo()
 	user := getuserinfo(c)
@@ -321,6 +349,8 @@ func DeleteByid(c *gin.Context) {
 		status = dao.Mgr.DeletePhoto(lid)
 	case "todolist":
 		status = dao.Mgr.DeleteTodoList(lid)
+	case "blacklist":
+		status = dao.Mgr.DeleteIpBlackList(lid)
 	default:
 	}
 
@@ -386,6 +416,24 @@ func AddTodoList(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"code": 203, "msg": "新增文章失败!"})
 	} else {
 		c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "新增文章成功!"})
+	}
+}
+
+// 增加新IP
+func AddIpBlackList(c *gin.Context) {
+	ip := c.PostForm("ip")
+	text := c.PostForm("text")
+	if len(text) < 1 || len(ip) < 2 {
+		c.JSON(http.StatusOK, gin.H{"code": 204, "msg": "传递参数有误！"})
+		return
+	}
+
+	id := getAllCount().IpBlackList + 1
+	if dao.Mgr.AddIpBlackList(int(id), ip, text) == 0 {
+		c.JSON(http.StatusOK, gin.H{"code": 203, "msg": "新增IP黑名单失败!"})
+	} else {
+		// c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "新增成功!"})
+		c.Redirect(http.StatusMovedPermanently, "/"+getAdminUrl()+"/blacklist")
 	}
 }
 

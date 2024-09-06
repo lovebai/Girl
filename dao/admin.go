@@ -38,6 +38,14 @@ func (mgr *manager) GetPhotoCountSum() int64 {
 	return count
 }
 
+// 获取IP黑名单总数
+func (mgr *manager) GetIpBlackListCountSum() int64 {
+	var count int64
+	bl := model.IpBlackList{}
+	mgr.db.Model(&bl).Count(&count)
+	return count
+}
+
 // 获取站点信息
 func (mgr *manager) GetSettingInfo() model.Siteinfo {
 	options := model.Siteinfo{}
@@ -72,6 +80,13 @@ func (mgr *manager) GetTodoListAdmin() []model.TodoList {
 	td := make([]model.TodoList, 10)
 	mgr.db.Order("list_id desc").Find(&td)
 	return td
+}
+
+// 获取ip黑名单列表
+func (mgr *manager) GetIpBlackListAdmin() []model.IpBlackList {
+	il := make([]model.IpBlackList, 10)
+	mgr.db.Order("id desc").Find(&il)
+	return il
 }
 
 // 获取关于数据
@@ -136,6 +151,13 @@ func (mgr *manager) DeleteTodoList(id int) int64 {
 	return rsu.RowsAffected
 }
 
+// admin dao根据id 删除IP
+func (mgr *manager) DeleteIpBlackList(id int) int64 {
+	del := model.IpBlackList{}
+	rsu := mgr.db.Delete(&del, id)
+	return rsu.RowsAffected
+}
+
 /** 新增 **/
 // dao 新增点滴
 func (mgr *manager) AddLittle(id int, name string, title string, text string) int64 {
@@ -171,6 +193,19 @@ func (mgr *manager) AddTodoList(id int, status int, title string, imgUrl string)
 		ListImgurl: imgUrl,
 	}
 	rsu := mgr.db.Create(&tl)
+	return rsu.RowsAffected
+}
+
+// dao 新增IP黑名单
+func (mgr *manager) AddIpBlackList(id int, ip string, commit string) int64 {
+	bl := model.IpBlackList{
+		Id:      id,
+		Ip:      ip,
+		Commit:  commit,
+		Address: utlis.Get_ip_city(ip),
+		Time:    utlis.GetTimeUnix(),
+	}
+	rsu := mgr.db.Create(&bl)
 	return rsu.RowsAffected
 }
 

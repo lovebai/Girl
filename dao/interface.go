@@ -23,6 +23,7 @@ type Manager interface {
 	GetArticleCountSum() int64
 	GetTodoListCountSum() int64
 	GetPhotoCountSum() int64
+	GetIpBlackListCountSum() int64
 	GetLenvingListAdmin() []model.Lenving
 	GetSettingInfo() model.Siteinfo
 	GetArticleListAdmin() []model.Article
@@ -36,16 +37,20 @@ type Manager interface {
 	GetPhotoAdminByID(id int) model.Photo
 	GetTodoListAdminByID(id int) model.TodoList
 
+	GetIpBlackListAdmin() []model.IpBlackList
+
 	//删
 	DeleteLenving(id int) int64
 	DeleteLittle(id int) int64
 	DeletePhoto(id int) int64
 	DeleteTodoList(id int) int64
+	DeleteIpBlackList(id int) int64
 
 	//增
 	AddLittle(id int, name string, title string, text string) int64
 	AddPhoto(id int, t string, text string, url string) int64
 	AddTodoList(id int, status int, title string, imgUrl string) int64
+	AddIpBlackList(id int, ip string, commit string) int64
 
 	//更新
 	UpdateLittles(id int, title string, text string) int64

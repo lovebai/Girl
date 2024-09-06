@@ -1,0 +1,61 @@
+{{define "admin/blacklist"}}
+{{template "admin/header" .}}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mb-3 size_18">IP封禁管理
+                    <a class="fabu" href="/{{.admin_url}}/blacklist/add">
+                        <button type="button" class="btn btn-success btn-sm right_10">
+                            <i class="mdi mdi-circle-edit-outline"></i>新增
+                        </button>
+                    </a></h4>
+                <table id="basic-datatable" class="table dt-responsive nowrap" width="100%">
+                    <thead>
+                    <tr>
+                        <th>IP归属地</th>
+                        <th>Date</th>
+                        <th>备注</th>
+                        <th>IP</th>
+                        <th style="width: 125px;">Action</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {{range $k,$list := .iplist}}
+                        <tr>
+                            {{$l := $list.Address|len}}
+                            <td>{{ if eq $l 0}}未知{{else}}{{$list.Address}} {{end}}</td>
+                            <td>
+                                <small class="text-muted">{{$list.Time|formatDate}}</small>
+                            </td>
+                            <td>
+                                <h5><span class="badge badge-success-lighten"> {{$list.Commit}} </span></h5>
+                            </td>
+                            <td>
+                                <h5>
+                                    <span class="badge badge-danger-lighten">{{$list.Ip}}</span>
+                                </h5>
+                            </td>
+                            <td>
+                                <a href="javascript:del('blacklist',{{$list.Id}},'{{$list.Ip}}');">
+                                    <button style="white-space: nowrap;" type="button"
+                                            class="btn btn-danger btn-rounded">
+                                        <i class=" mdi mdi-delete-empty mr-1"></i>删除
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                        {{end}}
+                    </tbody>
+                </table>
+
+            </div> <!-- end card body-->
+        </div> <!-- end card -->
+    </div><!-- end col-->
+</div>
+{{template "admin/footer" .}}
+</body>
+</html>
+{{end}}

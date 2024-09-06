@@ -49,8 +49,9 @@ type SettingF struct {
 
 // 内部
 type SumCount struct {
-	Lenving  int64
-	Article  int64
-	Photo    int64
-	TodoList int64
+	Lenving     int64
+	Article     int64
+	Photo       int64
+	TodoList    int64
+	IpBlackList int64
 }

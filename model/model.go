@@ -43,6 +43,15 @@ type Article struct {
 	ArticleTime    int64
 }
 
+//ip黑名单
+type IpBlackList struct {
+	Id      int
+	Ip      string
+	Time    int64
+	Commit  string
+	Address string
+}
+
 type Lenving struct {
 	LenvingId   int
 	LenvingName string
@@ -129,4 +138,8 @@ func (About) TableName() string {
 
 func (User) TableName() string {
 	return "user"
+}
+
+func (IpBlackList) TableName() string {
+	return "blacklist"
 }

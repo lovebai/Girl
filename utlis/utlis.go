@@ -111,7 +111,7 @@ func Get_ip_city(ip string) string {
 		return "0.0.0.0"
 	}
 	defer res.Body.Close()
-	fmt.Println(res.Header.Get("Content-Type"))
+	// fmt.Println(res.Header.Get("Content-Type"))
 	if res.StatusCode != http.StatusOK {
 		return "0.0.0.0"
 	}
@@ -127,7 +127,7 @@ func Get_ip_city(ip string) string {
 	if er != nil {
 		return "0.0.0.0"
 	}
-	fmt.Println(ipInfo)
+	// fmt.Println(ipInfo)
 	return ipInfo.City
 }
 

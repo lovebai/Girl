@@ -28,15 +28,19 @@ func AdminRouter(router *gin.Engine) {
 		admin.GET("/about", adminController.AboutPage)
 		admin.GET("/userinfo", adminController.UserInfoPage)
 		admin.GET("/otherset", adminController.OtherSetPage)
+		admin.GET("/blacklist", adminController.IpBlackListPage)
+		admin.GET("/blacklist/add", adminController.IpBlackListAddPage)
 		//
 		admin.POST("/leaving/del", adminController.DeleteByid)
 		admin.POST("/little/del", adminController.DeleteByid)
 		admin.POST("/photo/del", adminController.DeleteByid)
 		admin.POST("/todolist/del", adminController.DeleteByid)
+		admin.POST("/blacklist/del", adminController.DeleteByid)
 		//
 		admin.POST("/little/add", adminController.AddLittle)
 		admin.POST("/photo/add", adminController.AddPhoto)
 		admin.POST("/todolist/add", adminController.AddTodoList)
+		admin.POST("/blacklist/add", adminController.AddIpBlackList)
 
 		//
 		admin.GET("/little/update/:id", adminController.UpdateLittlePage)
