@@ -7,7 +7,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"html/template"
-	"io/ioutil"
+	"io"
 	"math/rand"
 	"net"
 	"net/http"
@@ -96,7 +96,7 @@ type IPInfo struct {
 // convertGBKToUTF8 将 GBK 编码的字节切片转换为 UTF-8 编码
 func convertGBKToUTF8(input []byte) ([]byte, error) {
 	// 创建 GBK 解码器
-	utf8Bytes, err := ioutil.ReadAll(transform.NewReader(bytes.NewReader(input), simplifiedchinese.GBK.NewDecoder()))
+	utf8Bytes, err := io.ReadAll(transform.NewReader(bytes.NewReader(input), simplifiedchinese.GBK.NewDecoder()))
 	if err != nil {
 		return nil, err
 	}
@@ -116,7 +116,7 @@ func Get_ip_city(ip string) string {
 		return "0.0.0.0"
 	}
 	re := regexp.MustCompile(`\{[^{^}]*\}`)
-	body, _ := ioutil.ReadAll(res.Body)
+	body, _ := io.ReadAll(res.Body)
 	utf8Body, err := convertGBKToUTF8(body)
 	matches := re.FindString(string(utf8Body))
 	if matches == "" {

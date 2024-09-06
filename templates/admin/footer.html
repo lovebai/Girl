@@ -590,9 +590,6 @@
         }
     }
 
-
-    $("#GirlImgUrl")
-
     $("#BoyImgUrl").click(()=>{
         let value = $("#BoyImgUrlvalue")
         let fileInput= $("#BoyImgUrlfile")[0]
@@ -612,13 +609,56 @@
                 dataType: "json",
                 success: function(response) {
                     if (response.code === 200 ) {
-                    toastr["success"](response.msg, "{{.info.SiteName}}");
-                    // $("#BoyImgUrl").text("上传成功")
+                        if (response.url.length !== 0) {
+                            toastr["success"](response.message, "{{.info.SiteName}}");
+                            value.val(response.url)
+                            fileInput.value = ''
+                        }
                 } else {
-                    toastr["error"](response.msg, "{{.info.SiteName}}");
+                    toastr["error"](response.message, "{{.info.SiteName}}");
                 }
                     // 处理成功响应
-                    console.log('上传成功:', response);
+                    // console.log('上传成功:', response);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // 处理错误响应
+                    console.error('上传失败:', textStatus, errorThrown);
+                }
+            });
+        } else {
+            toastr["warning"]("请先选择一个文件!", "{{.info.SiteName}}");
+        }
+    })
+
+    $("#GirlImgUrl").click(()=>{
+        let value = $("#GirlImgUrlvalue")
+        let fileInput= $("#GirlImgUrlfile")[0]
+
+        
+        var formData = new FormData();
+
+         // 检查是否选择了文件
+         if (fileInput.files.length > 0) {
+            formData.append('file', fileInput.files[0]);
+            $.ajax({
+                url: '/{{.admin_url}}/upload/image', // 替换为您的上传处理 URL
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                success: function(response) {
+                    if (response.code === 200 ) {
+                        if (response.url.length !== 0) {
+                            toastr["success"](response.message, "{{.info.SiteName}}");
+                            value.val(response.url)
+                            fileInput.value = ''
+                        }
+                } else {
+                    toastr["error"](response.message, "{{.info.SiteName}}");
+                }
+                    // 处理成功响应
+                    // console.log('上传成功:', response);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     // 处理错误响应

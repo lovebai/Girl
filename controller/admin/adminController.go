@@ -4,7 +4,9 @@ import (
 	"Girl/dao"
 	"Girl/model"
 	"Girl/utlis"
-	"fmt"
+	"bytes"
+	"io"
+	"mime/multipart"
 	"net/http"
 	"strconv"
 
@@ -707,7 +709,76 @@ func UpdateUserInfo(c *gin.Context) {
 
 }
 
+// 信息返回
+func resultMsg(c *gin.Context, code int, msg string) {
+	c.JSON(http.StatusOK, gin.H{"code": code, "msg": msg})
+}
+
+// 上传图片
 func UploadImage(c *gin.Context) {
-	file, _ := c.FormFile("file")
-	fmt.Printf("file.Filename: %v\n", file.Filename)
+	siteinfo := dao.Mgr.GetSettingInfo()
+	file, err := c.FormFile("file")
+	if err != nil {
+		resultMsg(c, 205, "参数错误！")
+		return
+	}
+	// 创建一个新的表单数据
+	var buf bytes.Buffer
+	writer := multipart.NewWriter(&buf)
+
+	// 将文件写入表单数据
+	part, err1 := writer.CreateFormFile("image", file.Filename)
+	if err1 != nil {
+		resultMsg(c, 206, "表单写入有误！")
+		return
+	}
+
+	// 读取文件内容并写入到表单
+	fileContent, err2 := file.Open()
+	if err2 != nil {
+		resultMsg(c, 205, "参数错误！")
+		return
+	}
+
+	defer fileContent.Close()
+
+	fileBytes, err3 := io.ReadAll(fileContent)
+	if err3 != nil {
+		resultMsg(c, 205, "参数错误！")
+		return
+	}
+
+	part.Write(fileBytes)
+
+	err4 := writer.WriteField("token", siteinfo.LinkApiToken)
+	if err4 != nil {
+		resultMsg(c, 206, "表单写入有误！")
+		return
+	}
+
+	writer.Close()
+
+	// 创建一个新的请求，转发到图片服务器
+	req, err5 := http.NewRequest("POST", siteinfo.LinkApiUrl, &buf)
+	if err5 != nil {
+		resultMsg(c, 204, "请求图床异常！")
+		return
+	}
+
+	// 设置请求头
+	req.Header.Set("Content-Type", writer.FormDataContentType())
+
+	// 发送请求到图片服务器
+	client := &http.Client{}
+	resp, err6 := client.Do(req)
+	if err6 != nil {
+		resultMsg(c, 203, "图片上传失败！")
+		return
+	}
+	defer resp.Body.Close()
+
+	// 返回图片服务器的响应
+	responseBody, _ := io.ReadAll(resp.Body)
+	c.Data(resp.StatusCode, resp.Header.Get("Content-Type"), responseBody)
+
 }
