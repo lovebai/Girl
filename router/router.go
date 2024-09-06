@@ -34,6 +34,9 @@ func Start() {
 	//Api路由
 	ApiRouter(router)
 
+	//安装页面
+	InstallRouter(router)
+
 	router.Run(":8100")
 
 }
