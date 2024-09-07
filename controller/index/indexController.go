@@ -125,11 +125,11 @@ func LittlePost(c *gin.Context) {
 		return
 	}
 	post := dao.Inx.GetArticle(aid)
-	siteinfo := dao.Inx.GetSetting()
+	info := getIndexInfo()
 	c.HTML(http.StatusOK, "index/little-post", gin.H{
 		"id":    id,
 		"title": post.ArticleTitle,
 		"post":  post,
-		"info":  siteinfo,
+		"info":  info,
 	})
 }
