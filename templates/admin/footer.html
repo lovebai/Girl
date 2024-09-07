@@ -724,15 +724,15 @@
     })
 
 $(document).ready(function() {
-    $("#year").append(new Date().getFullYear())
-  var $selectElement = $('#example-select1');
+  var $selectElement = $('#example-select-1');
   var $qweElements = $('.qwe');
 
   $selectElement.on('change', function() {
+    
     var $selectedOptions = $('option:selected', this);
     $selectedOptions.each(function() {
       var selectedValue = $(this).val();
-      if (selectedValue === '2' ) {
+      if (selectedValue === '1' ) {
         $qweElements.show();
       } else {
         $qweElements.hide();
@@ -746,12 +746,14 @@ $(document).ready(function() {
   var $initialSelectedOptions = $selectElement.find('option:selected');
   if ($initialSelectedOptions.length > 0) {
     var initialSelectedValue = $initialSelectedOptions.val();
-    if (initialSelectedValue === '2') {
+    if (initialSelectedValue === '1') {
       $qweElements.show();
     } else {
       $qweElements.hide();
     }
   }
+
+  $("#year").append(new Date().getFullYear())
 });
 
 
