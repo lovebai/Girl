@@ -21,6 +21,7 @@ type Index interface {
 	GetArticleList() []model.Article
 	GetArticle(id int) model.Article
 	GetLenvingList() []model.Lenving
+	GetLenvingListLimit(limit int) []model.Lenving
 	GetLenvingCount() int64
 	AddLenving(data model.Lenving) bool
 	GetPhotoList() []model.Photo
@@ -43,6 +44,7 @@ type Manager interface {
 	GetPhotoListAdmin() []model.Photo
 	GetTodoListAdmin() []model.TodoList
 	GetAboutAdmin() model.About
+	GetLenvingListAdminLimit(sum int) []model.Lenving
 
 	GetAllUserList() []model.User
 

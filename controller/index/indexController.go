@@ -49,7 +49,7 @@ func Little(c *gin.Context) {
 func Leaving(c *gin.Context) {
 	info := getIndexInfo()
 	count := dao.Inx.GetLenvingCount()
-	lenvingList := dao.Inx.GetLenvingList()
+	lenvingList := dao.Inx.GetLenvingListLimit(info.SiteInfo.LenvingSum)
 	c.HTML(http.StatusOK, "index/leaving", gin.H{
 		"title":       "留言 - " + info.SiteInfo.SiteName,
 		"info":        info,

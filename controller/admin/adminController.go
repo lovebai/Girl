@@ -73,7 +73,7 @@ func LoginPage(c *gin.Context) {
 
 func IndexPage(c *gin.Context) {
 	siteinfo := dao.Mgr.GetSettingInfo()
-	leavingList := dao.Mgr.GetLenvingListAdmin()
+	leavingList := dao.Mgr.GetLenvingListAdminLimit(10)
 	user := getuserinfo(c)
 	c.HTML(http.StatusOK, "admin/index", gin.H{
 		"title":       "首页",

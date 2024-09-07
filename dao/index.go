@@ -31,6 +31,13 @@ func (mgr *manager) GetLenvingList() []model.Lenving {
 	return Lenvings
 }
 
+// 获取指定数据的留言列表
+func (mgr *manager) GetLenvingListLimit(limit int) []model.Lenving {
+	Lenvings := make([]model.Lenving, 10)
+	mgr.db.Order("lenving_id desc").Limit(limit).Find(&Lenvings)
+	return Lenvings
+}
+
 // 获取留言列表总数
 func (mgr *manager) GetLenvingCount() int64 {
 	var count int64
