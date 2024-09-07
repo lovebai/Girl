@@ -33,7 +33,7 @@ func getAllCount() model.SumCount {
 
 // 后台管理地址
 func getAdminUrl() string {
-	return "Admin"
+	return utlis.GetConfBody().Path
 }
 
 // 后台用户

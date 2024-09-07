@@ -2,13 +2,14 @@ package router
 
 import (
 	indexController "Girl/controller/index"
+	"Girl/middleware"
 
 	"github.com/gin-gonic/gin"
 )
 
 // 前台路由
 func IndexRouter(router *gin.Engine) {
-	index := router.Group("/")
+	index := router.Group("/", middleware.GotoInstall)
 	{
 		index.GET("/", indexController.Index)
 		index.GET("/Little", indexController.Little)

@@ -170,7 +170,7 @@ func GetRandomElement(arr []string) string {
 // MD5Encrypt 函数接受一个字符串并返回其 MD5 加密后的字符串
 func MD5Encrypt(str string) string {
 	hasher := md5.New()
-	hasher.Write([]byte(str + "jiami"))
+	hasher.Write([]byte(str + GetConfBody().Salt))
 	hash := hasher.Sum(nil)
 	return hex.EncodeToString(hash)
 }

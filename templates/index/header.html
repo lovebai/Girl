@@ -4,10 +4,10 @@
 <div class="header-wrap">
     <div class="header">
         <div class="logo">
-            <h1><a class="alogo" href="/">{{.info.SiteLogo}}</a></h1>
+            <h1><a class="alogo" href="/">{{.info.SiteInfo.SiteLogo}}</a></h1>
         </div>
         <div class="word">
-            <span class="wenan">{{.info.SiteDesc}}</span>
+            <span class="wenan">{{.info.SiteInfo.SiteDesc}}</span>
         </div>
     </div>
 </div>
@@ -16,25 +16,25 @@
     <div class="bg-img">
         <div class="central central-800">
             <div
-                class="middle animated fadeInDown {{if ne .info.SiteBlur 1}}Blurkg{{end}}">
+                class="middle animated fadeInDown {{if ne .info.SiteInfo.SiteBlur 1}}Blurkg{{end}}">
                 <div class="img-male">
-                    {{if eq .info.AvaterShowType 0 }}
-                    <img src="https://q1.qlogo.cn/g?b=qq&nk={{.boyQQ}}&s=640" draggable="false">
+                    {{if eq .info.SiteInfo.AvaterShowType 0 }}
+                    <img src="https://q1.qlogo.cn/g?b=qq&nk={{.info.Man.Qq}}&s=640" draggable="false">
                     {{else}}
-                    <img src="{{.info.BoyImgUrl}}" draggable="false">
+                    <img src="{{.info.SiteInfo.BoyImgUrl}}" draggable="false">
                     {{end}}
-                    <span>{{.info.BoyName}}</span>
+                    <span>{{.info.SiteInfo.BoyName}}</span>
                 </div>
                 <div class="love-icon">
                     <img src="/static/img/like.svg" draggable="false">
                 </div>
                 <div class="img-female">
-                    {{if eq .info.AvaterShowType 0 }}
-                    <img src="https://q1.qlogo.cn/g?b=qq&nk={{.girlQQ}}&s=640" draggable="false">
+                    {{if eq .info.SiteInfo.AvaterShowType 0 }}
+                    <img src="https://q1.qlogo.cn/g?b=qq&nk={{.info.Woman.Qq}}&s=640" draggable="false">
                     {{else}}
-                    <img src="{{.info.GirlImgUrl}}" draggable="false">
+                    <img src="{{.info.SiteInfo.GirlImgUrl}}" draggable="false">
                     {{end}}
-                    <span>{{.info.GirlName}}</span>
+                    <span>{{.info.SiteInfo.GirlName}}</span>
                 </div>
             </div>
         </div>

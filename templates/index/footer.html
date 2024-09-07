@@ -58,7 +58,7 @@
         })
 
     </script>
-    {{.info.SiteFootJs|ToHtmlTable}}
+    {{.info.SiteInfo.SiteFootJs|ToHtmlTable}}
     <script>
         
                 console.log("%c Blog| https://bducds.com", "color:#fff;background:#000;padding:8px 15px;font-weight: 700;border-radius:15px");
@@ -104,10 +104,10 @@
     <div class="footer-warp">
         <div class="footer">
             
-            {{if ne .info.SiteIcp ""}}<p><a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">{{.info.SiteIcp}}</a></p>{{end}}
-            {{if ne .info.SiteGaIcp ""}} <p><a href="https://beian.mps.gov.cn/#/query/webSearch" target="_blank">{{.info.SiteGaIcp}}</a></p>{{end}}
+            {{if ne .info.SiteInfo.SiteIcp ""}}<p><a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">{{.info.SiteInfo.SiteIcp}}</a></p>{{end}}
+            {{if ne .info.SiteInfo.SiteGaIcp ""}} <p><a href="https://beian.mps.gov.cn/#/query/webSearch" target="_blank">{{.info.SiteInfo.SiteGaIcp}}</a></p>{{end}}
 
-            {{if ne .info.SiteCopyright ""}}<p>{{.info.SiteCopyright}}</p>{{end}}
+            {{if ne .info.SiteInfo.SiteCopyright ""}}<p>{{.info.SiteInfo.SiteCopyright}}</p>{{end}}
             
         </div>
     </div>

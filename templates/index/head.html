@@ -4,7 +4,7 @@
     <title>{{.title}}</title>
     <meta name="keywords"
         content="{{.title}},Like Girl 5.1.0,LGNeUi,情侣小站,开源情侣网站,PHP情侣网站,情侣记录,情侣网站,情侣项目,情侣小窝,Love,LikeGirl,Ki,PHP情侣小站,情侣小站使用教程,情侣小站使用文档">
-    <meta name="discription" content="{{.info.SiteDesc}} - Like Girl for Golang 5.1.0">
+    <meta name="discription" content="{{.info.SiteInfo.SiteDesc}} - Like Girl for Golang 5.1.0">
     <meta name="author" content="Ki">
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&display=swap" rel="stylesheet">
@@ -33,7 +33,7 @@
     <meta charset="utf-8" />
     
     <!-- 自定义头部代码及 pajax开关-->
-   {{ if eq .info.SitePajx 1 }}
+   {{ if eq .info.SiteInfo.SitePajx 1 }}
         <script>
             $(document).pjax('a[target!=_blank]', '#pjax-container', { fragment: '#pjax-container', timeout: 15000 });
             $(document).on('pjax:send', function () {
@@ -79,7 +79,7 @@
 <style>
     .bg-img {
         /* background: url(https://img.gejiba.com/images/f4b1de284e9dcb9057553642d9fee764.png) no-repeat center !important; */
-        background: url({{.info.BgimgUrl}}) no-repeat center !important;
+        background: url({{.info.SiteInfo.BgimgUrl}}) no-repeat center !important;
         background-size: cover !important;
     }
 
@@ -121,6 +121,6 @@
     }
 </style>
 
-{{.info.SiteHeadStyle|ToHtmlTable}}
+{{.info.SiteInfo.SiteHeadStyle|ToHtmlTable}}
 
 {{end}}

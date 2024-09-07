@@ -2,6 +2,19 @@ package dao
 
 import "Girl/model"
 
+//安装
+type Install interface {
+	CreateSiteinfo() int64
+	CreateArticle(auname string) int64
+	CreateLenving() int64
+	CreatePhoto() int64
+	CreateTodoList() int64
+	CreateAbout() int64
+	CreateUser(id int, name string, pass string, qq string, sex int) int64
+	CreateIpBlackList() int64
+	GetWebSiteInfo() int64
+}
+
 //前台
 type Index interface {
 	GetSetting() model.Siteinfo

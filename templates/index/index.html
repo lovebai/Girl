@@ -23,24 +23,24 @@
                     class="card col-lg-4 col-sm-12 col-sm-x-12 flex-h animated fadeInUp ">
                     <img src="static/img/diandian.png">
                     <div class="text">
-                        <span><a target="_self" href="/Little">{{.info.CardOne}}</a></span>
-                        <p>{{.info.CardOneDesc}}</p>
+                        <span><a target="_self" href="/Little">{{.info.SiteInfo.CardOne}}</a></span>
+                        <p>{{.info.SiteInfo.CardOneDesc}}</p>
                     </div>
                 </div>
                 <div
                     class="card col-lg-4 col-sm-12 col-sm-x-12 flex-h animated fadeInUp">
                     <img src="static/img/liuyan.png" alt="">
                     <div class="text">
-                        <span><a target="_self" href="/Lenving">{{.info.CardTwo}} </a></span>
-                        <p>{{.info.CardTwoDesc}} </p>
+                        <span><a target="_self" href="/Lenving">{{.info.SiteInfo.CardTwo}} </a></span>
+                        <p>{{.info.SiteInfo.CardTwoDesc}} </p>
                     </div>
                 </div>
                 <div
                     class="card col-lg-4 col-sm-12 col-sm-x-12 flex-h animated fadeInUp">
                     <img src="static/img/about.png" alt="">
                     <div class="text">
-                        <span><a target="_self" href="/About">{{.info.CardThree}}</a></span>
-                        <p>{{.info.CardThreeDesc}} </p>
+                        <span><a target="_self" href="/About">{{.info.SiteInfo.CardThree}}</a></span>
+                        <p>{{.info.SiteInfo.CardThreeDesc}} </p>
                     </div>
                 </div>
                 <div
@@ -65,10 +65,10 @@
     <script>
         function show_date_time() {
             window.setTimeout("show_date_time()", 1000);
-            // BirthDay = new Date("{{.info.StartTime}}");
+            // BirthDay = new Date("{{.info.SiteInfo.StartTime}}");
             today = new Date();
             // timeold = (today.getTime() - BirthDay.getTime());
-            timeold = (today.getTime() - {{.info.StartTime}});
+            timeold = (today.getTime() - {{.info.SiteInfo.StartTime}});
             sectimeold = timeold / 1000;
             secondsold = Math.floor(sectimeold);
             msPerDay = 24 * 60 * 60 * 1000;

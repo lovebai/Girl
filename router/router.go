@@ -10,6 +10,7 @@ import (
 )
 
 func Start() {
+	gin.SetMode(utlis.GetConfBody().AppMOde)
 	router := gin.Default()
 	router.SetTrustedProxies([]string{"127.0.0.1"})
 	router.SetFuncMap(template.FuncMap{

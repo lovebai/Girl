@@ -11,36 +11,48 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// 查
+type Body struct {
+	SiteInfo model.Siteinfo
+	Man      model.User
+	Woman    model.User
+}
+
+func getIndexInfo() Body {
+	body := Body{
+		SiteInfo: dao.Inx.GetSetting(),
+		Man:      dao.Inx.GetUserinfoBySex(1),
+		Woman:    dao.Inx.GetUserinfoBySex(0),
+	}
+	return body
+}
+
 func Index(c *gin.Context) {
-	siteinfo := dao.Inx.GetSetting()
-	boy := dao.Inx.GetUserinfoBySex(1)
-	girl := dao.Inx.GetUserinfoBySex(0)
+	info := getIndexInfo()
 	c.HTML(http.StatusOK, "index/index", gin.H{
-		"title":  siteinfo.SiteName,
-		"info":   siteinfo,
-		"boyQQ":  boy.Qq,
-		"girlQQ": girl.Qq,
+		"title": info.SiteInfo.SiteName,
+		"info":  info,
 	})
 }
 
 func Little(c *gin.Context) {
-	siteinfo := dao.Inx.GetSetting()
+	info := getIndexInfo()
 	article := dao.Inx.GetArticleList()
 	c.HTML(http.StatusOK, "index/little", gin.H{
-		"title":   "点点滴滴 - " + siteinfo.SiteName,
-		"info":    siteinfo,
+		"title":   "点点滴滴 - " + info.SiteInfo.SiteName,
+		"info":    info,
 		"article": article,
 	})
 
 }
 
 func Leaving(c *gin.Context) {
-	siteinfo := dao.Inx.GetSetting()
+	info := getIndexInfo()
 	count := dao.Inx.GetLenvingCount()
 	lenvingList := dao.Inx.GetLenvingList()
 	c.HTML(http.StatusOK, "index/leaving", gin.H{
-		"title":       "留言 - " + siteinfo.SiteName,
-		"info":        siteinfo,
+		"title":       "留言 - " + info.SiteInfo.SiteName,
+		"info":        info,
 		"count":       count,
 		"lenvingList": lenvingList,
 	})
@@ -73,33 +85,33 @@ func LeavingAdd(c *gin.Context) {
 }
 
 func Photo(c *gin.Context) {
-	siteinfo := dao.Inx.GetSetting()
+	info := getIndexInfo()
 	imgList := dao.Inx.GetPhotoList()
 	c.HTML(http.StatusOK, "index/photo", gin.H{
-		"title": "相册 - " + siteinfo.SiteName,
-		"info":  siteinfo,
+		"title": "相册 - " + info.SiteInfo.SiteName,
+		"info":  info,
 		"list":  imgList,
 	})
 
 }
 
 func TodoList(c *gin.Context) {
-	siteinfo := dao.Inx.GetSetting()
+	info := getIndexInfo()
 	todolist := dao.Inx.GetTodoList()
 	c.HTML(http.StatusOK, "index/todolist", gin.H{
-		"title":    "恋爱事件 - " + siteinfo.SiteName,
-		"info":     siteinfo,
+		"title":    "恋爱事件 - " + info.SiteInfo.SiteName,
+		"info":     info,
 		"todolist": todolist,
 	})
 
 }
 
 func About(c *gin.Context) {
-	siteinfo := dao.Inx.GetSetting()
+	info := getIndexInfo()
 	about := dao.Inx.GetAbout()
 	c.HTML(http.StatusOK, "index/about", gin.H{
-		"title": "关于 - " + siteinfo.SiteName,
-		"info":  siteinfo,
+		"title": "关于 - " + info.SiteInfo.SiteName,
+		"info":  info,
 		"about": about,
 	})
 

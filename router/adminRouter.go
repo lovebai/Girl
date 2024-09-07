@@ -3,17 +3,18 @@ package router
 import (
 	adminController "Girl/controller/admin"
 	"Girl/middleware"
+	"Girl/utlis"
 
 	"github.com/gin-gonic/gin"
 )
 
 func AdminRouter(router *gin.Engine) {
 	//后台登录
-	router.GET("/Admin/login", adminController.LoginPage)
-	router.POST("/Admin/login", adminController.Login)
+	router.GET("/"+utlis.GetConfBody().Path+"/login", adminController.LoginPage)
+	router.POST("/"+utlis.GetConfBody().Path+"/login", adminController.Login)
 
 	//登录成功
-	admin := router.Group("/Admin", middleware.LoginStatus)
+	admin := router.Group("/"+utlis.GetConfBody().Path, middleware.LoginStatus)
 	{
 
 		admin.GET("/", adminController.IndexPage)

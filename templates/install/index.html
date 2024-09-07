@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8"/>
-    <title>Like_Girl_Golang 安装页面</title>
+    <title>Like_Girl_Golang 设置用户名</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
     <meta content="Coderthemes" name="author"/>
@@ -76,36 +76,6 @@
 
                         <form  method="post">
                             <div class="container text-center">
-                                <div class="row row-cols-2">
-                                  <div class="col">
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="inputGroup-sizing-default">请输入后台地址：</span>
-                                        <input type="text" name="adminUrl" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="如：Admin">
-                                      </div>
-                                  </div>
-                                  <div class="col">
-                                    <div class="input-group mb-3">
-                                        <input type="text" name="sqlFile" id="sqlFile" class="form-control" placeholder="请输入sqlite数据文件名称" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                        <span class="input-group-text">.db</span>
-                                        <button class="btn btn-secondary" type="button" id="button-addon1">随机生成</button>
-                                      </div>
-                                  </div>
-                                </div>
-                              </div>
-
-                            <div class="container text-center">
-                                <div class="row row-cols-2">
-                                  <div class="col">
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="inputGroup-sizing-default">请输入加密盐：</span>
-                                        <input type="text" name="salt" id="salt" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="自己看着输入吧！建议英文或数字">
-                                        <button class="btn btn-secondary" type="button" id="button-addon2">随机生成</button>  
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-
-                            <div class="container text-center">
                                 <div class="row">
                                   <div class="col">
                                     <div class="input-group mb-3">
@@ -156,15 +126,15 @@
                                   提示
                                 </div>
                                 <div class="card-body">
-                                  <h5 class="card-title">关于后台地址</h5>
+                                  <!-- <h5 class="card-title">关于后台地址</h5>
                                   <p class="card-text">顾名思义就是访问后台的地址，可以起到隐藏后台的作用，不填默认为<span style="color: red"> Admin </span>,无需输入斜杆<span style="color: red"> / </span>。</p>
                                   <h5 class="card-title">关于数据库</h5>
                                   <p class="card-text">本系统程序本就轻量化，所有采用的sqlite文件数据库，需在第二个文本框中输入自己想要的数据库文件名，留空系统将自动生成，或点随机生成，无需填写<span style="color: red"> .db </span>后缀。</p>
                                   <h5 class="card-title">关于加密盐</h5>
-                                  <p class="card-text">混淆用户密码加密，为了使密码更加复杂，自定义输入或点随机生成，留空则为系统默认。</p>
+                                  <p class="card-text">混淆用户密码加密，为了使密码更加复杂，自定义输入或点随机生成，留空则为系统默认。</p> -->
                                   <h5 class="card-title">关于用户信息</h5>
                                   <p class="card-text">创建两个后台用户，一个男士登录，一个女士登录，QQ号可用做前台页面头像显示。</p>
-                                  <div class="alert alert-info" role="alert">安装成功后程序会创建两个文件，一个为数据库文件，另一个为 conf.ini 的配置文件，以上所填信息除用户信息外均写入配置文件中。</div>
+                                  <!-- <div class="alert alert-info" role="alert">安装成功后程序会创建两个文件，一个为数据库文件，另一个为 conf.ini 的配置文件，以上所填信息除用户信息外均写入配置文件中。</div> -->
                                 </div>
                               </div>
 
@@ -193,28 +163,6 @@
 
 <!-- App js -->
 <script src="/static/js/app.min.js"></script>
-<script>
-    // 获取长度为len的随机字符串
-function getRandomString(len) {
-    len = len || 32;
-    var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678'; // 默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1
-    var maxPos = $chars.length;
-    var pwd = '';
-    for (i = 0; i < len; i++) {
-        pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
-    }
-    return pwd;
-}
-
-$("#button-addon1").click(()=>{
-    $("#sqlFile").val(getRandomString(6))
-})
-
-$("#button-addon2").click(()=>{
-    $("#salt").val(getRandomString(6))
-})
-
-</script>
 
 </body>
 </html>

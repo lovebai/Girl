@@ -10,9 +10,9 @@
   <div id="pjax-container">
     <div class="central central-800 bg">
         <div class="title mt-2rem">
-            <h1>{{.info.CardTwoDesc}}</h1>
+            <h1>{{.info.SiteInfo.CardTwoDesc}}</h1>
         </div>
-        <h3>已收到 <b> {{.count}} </b> 条祝福留言<i class="jiequ">（显示最新 {{.info.LenvingSum }}条）</i></h3>
+        <h3>已收到 <b> {{.count}} </b> 条祝福留言<i class="jiequ">（显示最新 {{.info.SiteInfo.LenvingSum }}条）</i></h3>
 
         <div class="row">
             <div class="card col-lg-12 col-md-12 col-sm-12 col-sm-x-12">
@@ -79,21 +79,21 @@
                         loadingname();
                         setTimeout(function () {
                             removeLoading('test');
-                            toastr["warning"]("获取QQ头像失败 API请求超时 请联系小站管理员！", "{{.info.SiteName}}");
+                            toastr["warning"]("获取QQ头像失败 API请求超时 请联系小站管理员！", "{{.info.SiteInfo.SiteName}}");
                         }, 2000);
                     }
                 },
                 success: function (result) {
                     if (result.code == 500) {
                         removeLoading('test');
-                        toastr["warning"](result.msg, "{{.info.SiteName}}");
+                        toastr["warning"](result.msg, "{{.info.SiteInfo.SiteName}}");
                     } else if (result.code == 200) {
                         loadingname();
                         $("#nickname").val(result["data"].name);
                         $(".avatar").attr("src", result["data"].avatar);
                         setTimeout(function () {
                             removeLoading('test');
-                            toastr["success"]("获取昵称头像成功", "{{.info.SiteName}}");
+                            toastr["success"]("获取昵称头像成功", "{{.info.SiteInfo.SiteName}}");
                         }, 1200);
                     }
 
@@ -106,42 +106,42 @@
             let qq = $("input[name='qq']").val().trim();
             let name = $("input[name='name']").val().trim();
             if (qq.length == 0) {
-                toastr["warning"]("请填写QQ号码！", "{{.info.SiteName}}");
+                toastr["warning"]("请填写QQ号码！", "{{.info.SiteInfo.SiteName}}");
                 return false;
             } else if (name.length == 0) {
-                toastr["warning"]("请填写恁的昵称！", "{{.info.SiteName}}");
+                toastr["warning"]("请填写恁的昵称！", "{{.info.SiteInfo.SiteName}}");
                 return false;
             }
             let qqlength = /^[0-9]{6,10}$/;
             if (!qqlength.test(qq)) {
-                toastr["warning"]("您的QQ号码格式错误 <br/> 请输入由6-10位的数字 <br/>组成的QQ号码！", "{{.info.SiteName}}");
+                toastr["warning"]("您的QQ号码格式错误 <br/> 请输入由6-10位的数字 <br/>组成的QQ号码！", "{{.info.SiteInfo.SiteName}}");
                 return false;
             }
             if ((qq == 123456) || (qq == 100000) || (qq == 1234567)) {
-                toastr["warning"]("我想也许这并不是您的QQ号码...", "{{.info.SiteName}}");
+                toastr["warning"]("我想也许这并不是您的QQ号码...", "{{.info.SiteInfo.SiteName}}");
                 return false;
             }
             let text = $("textarea[name='text']").val().trim();
             if (text.length == 0) {
-                toastr["warning"]("请填写您要留言的内容！", "{{.info.SiteName}}");
+                toastr["warning"]("请填写您要留言的内容！", "{{.info.SiteInfo.SiteName}}");
                 return false;
             } else if (text.length <= 2) {
-                toastr["warning"]("请填写两个字符以上的内容！", "{{.info.SiteName}}");
+                toastr["warning"]("请填写两个字符以上的内容！", "{{.info.SiteInfo.SiteName}}");
                 return false;
             }
             let nonub = /^[0-9]+$/;
-            let weifan = new RegExp("{{.info.SiteRegexp}}");
+            let weifan = new RegExp("{{.info.SiteInfo.SiteRegexp}}");
             if (nonub.test(text)) {
-                toastr["warning"]("内容为纯数字 已被拦截！", "{{.info.SiteName}}");
+                toastr["warning"]("内容为纯数字 已被拦截！", "{{.info.SiteInfo.SiteName}}");
                 return false;
             } else if (weifan.test(text)) {
-                toastr["warning"]("您输入的内容是违禁词 <br/>请注意您的发言不文明的留言 <br/>会被管理员拉进小黑屋喔", "{{.info.SiteName}}");
+                toastr["warning"]("您输入的内容是违禁词 <br/>请注意您的发言不文明的留言 <br/>会被管理员拉进小黑屋喔", "{{.info.SiteInfo.SiteName}}");
                 return false;
             }
 
 
             if (!(qq && name && text)) {
-                toastr["warning"]("表单信息不能为空 请先填写完整！", "{{.info.SiteName}}");
+                toastr["warning"]("表单信息不能为空 请先填写完整！", "{{.info.SiteInfo.SiteName}}");
                 return false
             }
             $('#leavingPost').text('留言提交中...');
@@ -162,17 +162,17 @@
                     // console.log(res)
                     res = JSON.parse(res)
                     if (res.code == 200) {
-                        toastr["success"]("留言提交成功 请刷新本页查看！", "{{.info.SiteName}}");
+                        toastr["success"]("留言提交成功 请刷新本页查看！", "{{.info.SiteInfo.SiteName}}");
                         $('#leavingPost').text('留言成功');
                     } else if (res.code == 201) {
-                        toastr["error"]("留言提交失败！", "{{.info.SiteName}}");
+                        toastr["error"]("留言提交失败！", "{{.info.SiteInfo.SiteName}}");
                         $('#leavingPost').text('留言失败');
                     } else {
-                        toastr["error"]("未知错误！", "{{.info.SiteName}}");
+                        toastr["error"]("未知错误！", "{{.info.SiteInfo.SiteName}}");
                     }
                 },
                 error: function (err) {
-                    toastr["error"]("网络错误 请稍后重试！", "{{.info.SiteName}}");
+                    toastr["error"]("网络错误 请稍后重试！", "{{.info.SiteInfo.SiteName}}");
                 }
             }
             )
