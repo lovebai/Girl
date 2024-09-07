@@ -5,8 +5,8 @@ import (
 	"Girl/model"
 	"Girl/utlis"
 	"net/http"
+	"regexp"
 	"strconv"
-	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -65,12 +65,18 @@ func LeavingAdd(c *gin.Context) {
 	name := c.PostForm("name")
 	qq := c.PostForm("qq")
 	text := c.PostForm("text")
+	re := regexp.MustCompile(getIndexInfo().SiteInfo.BlockWord)
+
+	if re.MatchString(text) {
+		c.JSON(http.StatusOK, gin.H{"code": 203, "msg": "抱歉！您发布的评论有敏感词汇！"})
+		return
+	}
 	data := model.Lenving{
 		LenvingId:   int(count) + 1,
 		LenvingName: name,
 		LenvingQq:   qq,
 		LenvingText: text,
-		LenvingTime: time.Now().Unix(),
+		LenvingTime: utlis.GetTimeUnix(),
 		LenvingIp:   utlis.GetIPFromRequest(c),
 		LenvingCity: utlis.Get_ip_city(utlis.GetIPFromRequest(c)),
 	}

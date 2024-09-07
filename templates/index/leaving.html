@@ -154,21 +154,18 @@
                     text: text,
                 },
                 type: "POST",
-                dataType: "text",
+                dataType: "json",
                 success: function (res) {
                     setInterval(() => {
                         $('#leavingPost').removeAttr("disabled");
                     }, 5000);
-                    // console.log(res)
-                    res = JSON.parse(res)
+                    // res = JSON.parse(res)
                     if (res.code == 200) {
-                        toastr["success"]("留言提交成功 请刷新本页查看！", "{{.info.SiteInfo.SiteName}}");
+                        toastr["success"]("留言提交成功 正在刷新...", "{{.info.SiteInfo.SiteName}}");
                         $('#leavingPost').text('留言成功');
-                    } else if (res.code == 201) {
-                        toastr["error"]("留言提交失败！", "{{.info.SiteInfo.SiteName}}");
-                        $('#leavingPost').text('留言失败');
+                        setInterval(document.location.reload(),3000)
                     } else {
-                        toastr["error"]("未知错误！", "{{.info.SiteInfo.SiteName}}");
+                        toastr["error"](res.msg, "{{.info.SiteInfo.SiteName}}");
                     }
                 },
                 error: function (err) {
