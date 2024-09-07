@@ -1,7 +1,8 @@
 package model
 
 type Conf struct {
-	AppMOde string
+	AppMode string
+	AppPort string
 	Data    string
 	Path    string
 	Salt    string

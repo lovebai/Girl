@@ -10,7 +10,7 @@ import (
 )
 
 func Start() {
-	gin.SetMode(utlis.GetConfBody().AppMOde)
+	gin.SetMode(utlis.GetConfBody().AppMode)
 	router := gin.Default()
 	router.SetTrustedProxies([]string{"127.0.0.1"})
 	router.SetFuncMap(template.FuncMap{
@@ -38,6 +38,6 @@ func Start() {
 	//安装页面
 	InstallRouter(router)
 
-	router.Run(":8100")
+	router.Run(":" + utlis.GetConfBody().AppPort)
 
 }

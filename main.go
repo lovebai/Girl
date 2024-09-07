@@ -1,9 +1,9 @@
 package main
 
-import "Girl/router"
+import (
+	"Girl/router"
+)
 
 func main() {
-
 	router.Start()
-
 }
