@@ -61,6 +61,13 @@ func (mgr *manager) GetLenvingListAdmin() []model.Lenving {
 	return Lenvings
 }
 
+// 获取指定条数的留言列表
+func (mgr *manager) GetLenvingListAdminLimit(sum int) []model.Lenving {
+	Lenvings := make([]model.Lenving, 10)
+	mgr.db.Order("lenving_id desc").Limit(sum).Find(&Lenvings)
+	return Lenvings
+}
+
 // 获取点滴列表
 func (mgr *manager) GetArticleListAdmin() []model.Article {
 	article := make([]model.Article, 10)
