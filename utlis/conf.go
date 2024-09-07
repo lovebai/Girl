@@ -32,7 +32,7 @@ func GetConfBody() model.Conf {
 		defer file.Close() // 确保在函数结束时关闭文件
 
 		content := fmt.Sprintf(`# possible values : release, debug, test
-app_mode = debug 
+app_mode = relese 
 
 [paths]
 data = suibianba
