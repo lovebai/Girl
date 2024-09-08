@@ -36,7 +36,7 @@ func FormatAsDate(unix int64) string {
 // 时间戳格式化为什么什么之前
 func FormatAsTimeAgo(timestamp int64) string {
 	now := time.Now()
-	t := time.Unix(timestamp, 0)
+	t := time.Unix(timestamp/1000, 0)
 	diff := now.Sub(t)
 
 	years := int(diff.Hours() / 24 / 365)
