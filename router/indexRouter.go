@@ -9,7 +9,8 @@ import (
 
 // 前台路由
 func IndexRouter(router *gin.Engine) {
-	index := router.Group("/", middleware.GotoInstall)
+	router.GET("/firewalls", indexController.FirewallsPage)
+	index := router.Group("/", middleware.GotoInstall, middleware.FirewallsMiddleware)
 	{
 		index.GET("/", indexController.Index)
 		index.GET("/Little", indexController.Little)

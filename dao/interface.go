@@ -28,6 +28,7 @@ type Index interface {
 	GetTodoList() []model.TodoList
 	GetAbout() model.About
 	GetUserinfoBySex(sex int) model.User
+	GetBlackByIp(cip string) (int64, model.IpBlackList)
 }
 
 //后台

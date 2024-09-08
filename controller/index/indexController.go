@@ -139,3 +139,10 @@ func LittlePost(c *gin.Context) {
 		"info":  info,
 	})
 }
+
+// ip拦截页面
+func FirewallsPage(c *gin.Context) {
+	clientIp := utlis.GetIPFromRequest(c)
+	_, ip := dao.Inx.GetBlackByIp(clientIp)
+	c.HTML(http.StatusOK, "index/firewalls", gin.H{"ip": ip, "cip": clientIp})
+}

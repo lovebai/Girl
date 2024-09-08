@@ -42,3 +42,13 @@ func GotoInstall(c *gin.Context) {
 		return
 	}
 }
+
+// ip地址拦截
+func FirewallsMiddleware(c *gin.Context) {
+	clientIp := utlis.GetIPFromRequest(c)
+	row, _ := dao.Inx.GetBlackByIp(clientIp)
+	if row == 1 {
+		c.Redirect(http.StatusMovedPermanently, "/firewalls")
+		return
+	}
+}

@@ -85,3 +85,10 @@ func (mgr *manager) GetUserinfoBySex(sex int) model.User {
 	mgr.db.Where("sex = ?", sex).First(&user)
 	return user
 }
+
+//根据ip地址查询
+func (mgr *manager) GetBlackByIp(cip string) (int64, model.IpBlackList) {
+	bl := model.IpBlackList{}
+	row := mgr.db.Where("ip = ? ", cip).Find(&bl)
+	return row.RowsAffected, bl
+}
