@@ -115,7 +115,7 @@ func (mgr *manager) CreateLenving() int64 {
 		LenvingName: "Ki.",
 		LenvingQq:   "3439780232",
 		LenvingText: "LikeGirl#5.1.0默认留言",
-		LenvingTime: 1718090394,
+		LenvingTime: 1718090394000,
 		LenvingIp:   "123.123.123.123",
 		LenvingCity: "北京市",
 	}
