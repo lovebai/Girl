@@ -6,6 +6,7 @@ import (
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 type manager struct {
@@ -19,7 +20,13 @@ var Mgr Manager
 // 初始化数据库
 func init() {
 	dataFilepath := "data/" + utlis.GetConfBody().Data + "_main.db"
-	db, err := gorm.Open(sqlite.Open(dataFilepath), &gorm.Config{})
+	var mode logger.Interface
+	if utlis.GetConfBody().AppMode == "release" {
+		mode = logger.Default.LogMode(logger.Silent)
+	} else {
+		mode = logger.Default.LogMode(logger.Warn)
+	}
+	db, err := gorm.Open(sqlite.Open(dataFilepath), &gorm.Config{Logger: mode})
 
 	if err != nil {
 		panic("数据库打开失败")
