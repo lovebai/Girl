@@ -19,3 +19,7 @@ func RandImgUrl(c *gin.Context) {
 	url := utlis.GetRandomElement(arr)
 	c.Redirect(http.StatusMovedPermanently, url)
 }
+
+func BingTodayUrl(c *gin.Context) {
+	c.Redirect(http.StatusMovedPermanently, "https://api.bducds.com/api/bing_images/")
+}

@@ -8,8 +8,9 @@ import (
 
 // 前台路由
 func ApiRouter(router *gin.Engine) {
-	index := router.Group("/api")
+	api := router.Group("/api")
 	{
-		index.GET("/RandImg", apiController.RandImgUrl)
+		api.GET("/RandImg", apiController.RandImgUrl)
+		api.GET("/BingImg", apiController.BingTodayUrl)
 	}
 }
