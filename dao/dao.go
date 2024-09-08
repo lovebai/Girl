@@ -18,7 +18,7 @@ var Mgr Manager
 
 // 初始化数据库
 func init() {
-	dataFilepath := utlis.GetConfBody().Data + "_main.db"
+	dataFilepath := "data/" + utlis.GetConfBody().Data + "_main.db"
 	db, err := gorm.Open(sqlite.Open(dataFilepath), &gorm.Config{})
 
 	if err != nil {

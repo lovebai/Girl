@@ -9,8 +9,8 @@ import (
 )
 
 const (
-	FileName = "conf.ini"
-	Port     = "8888"
+	FileName = "data/conf.ini"
+	Port     = "5200"
 )
 
 // 检查文件是否存在 存在则返回true
@@ -45,7 +45,7 @@ func GetConfBody() model.Conf {
 		appPort = Port
 		data = "BoyandGirlDB"
 		path = "Admin"
-		salt = "hash123"
+		salt = "jiami"
 
 	}
 	conf.AppMode = appMode
