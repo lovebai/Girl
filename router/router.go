@@ -38,6 +38,8 @@ func Start() {
 	//安装页面
 	InstallRouter(router)
 
+	utlis.Header()
+	utlis.Tip(utlis.GetConfBody().AppPort)
 	router.Run(":" + utlis.GetConfBody().AppPort)
 
 }

@@ -45,7 +45,7 @@ func GetConfBody() model.Conf {
 		appPort = Port
 		data = "BoyandGirlDB"
 		path = "Admin"
-		salt = "jiami"
+		salt = "hash123"
 
 	}
 	conf.AppMode = appMode
@@ -54,4 +54,21 @@ func GetConfBody() model.Conf {
 	conf.Path = path
 	conf.Salt = salt
 	return conf
+}
+
+// 头部
+func Header() {
+	fmt.Println(` _       _ _              ______ _       _    _______              ______       _                   
+| |     (_) |            / _____|_)     | |  (_______)            / _____)     | |                  
+| |      _| |  _ ____   | /  ___ _  ____| |   _____ ___   ____   | /  ___  ___ | | ____ ____   ____ 
+| |     | | | / ) _  )  | | (___) |/ ___) |  |  ___) _ \ / ___)  | | (___)/ _ \| |/ _  |  _ \ / _  |
+| |_____| | |< ( (/ /   | \____/| | |   | |  | |  | |_| | |      | \____/| |_| | ( ( | | | | ( ( | |
+|_______)_|_| \_)____)   \_____/|_|_|   |_|  |_|   \___/|_|       \_____/ \___/|_|\_||_|_| |_|\_|| |
+                                                                                             (_____|
+`)
+}
+
+// 提示
+func Tip(port string) {
+	fmt.Printf("Like Girl For Golang 程序已启动，请通过 %v 端口访问 ^_^\n", port)
 }
