@@ -3,7 +3,6 @@ package middleware
 import (
 	"Girl/dao"
 	"Girl/utlis"
-	"fmt"
 	"net/http"
 
 	"github.com/gin-contrib/sessions"
@@ -17,20 +16,15 @@ func LoginStatus(c *gin.Context) {
 	jwtToken := session.Get("jwtToken")
 	if jwtToken == nil {
 		c.Redirect(http.StatusFound, "/"+utlis.GetConfBody().Path+"/login")
-		fmt.Printf("没有cookie")
 		c.Abort()
 		return
 	}
-	fmt.Printf("jwtToken: %v\n", jwtToken)
 	claims, err := utlis.ParseToken(jwtToken.(string))
 	if err != nil {
 		c.Redirect(http.StatusFound, "/"+utlis.GetConfBody().Path+"/login")
 		return
 	}
-	fmt.Printf("claims: %v\n", claims)
-
 	res, user := dao.Mgr.GetUserinfoByName(claims.Username)
-	fmt.Printf("user.Password: %v c %v %v\n", user.Password, claims.Password, res)
 	if res == 0 || user.Password != claims.Password {
 		c.Redirect(http.StatusFound, "/"+utlis.GetConfBody().Path+"/login")
 		c.Abort()
