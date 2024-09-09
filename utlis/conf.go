@@ -49,6 +49,8 @@ path = Admin
 [others]
 # 密码加密盐
 salt = jiami
+# 后台签名密钥
+admin_secret = secret
 		`
 
 		// 写入内容到文件
@@ -73,19 +75,21 @@ salt = jiami
 	data := cfg.Section("paths").Key("data").String()
 	path := cfg.Section("paths").Key("path").String()
 	salt := cfg.Section("others").Key("salt").String()
+	secret := cfg.Section("others").Key("admin_secret").String()
 	if len(path) == 0 {
 		appMode = "release"
 		appPort = Port
 		data = "BoyandGirlDB"
 		path = "Admin"
 		salt = "hash123"
-
+		secret = "secrtt"
 	}
 	conf.AppMode = appMode
 	conf.AppPort = appPort
 	conf.Data = data
 	conf.Path = path
 	conf.Salt = salt
+	conf.Secret = secret
 	return conf
 }
 

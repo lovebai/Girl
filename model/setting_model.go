@@ -55,3 +55,5 @@ type SumCount struct {
 	TodoList    int64
 	IpBlackList int64
 }
+
+var LoggedInUsers = make(map[string]bool)

@@ -3,6 +3,7 @@ package middleware
 import (
 	"Girl/dao"
 	"Girl/utlis"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-contrib/sessions"
@@ -13,32 +14,35 @@ import (
 func LoginStatus(c *gin.Context) {
 	// fmt.Printf("utlis.MD5Encrypt(\"123456\"): %v\n", utlis.MD5Encrypt("123456"))
 	session := sessions.Default(c)
-	username := session.Get("username")
-	pwd := session.Get("password")
-	if username == nil {
-		// fmt.Printf(" !username: %v\n", username)
-		c.Redirect(http.StatusMovedPermanently, "/"+utlis.GetConfBody().Path+"/login")
+	jwtToken := session.Get("jwtToken")
+	if jwtToken == nil {
+		c.Redirect(http.StatusFound, "/"+utlis.GetConfBody().Path+"/login")
+		fmt.Printf("没有cookie")
+		c.Abort()
 		return
 	}
-	res, user := dao.Mgr.GetUserinfoByName(username.(string))
-
-	if res == 0 {
-		c.Redirect(http.StatusMovedPermanently, "/"+utlis.GetConfBody().Path+"/login")
+	fmt.Printf("jwtToken: %v\n", jwtToken)
+	claims, err := utlis.ParseToken(jwtToken.(string))
+	if err != nil {
+		c.Redirect(http.StatusFound, "/"+utlis.GetConfBody().Path+"/login")
 		return
 	}
+	fmt.Printf("claims: %v\n", claims)
 
-	if user.Password != pwd {
-		c.Redirect(http.StatusMovedPermanently, "/"+utlis.GetConfBody().Path+"/login")
+	res, user := dao.Mgr.GetUserinfoByName(claims.Username)
+	fmt.Printf("user.Password: %v c %v %v\n", user.Password, claims.Password, res)
+	if res == 0 || user.Password != claims.Password {
+		c.Redirect(http.StatusFound, "/"+utlis.GetConfBody().Path+"/login")
+		c.Abort()
+		return
 	}
-
-	// fmt.Printf("username: %v\n", username)
+	c.Next()
 }
 
 // 跳转安装
 func GotoInstall(c *gin.Context) {
-	// fmt.Printf("dao.Ist.GetWebSiteInfo(): %v\n", dao.Ist.GetWebSiteInfo())
 	if dao.Ist.GetWebSiteInfo() == 0 {
-		c.Redirect(http.StatusMovedPermanently, "/install")
+		c.Redirect(http.StatusFound, "/install")
 		return
 	}
 }

@@ -5,6 +5,7 @@ import (
 	"Girl/model"
 	"Girl/utlis"
 	"bytes"
+	"fmt"
 	"io"
 	"mime/multipart"
 	"net/http"
@@ -36,16 +37,35 @@ func getAdminUrl() string {
 	return utlis.GetConfBody().Path
 }
 
+// 根据jwt获取用户
+func getUserinfoByJwt(c *gin.Context) model.User {
+	session := sessions.Default(c)
+	jwtToken := session.Get("jwtToken")
+	user := model.User{}
+	if jwtToken == nil {
+		// c.Redirect(http.StatusFound, "/"+utlis.GetConfBody().Path+"/login")
+		return model.User{}
+	}
+	claims, err := utlis.ParseToken(jwtToken.(string))
+	if err != nil {
+		return model.User{}
+	}
+
+	user.Username = claims.Username
+	user.Password = claims.Password
+	return user
+}
+
 // 后台用户
 func getuserinfo(c *gin.Context) model.User {
-	session := sessions.Default(c)
-	username := session.Get("username")
+	username := getUserinfoByJwt(c).Username
 	u := model.User{}
-	if username == nil {
+	fmt.Printf("我到这里了username: %v\n", username)
+	if len(username) == 0 {
 		c.Redirect(http.StatusMovedPermanently, "/"+getAdminUrl()+"/login")
 		return u
 	}
-	res, user := dao.Mgr.GetUserinfoByName(username.(string))
+	res, user := dao.Mgr.GetUserinfoByName(username)
 	if res == 0 {
 		return u
 	}
@@ -53,11 +73,10 @@ func getuserinfo(c *gin.Context) model.User {
 }
 
 func LoginPage(c *gin.Context) {
-	session := sessions.Default(c)
-	un := session.Get("username")
+	un := getUserinfoByJwt(c).Username
 	// fmt.Printf("un: %v\n", un)
-	if un != nil {
-		res, _ := dao.Mgr.GetUserinfoByName(un.(string))
+	if len(un) == 0 {
+		res, _ := dao.Mgr.GetUserinfoByName(un)
 		if res != 0 {
 			c.Redirect(http.StatusMovedPermanently, "")
 			return
@@ -643,8 +662,13 @@ func Login(c *gin.Context) {
 
 	session := sessions.Default(c)
 	session.Options(sessions.Options{Path: "/", MaxAge: 3600 * 24}) //12小时过期
-	session.Set("username", username)
-	session.Set("password", user.Password)
+	// 生成 JWT
+	usernameJwt, err := utlis.GenerateJWT(user.Username, user.Password, 12*60) //12小时过期
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"code": 210, "msg": "could not create token"})
+		return
+	}
+	session.Set("jwtToken", usernameJwt)
 	session.Save()
 	c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "恭喜，登录成功啦！"})
 }
@@ -652,18 +676,10 @@ func Login(c *gin.Context) {
 // 退出登录
 func Logout(c *gin.Context) {
 	session := sessions.Default(c)
-	username := session.Get("username")
-	password := session.Get("password")
-	if username == nil || password == nil {
-		c.Redirect(http.StatusMovedPermanently, "/"+getAdminUrl()+"/login")
-	}
-
 	session.Options(sessions.Options{Path: "/", MaxAge: -1}) //清除
-	session.Set("username", username)
-	session.Set("password", password)
+	session.Set("jwtToken", 0)
 	session.Save()
 	c.Redirect(http.StatusMovedPermanently, "/"+getAdminUrl()+"/login")
-	// fmt.Println("退出登录，清理session...")
 }
 
 // 修改用户信息
@@ -680,8 +696,8 @@ func UpdateUserInfo(c *gin.Context) {
 	}
 
 	session := sessions.Default(c)
-	username := session.Get("username")
-	oldpwd := session.Get("password")
+	username := getUserinfoByJwt(c).Username
+	oldpwd := getUserinfoByJwt(c).Password
 	// _, user := dao.Mgr.GetUserinfoByName(username.(string))
 	if upwd != cupwd {
 		c.JSON(http.StatusOK, gin.H{"code": 203, "msg": "两个密码不一样！"})
@@ -698,7 +714,7 @@ func UpdateUserInfo(c *gin.Context) {
 				c.JSON(http.StatusOK, gin.H{"code": 202, "msg": "修改失败!"})
 				return
 			} else {
-				if oldpwd.(string) != utlis.MD5Encrypt(cupwd) && len(cupwd) != 0 {
+				if oldpwd != utlis.MD5Encrypt(cupwd) && len(cupwd) != 0 {
 					//改
 					if len(cupwd) < 5 {
 						c.JSON(http.StatusOK, gin.H{"code": 202, "msg": "密码不能小于6位数！"})
@@ -710,8 +726,8 @@ func UpdateUserInfo(c *gin.Context) {
 						} else {
 							c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "用户名和密码修改成功!"})
 							session.Options(sessions.Options{Path: "/", MaxAge: -1}) //清除
-							session.Set("username", username)
-							session.Set("password", utlis.MD5Encrypt(cupwd))
+							// session.Set("password", utlis.MD5Encrypt(cupwd))
+							session.Set("jwtToken", 0)
 							session.Save()
 							return
 						}
@@ -720,7 +736,7 @@ func UpdateUserInfo(c *gin.Context) {
 				} else {
 					c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "用户名修改成功!"})
 					session.Options(sessions.Options{Path: "/", MaxAge: -1}) //清除
-					session.Set("username", username)
+					session.Set("jwtToken", 0)
 					session.Save()
 					return
 				}
@@ -728,7 +744,7 @@ func UpdateUserInfo(c *gin.Context) {
 		}
 	}
 
-	if oldpwd.(string) != utlis.MD5Encrypt(cupwd) && len(cupwd) != 0 {
+	if oldpwd != utlis.MD5Encrypt(cupwd) && len(cupwd) != 0 {
 		//改
 		if len(cupwd) < 5 {
 			c.JSON(http.StatusOK, gin.H{"code": 202, "msg": "密码不能小于6位数！"})
@@ -740,8 +756,7 @@ func UpdateUserInfo(c *gin.Context) {
 			} else {
 				c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "密码修改成功!"})
 				session.Options(sessions.Options{Path: "/", MaxAge: -1}) //清除
-				session.Set("username", username)
-				session.Set("password", utlis.MD5Encrypt(cupwd))
+				session.Set("jwtToken", 0)
 				session.Save()
 				return
 			}

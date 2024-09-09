@@ -6,4 +6,5 @@ type Conf struct {
 	Data    string
 	Path    string
 	Salt    string
+	Secret  string
 }
