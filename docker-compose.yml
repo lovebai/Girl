@@ -5,6 +5,6 @@ services:
         container_name: girl
         restart: always
         volumes:
-            - "./datas:/Girl/data"
+            - "./data:/Girl/data"
         ports:
             - "5200:5200"
