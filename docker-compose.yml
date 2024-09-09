@@ -1,0 +1,10 @@
+version: "3"
+services:
+    girl:
+        image: "kukudebai/girl:latest"
+        container_name: girl
+        restart: always
+        volumes:
+            - "./datas:/Girl/data"
+        ports:
+            - "5200:5200"
