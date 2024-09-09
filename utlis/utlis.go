@@ -116,7 +116,7 @@ func Get_ip_city(ip string) string {
 	}
 	re := regexp.MustCompile(`\{[^{^}]*\}`)
 	body, _ := io.ReadAll(res.Body)
-	utf8Body, err := convertGBKToUTF8(body)
+	utf8Body, _ := convertGBKToUTF8(body)
 	matches := re.FindString(string(utf8Body))
 	if matches == "" {
 		return "0.0.0.0"
