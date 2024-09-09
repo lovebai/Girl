@@ -5,7 +5,6 @@ import (
 	"Girl/model"
 	"Girl/utlis"
 	"bytes"
-	"fmt"
 	"io"
 	"mime/multipart"
 	"net/http"
@@ -60,7 +59,6 @@ func getUserinfoByJwt(c *gin.Context) model.User {
 func getuserinfo(c *gin.Context) model.User {
 	username := getUserinfoByJwt(c).Username
 	u := model.User{}
-	fmt.Printf("我到这里了username: %v\n", username)
 	if len(username) == 0 {
 		c.Redirect(http.StatusMovedPermanently, "/"+getAdminUrl()+"/login")
 		return u
@@ -74,7 +72,6 @@ func getuserinfo(c *gin.Context) model.User {
 
 func LoginPage(c *gin.Context) {
 	un := getUserinfoByJwt(c).Username
-	// fmt.Printf("un: %v\n", un)
 	if len(un) == 0 {
 		res, _ := dao.Mgr.GetUserinfoByName(un)
 		if res != 0 {
@@ -485,7 +482,6 @@ func UpdatePhoto(c *gin.Context) {
 	pt := c.PostForm("imgText")
 	pd := c.PostForm("imgDatd")
 	pu := c.PostForm("imgUrl")
-	// fmt.Println("====", pid, pt, pd, pu)
 	if len(pt) < 2 || len(pd) < 2 || len(pu) < 2 {
 		c.JSON(http.StatusOK, gin.H{"code": 204, "msg": "传递参数有误！"})
 		return

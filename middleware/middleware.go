@@ -11,7 +11,6 @@ import (
 
 // 登录状态
 func LoginStatus(c *gin.Context) {
-	// fmt.Printf("utlis.MD5Encrypt(\"123456\"): %v\n", utlis.MD5Encrypt("123456"))
 	session := sessions.Default(c)
 	jwtToken := session.Get("jwtToken")
 	if jwtToken == nil {

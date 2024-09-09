@@ -18,7 +18,6 @@ func GetFileExists() bool {
 	if _, err := os.Stat(FileName); err != nil {
 		return false
 	}
-	// fmt.Printf("File %s already exists.\n", FileName)
 	return true
 }
 

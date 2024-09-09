@@ -81,7 +81,6 @@ func LeavingAdd(c *gin.Context) {
 		LenvingCity: utlis.Get_ip_city(utlis.GetIPFromRequest(c)),
 	}
 	status := dao.Inx.AddLenving(data)
-	// fmt.Println(status)
 	if status {
 		c.JSON(http.StatusOK, gin.H{"code": 200})
 		return
