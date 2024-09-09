@@ -21,6 +21,7 @@ func LoginStatus(c *gin.Context) {
 	claims, err := utlis.ParseToken(jwtToken.(string))
 	if err != nil {
 		c.Redirect(http.StatusFound, "/"+utlis.GetConfBody().Path+"/login")
+		c.Abort()
 		return
 	}
 	res, user := dao.Mgr.GetUserinfoByName(claims.Username)

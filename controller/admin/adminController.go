@@ -71,14 +71,14 @@ func getuserinfo(c *gin.Context) model.User {
 }
 
 func LoginPage(c *gin.Context) {
-	un := getUserinfoByJwt(c).Username
-	if len(un) == 0 {
-		res, _ := dao.Mgr.GetUserinfoByName(un)
-		if res != 0 {
-			c.Redirect(http.StatusMovedPermanently, "")
-			return
-		}
-	}
+	// un := getUserinfoByJwt(c).Username
+	// if len(un) == 0 {
+	// 	res, _ := dao.Mgr.GetUserinfoByName(un)
+	// 	if res != 0 {
+	// 		c.Redirect(http.StatusMovedPermanently, "")
+	// 		return
+	// 	}
+	// }
 	siteinfo := dao.Mgr.GetSettingInfo()
 	c.HTML(http.StatusOK, "admin/login", gin.H{
 		"title":     "管理员登录页面",
