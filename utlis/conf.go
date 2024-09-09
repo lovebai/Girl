@@ -25,7 +25,40 @@ func GetFileExists() bool {
 // 获取配置文件内容
 func GetConfBody() model.Conf {
 	if !GetFileExists() {
-		fmt.Printf("Tip: %v 配置文件不存在，请先创建配置文件。\n", FileName)
+		file, err := os.Create(FileName)
+		if err != nil {
+			fmt.Println("Error creating file:", err)
+			os.Exit(1)
+		}
+		defer file.Close()
+
+		// 要写入的内容
+		content := `# 运行模式 : release, debug, test
+app_mode = release
+
+# Web服务端口
+app_port = 5200
+
+[paths]
+# 数据库文件名
+data = temp
+
+# 后台登录地址
+path = Admin
+
+[others]
+# 密码加密盐
+salt = jiami
+		`
+
+		// 写入内容到文件
+		_, err = file.WriteString(content)
+		if err != nil {
+			fmt.Println("Error writing to file:", err)
+			os.Exit(1)
+		}
+
+		fmt.Printf("Tip: 请先修改conf.ini配置文件,修改完成重新启动即可。\n")
 		os.Exit(1)
 	}
 
