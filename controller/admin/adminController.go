@@ -180,6 +180,7 @@ func PhotoAddPage(c *gin.Context) {
 		"countSum":  getAllCount(),
 		"info":      siteinfo,
 		"user":      user,
+		"ph":        model.Photo{ImgTime: utlis.GetTimeUnix()},
 	})
 }
 
