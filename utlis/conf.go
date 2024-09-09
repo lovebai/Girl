@@ -13,26 +13,16 @@ const (
 	Port     = "5200"
 )
 
-// 检查文件是否存在 存在则返回true
-func GetFileExists() bool {
-	if _, err := os.Stat(FileName); err != nil {
-		return false
+func initConf() {
+	file, err := os.Create(FileName)
+	if err != nil {
+		fmt.Println("Error creating file:", err)
+		os.Exit(1)
 	}
-	return true
-}
+	defer file.Close()
 
-// 获取配置文件内容
-func GetConfBody() model.Conf {
-	if !GetFileExists() {
-		file, err := os.Create(FileName)
-		if err != nil {
-			fmt.Println("Error creating file:", err)
-			os.Exit(1)
-		}
-		defer file.Close()
-
-		// 要写入的内容
-		content := `# 运行模式 : release, debug, test
+	// 要写入的内容
+	content := `# 运行模式 : release, debug, test
 app_mode = release
 
 # Web服务端口
@@ -50,17 +40,29 @@ path = Admin
 salt = jiami
 # 后台签名密钥
 admin_secret = secret
-		`
+	`
 
-		// 写入内容到文件
-		_, err = file.WriteString(content)
-		if err != nil {
-			fmt.Println("Error writing to file:", err)
-			os.Exit(1)
-		}
-
-		fmt.Printf("Tip: 请先修改conf.ini配置文件,修改完成重新启动即可。\n")
+	// 写入内容到文件
+	_, err = file.WriteString(content)
+	if err != nil {
+		fmt.Println("Error writing to file:", err)
 		os.Exit(1)
+	}
+
+}
+
+// 检查文件是否存在 存在则返回true
+func GetFileExists() bool {
+	if _, err := os.Stat(FileName); err != nil {
+		return false
+	}
+	return true
+}
+
+// 获取配置文件内容
+func GetConfBody() model.Conf {
+	if !GetFileExists() {
+		initConf()
 	}
 
 	cfg, err := ini.Load(FileName)
