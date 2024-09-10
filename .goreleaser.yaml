@@ -64,6 +64,6 @@ changelog:
 
 dockers:
   - image_templates:
-      - "kukudebai/{{.ProjectName}}:{{ .Tag }}"
-      - d"kukudebai/{{.ProjectName}}:latest"
+      - "kukudebai/girl:{{ .Tag }}"
+      - d"kukudebai/girl:latest"
     dockerfile: Dockerfile
