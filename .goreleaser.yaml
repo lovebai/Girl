@@ -62,13 +62,8 @@ changelog:
       - "^docs:"
       - "^test:"
 
-docker:
-  dockerfile: Dockerfile
-  image: kukudebai/girl
-  tags:
-    - latest
-    - "{{ .Version }}"
-  build:
-    args:
-      - MY_ARG=value
-
+dockers:
+  - image_templates:
+      - "kukudebai/{{.ProjectName}}:{{ .Tag }}"
+      - d"kukudebai/{{.ProjectName}}:latest"
+    dockerfile: Dockerfile
