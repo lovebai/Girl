@@ -1,26 +1,53 @@
 package router
 
 import (
+	"Girl/src"
 	"Girl/utlis"
-	"text/template"
+	"html/template"
+	"io"
+	"strings"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 )
 
+// loadTemplate 加载由 go-assets-builder 嵌入的模板
+func loadTemplate(funcMap template.FuncMap) (*template.Template, error) {
+	t := template.New("").Funcs(funcMap)
+	for name, file := range src.Assets.Files {
+		if file.IsDir() || !strings.HasSuffix(name, ".html") {
+			continue
+		}
+		h, err := io.ReadAll(file)
+		if err != nil {
+			return nil, err
+		}
+		t, err = t.New(name).Parse(string(h))
+		if err != nil {
+			return nil, err
+		}
+	}
+	return t, nil
+}
+
 func Start() {
 	gin.SetMode(utlis.GetConfBody().AppMode)
 	router := gin.Default()
 	router.SetTrustedProxies([]string{"127.0.0.1"})
-	router.SetFuncMap(template.FuncMap{
+	funcMap := template.FuncMap{
 		"formatDate":               utlis.FormatAsDate,
 		"FormatAsTimeAgo":          utlis.FormatAsTimeAgo,
 		"ConvertTimestampToString": utlis.ConvertTimestampToString,
 		"ToHtml":                   utlis.ToHtml,
-		"ToHtmlTable":              utlis.ToHtmlTable})
-	router.LoadHTMLGlob("templates/**/*")
-	router.Static("/static", "./static")
+		"ToHtmlTable":              utlis.ToHtmlTable}
+	templates, err := loadTemplate(funcMap)
+	if err != nil {
+		panic(err)
+	}
+	router.SetHTMLTemplate(templates)
+
+	router.StaticFS("/static", src.VFS)
 
 	//session cookie
 	store := cookie.NewStore([]byte("Girl"))
