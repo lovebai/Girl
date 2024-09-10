@@ -14,6 +14,12 @@ const (
 )
 
 func initConf() {
+	err := os.MkdirAll("data", os.ModePerm)
+	if err != nil {
+		fmt.Println("Error creating directory:", err)
+		os.Exit(1)
+	}
+
 	file, err := os.Create(FileName)
 	if err != nil {
 		fmt.Println("Error creating file:", err)

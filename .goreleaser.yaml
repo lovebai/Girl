@@ -62,8 +62,8 @@ changelog:
       - "^docs:"
       - "^test:"
 
-dockers:
-  - image_templates:
-      - "kukudebai/girl:{{ .Tag }}"
-      - "kukudebai/girl:latest"
-    dockerfile: Dockerfile
+# dockers:
+#   - image_templates:
+#       - "kukudebai/girl:{{ .Tag }}"
+#       - "kukudebai/girl:latest"
+#     dockerfile: Dockerfile
