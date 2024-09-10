@@ -19,7 +19,7 @@ before:
     # You may remove this if you don't use go modules.
     - go mod tidy
     # you may remove this if you don't need go generate
-    - go generate ./...
+    # - go generate ./...
 
 builds:
   - env:
@@ -31,6 +31,11 @@ builds:
       - linux
       - windows
       - darwin
+
+    goarch:
+      - amd64
+      - arm
+      - arm64
 
 
 archives:
@@ -56,4 +61,14 @@ changelog:
     exclude:
       - "^docs:"
       - "^test:"
+
+docker:
+  dockerfile: Dockerfile
+  image: kukudebai/girl
+  tags:
+    - latest
+    - "{{ .Version }}"
+  build:
+    args:
+      - MY_ARG=value
 

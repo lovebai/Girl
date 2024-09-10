@@ -23,8 +23,6 @@ WORKDIR /Girl
 # 复制编译好的二进制文件
 COPY --from=builder /app/girl ./girl
 COPY --from=builder /app/data/ ./data
-COPY --from=builder /app/static/ ./static
-COPY --from=builder /app/templates/ ./templates
 
 # 安装时区数据
 RUN apk update \
