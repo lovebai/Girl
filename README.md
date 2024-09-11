@@ -1,7 +1,6 @@
 ## Girl Like For Golang
 
-这是一个情侣小站，该项目前端UI主要基于PHP版的 **Like_Girl V5.1.0** ，PHP版本地址：[https://blog.kikiw.cn/index.php/archives/52/]()
-
+这是一个情侣小站，该项目前端UI主要基于PHP版的 **Like_Girl V5.1.0** ，如需PHP版本自行下载。
 
 ## ✨效果预览
 
@@ -92,10 +91,10 @@ git clone https://github.com/lovebai/Girl.git
 goreleaser build --clean --single-target --snapshot
 ```
 
+## 🗒️文档
+
+[https://obai.cc/ji-shu/Like_Girl_For_Golang.html](https://obai.cc/ji-shu/Like_Girl_For_Golang.html "[https://obai.cc/ji-shu/Like_Girl_For_Golang.html](https://obai.cc/ji-shu/Like_Girl_For_Golang.html)")
+
 ## 技术栈
 
 Go、 Gin、 Gorm、  Bootstrap、 Javascript、 Css、 Html
-
-## 相关文档
-
-[https://obai.cc/ji-shu/Like_Girl_For_Golang.html](https://obai.cc/ji-shu/Like_Girl_For_Golang.html)
