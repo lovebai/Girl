@@ -53,6 +53,9 @@ func Start() {
 	store := cookie.NewStore([]byte("Girl"))
 	router.Use(sessions.Sessions("BoyAndGirl", store))
 
+	//默认路由 404
+	NoRouter(router)
+
 	//前台路由
 	IndexRouter(router)
 
