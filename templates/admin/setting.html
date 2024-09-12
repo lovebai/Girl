@@ -25,19 +25,15 @@
                         <input type="text" class="form-control"  placeholder="显示在顶部的文案"
                                name="SiteDesc" value="{{.info.SiteDesc}}" required>
                     </div>
-                    <div class="form-group">
-                        <label for="validationCustom06">是否关闭头像背景高斯模糊</label>
-                        <select class="form-control" id="example-select" name="SiteBlur">
-                            <option value="1" {{if eq .info.SiteBlur 1}} selected {{end}}>开启</option>
-                            <option value="0" {{if eq .info.SiteBlur 0}} selected {{end}}>关闭</option>
-                        </select>
+                    <div class="form-group mb-3">
+                        <label for="validationCustom03">站点关键词</label>
+                        <input type="text" class="form-control"  placeholder="SEO关键词"
+                               name="Keywords" value="{{.info.Keywords}}" required>
                     </div>
-                    <div class="form-group">
-                        <label for="validationCustom07">是否开启前端无刷新加载</label>
-                        <select class="form-control" id="example-select" name="SitePajx">
-                            <option value="1" {{if eq .info.SitePajx  1}} selected {{end}}>开启</option>
-                            <option value="0" {{if eq .info.SitePajx  0}} selected {{end}}>关闭</option>
-                        </select>
+                    <div class="form-group mb-3">
+                        <label for="validationCustom03">站点描述</label>
+                        <input type="text" class="form-control"  placeholder="SEO站点描述"
+                               name="Discription" value="{{.info.Discription}}" required>
                     </div>
                     <div class="form-group mb-3 text_right">
                         <button class="btn btn-primary" type="button" id="updateSetA">提交修改</button>
@@ -55,7 +51,7 @@
 
                 <form class="needs-validation">
                     <div class="form-group mb-3">
-                        <label for="validationCustom01">男主Nanme</label>
+                        <label for="validationCustom01">男主Name</label>
                         <input type="text" class="form-control"  placeholder="请输入男主Name"
                                name="boy" value="{{.info.BoyName}}" required>
                     </div>
@@ -141,13 +137,6 @@
             <div class="card-body">
                 <h4 class="header-title mb-3">卡片配置&版权配置</h4>
                 <form class="needs-validation">
-                    <div class="form-group mb-3">
-                        <label for="validationCustom01">背景图片URL地址</label>
-                        <span class="badge badge-success-lighten"style="font-size: 0.8rem;">内部随机图片接口：<span style="color: #727cf5;">/api/RandImg</span> </span>
-                        <span class="badge badge-success-lighten"style="font-size: 0.8rem;">每日必应图：<span style="color: #727cf5;">/api/BingImg</span> </span>
-                        <input type="text" class="form-control"  placeholder="请输入图片地址"
-                               name="bgimg" value="{{.info.BgimgUrl}}" required>
-                    </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom01">卡片1Name</label>
                         <input type="text" class="form-control"  placeholder="请输入卡片Name"

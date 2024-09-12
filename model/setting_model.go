@@ -1,11 +1,11 @@
 package model
 
 type SettingA struct {
-	SiteName string `json:"sitename"`
-	SiteLogo string `json:"sitelogo"`
-	SiteDesc string `json:"sitedesc"`
-	SiteBlur int    `json:"siteblur"`
-	SitePajx int    `json:"sitepajx"`
+	SiteName    string `json:"sitename"`
+	SiteLogo    string `json:"sitelogo"`
+	SiteDesc    string `json:"sitedesc"`
+	Keywords    string `json:"keywords"`
+	Discription string `json:"discription"`
 }
 
 type SettingB struct {
@@ -17,7 +17,6 @@ type SettingB struct {
 }
 
 type SettingC struct {
-	BgimgUrl      string `json:"bgimgurl"`
 	CardOne       string `json:"cardone"`
 	CardOneDesc   string `json:"cardonedesc"`
 	CardTwo       string `json:"cardtwo"`
@@ -34,6 +33,10 @@ type SettingD struct {
 	LinkType       int    `json:"linktype"`
 	LinkApiUrl     string `json:"linkapiurl"`
 	LinkApiToken   string `json:"linkapitoken"`
+	SiteBlur       int    `json:"siteblur"`
+	SitePajx       int    `json:"sitepajx"`
+	BgimgUrl       string `json:"bgimgurl"`
+	SiteIcon       string `json:"siteicon"`
 }
 
 type SettingE struct {

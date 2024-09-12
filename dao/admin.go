@@ -268,8 +268,8 @@ func (mgr *manager) UpdateSettingA(st model.SettingA) int64 {
 	info.SiteName = st.SiteName
 	info.SiteLogo = st.SiteLogo
 	info.SiteDesc = st.SiteDesc
-	info.SiteBlur = st.SiteBlur
-	info.SitePajx = st.SitePajx
+	info.Keywords = st.Keywords
+	info.Discription = st.Discription
 	rsu := mgr.db.Where("option_id = ?", info.OptionId).Save(&info)
 	return rsu.RowsAffected
 }
@@ -291,7 +291,6 @@ func (mgr *manager) UpdateSettingB(st model.SettingB) int64 {
 func (mgr *manager) UpdateSettingC(st model.SettingC) int64 {
 	info := model.Siteinfo{}
 	mgr.db.First(&info, 1)
-	info.BgimgUrl = st.BgimgUrl
 	info.CardOne = st.CardOne
 	info.CardOneDesc = st.CardOneDesc
 	info.CardTwo = st.CardTwo
@@ -313,6 +312,10 @@ func (mgr *manager) UpdateSettingD(st model.SettingD) int64 {
 	info.LinkType = st.LinkType
 	info.LinkApiUrl = st.LinkApiUrl
 	info.LinkApiToken = st.LinkApiToken
+	info.BgimgUrl = st.BgimgUrl
+	info.SiteBlur = st.SiteBlur
+	info.SitePajx = st.SitePajx
+	info.SiteIcon = st.SiteIcon
 	rsu := mgr.db.Where("option_id = ?", info.OptionId).Save(&info)
 	return rsu.RowsAffected
 }

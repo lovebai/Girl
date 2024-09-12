@@ -6,8 +6,11 @@ type Siteinfo struct {
 	SiteName       string
 	SiteLogo       string
 	SiteDesc       string
+	Keywords       string
+	Discription    string
 	SiteBlur       int
 	SitePajx       int
+	SiteIcon       string
 	BoyName        string
 	GirlName       string
 	BoyImgUrl      string

@@ -33,12 +33,12 @@
         let sitename = $("input[name='SiteName']").val()
         let sitelogo = $("input[name='SiteLogo']").val()
         let sitedesc = $("input[name='SiteDesc']").val()
-        let siteblur = $("select[name='SiteBlur']").val().trim()
-        let sitepajx = $("select[name='SitePajx']").val().trim()
+        let keywords = $("input[name='Keywords']").val()
+        let discription = $("input[name='Discription']").val()
 
         $.ajax({
             url: "/{{.admin_url}}/siteinfo/updateA",
-            data: JSON.stringify({sitename,sitelogo,sitedesc,siteblur:parseInt(siteblur),sitepajx:parseInt(sitepajx)}),
+            data: JSON.stringify({sitename,sitelogo,sitedesc,keywords,discription}),
             type: "POST",
             dataType: "json",
             success: function (res) {
@@ -87,7 +87,6 @@
     })
 
     $("#updateSetC").click(()=>{
-        let bgimgurl = $("input[name='bgimg']").val();
         let cardone = $("input[name='card1']").val();
         let cardonedesc = $("input[name='deci1']").val();
         let cardtwo = $("input[name='card2']").val();
@@ -101,7 +100,6 @@
         $.ajax({
             url: "/{{.admin_url}}/siteinfo/updateC",
             data: JSON.stringify({
-                bgimgurl,
                 cardone,
                 cardonedesc,
                 cardtwo,
@@ -130,10 +128,14 @@
     })
 
     $("#updateSetD").click(()=>{
+        let siteblur = $("select[name='SiteBlur']").val().trim()
+        let sitepajx = $("select[name='SitePajx']").val().trim()
+        let bgimgurl = $("input[name='bgimg']").val();
         let avatershowtype = $("select[name='AvaterShowType']").val().trim();
         let linktype = $("select[name='LinkType']").val().trim();
         let linkapiurl = $("input[name='LinkApiUrl']").val();
         let linkapitoken = $("input[name='LinkApiToken']").val();
+        let siteicon = $("input[name='siteicon']").val();
         $.ajax({
             url: "/{{.admin_url}}/siteinfo/updateD",
             data: JSON.stringify({
@@ -141,6 +143,10 @@
                 linktype:parseInt(linktype),
                 linkapiurl,
                 linkapitoken,
+                bgimgurl,
+                siteicon,
+                siteblur:parseInt(siteblur),
+                sitepajx:parseInt(sitepajx)
                 }),
             type: "POST",
             dataType: "json",

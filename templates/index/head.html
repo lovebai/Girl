@@ -1,10 +1,9 @@
 {{define "index/head"}}
 
-    <link rel="shortcut icon" href="/static/img/favicon.ico" />
+    <link rel="shortcut icon" href="{{.info.SiteInfo.SiteIcon}}" />
     <title>{{.title}}</title>
-    <meta name="keywords"
-        content="{{.title}},Like Girl 5.1.0,LGNeUi,情侣小站,开源情侣网站,PHP情侣网站,情侣记录,情侣网站,情侣项目,情侣小窝,Love,LikeGirl,Ki,PHP情侣小站,情侣小站使用教程,情侣小站使用文档">
-    <meta name="discription" content="{{.info.SiteInfo.SiteDesc}} - Like Girl for Golang 5.1.0">
+    <meta name="keywords" content="{{.info.SiteInfo.Keywords}}">
+    <meta name="discription" content="{{.info.SiteInfo.Discription}}">
     <meta name="author" content="Ki">
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="shortcut icon" href="/static/img/favicon.ico" />
