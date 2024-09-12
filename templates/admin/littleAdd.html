@@ -25,7 +25,7 @@
                                name="articletitle" required>
                         <input name="aid" value="{{.art.ArticleId}}" hidden />
                     </div>
-                    <div id="test-editor">
+                    <div id="test-editor" style="z-index: 9;">
                         <textarea name="articletext">{{.art.ArticleContext}}</textarea>
                     </div>
                     <div class="form-group mb-3 text_right">
@@ -54,8 +54,24 @@
         var editor = editormd("test-editor", {
             // width  : "100%",
             // height : "100%",
+            autoWatch      : false,
             htmlDecode: true,
-            path: "/static/editormd/lib/"
+            path: "/static/editormd/lib/",
+            watch:false,
+            toolbarIcons : function() {
+            // Or return editormd.toolbarModes[name]; // full, simple, mini
+            // Using "||" set icons align right.
+            return [
+                "defaultCode","|","undo", "redo", "|", 
+            "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|", 
+            "h1", "h2", "h3", "h4", "h5", "h6", "|", 
+            "center", "hr", "|",
+            "link", "image","mp4", "code",  "datetime",  "pagebreak", "|",
+             "watch", "preview", "clear"
+             ]
+            },
+        
+
 
         });
     });
