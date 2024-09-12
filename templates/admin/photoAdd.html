@@ -22,10 +22,18 @@
 
                     <div class="form-group mb-3" id="img_url">
                         <label for="validationCustom01">图片URL</label>
-                        <input type="text" name="imgUrl" class="form-control" placeholder="请输入图片URL地址" value="{{.ph.ImgUrl}}" required>
+                        <input type="text" name="imgUrl" id="img-p" class="form-control" placeholder="请输入图片URL地址" value="{{.ph.ImgUrl}}" required>
+                        {{if eq .info.LinkType 1}}
+                        <br/>
+                        <div class="input-group">
+                            <input type="file" class="form-control" id="img-p-f"  name="file" accept="image/*">
+                            <button style="color: #FFF;background-color: #6c757d;" class="btn btn-outline-secondary" type="button" id="img-p-b" >上传图片</button>
+                          </div>
+                        {{end}}
                     </div>
                     <div class="form-group mb-3 text_right">
-                        {{if eq .ph.ImgId nil}}
+                        {{$lt := .ph.ImgText|len}}
+                        {{if eq $lt 0}}
                         <button class="btn btn-primary"  type="button" id="ImgAdd">新增相册</button>
                         {{else}}
                         <button class="btn btn-primary"  type="button" id="ImgUpdate">修改相册</button>

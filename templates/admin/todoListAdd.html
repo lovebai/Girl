@@ -20,12 +20,15 @@
                             function myOnClickHandler(obj) {
                                 var input = document.getElementById("switch3");
                                 var img_url = document.getElementById("img_url");
+                                var img_url_1 = document.getElementById("img_url-1");
                                 if (obj.checked) {
                                     input.setAttribute("value", "1");
-                                    img_url.style.display = "block";
+                                    img_url.style.display = "flex";
+                                    img_url_1.style.display = "flex";
                                 } else {
                                     input.setAttribute("value", "0");
                                     img_url.style.display = "none";
+                                    img_url_1.style.display = "none";
                                 }
                             }
                         </script>
@@ -37,9 +40,17 @@
                     </div>
                     <div class="form-group mb-3" id="img_url">
                         <label for="validationCustom01"></label>
-                        <input type="text" name="imgurl" class="form-control" id="validationCustom01"
+                        <input type="text" name="imgurl" class="form-control" id="img-t"
                                placeholder="请输入图片地址（没有无需填写）" value="{{.tl.ListImgurl}}">
                     </div>
+                    {{if eq .info.LinkType 1}}
+                    <div class="input-group" id="img_url-1">
+                        <input type="file" class="form-control" id="img-t-f"  name="file" accept="image/*">
+                        <button style="color: #FFF;background-color: #6c757d;" class="btn btn-outline-secondary" type="button" id="img-t-b" >上传图片</button>
+                      </div>
+                      <br/>
+                    {{end}}
+
                     <input name="id" value="{{.tl.ListId}}" hidden >
                     <div class="form-group mb-3 text_right">
                         {{if eq .tl.ListId nil}}
