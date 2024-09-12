@@ -46,8 +46,12 @@ func Start() {
 		panic(err)
 	}
 	router.SetHTMLTemplate(templates)
-
 	router.StaticFS("/static", src.VFS)
+
+	// dev
+	// router.SetFuncMap(funcMap)
+	// router.LoadHTMLGlob("templates/**/*")
+	// router.Static("/static", "./static")
 
 	//session cookie
 	store := cookie.NewStore([]byte("Girl"))
