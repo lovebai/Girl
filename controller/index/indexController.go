@@ -133,7 +133,7 @@ func LittlePost(c *gin.Context) {
 	info := getIndexInfo()
 	c.HTML(http.StatusOK, "index/little-post", gin.H{
 		"id":    id,
-		"title": post.ArticleTitle,
+		"title": post.ArticleTitle + " - " + info.SiteInfo.SiteName,
 		"post":  post,
 		"info":  info,
 	})
