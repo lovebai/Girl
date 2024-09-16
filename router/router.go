@@ -45,13 +45,16 @@ func Start() {
 	if err != nil {
 		panic(err)
 	}
-	router.SetHTMLTemplate(templates)
-	router.StaticFS("/static", src.VFS)
 
-	// dev
-	// router.SetFuncMap(funcMap)
-	// router.LoadHTMLGlob("templates/**/*")
-	// router.Static("/static", "./static")
+	if utlis.GetConfBody().AppMode == "debug" {
+		router.SetFuncMap(funcMap)
+		router.LoadHTMLGlob("templates/**/*")
+		router.Static("/static", "./static")
+
+	} else {
+		router.SetHTMLTemplate(templates)
+		router.StaticFS("/static", src.VFS)
+	}
 
 	//session cookie
 	store := cookie.NewStore([]byte("Girl"))
