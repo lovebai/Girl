@@ -19,6 +19,7 @@ func (mgr *manager) CreateSiteinfo() int64 {
 		SiteIcon:       "/static/img/favicon.ico",
 		SiteBlur:       0,
 		SitePajx:       0,
+		Watch:          0,
 		BoyName:        "Ki",
 		GirlName:       "Li",
 		StartTime:      1718121600000,

@@ -316,6 +316,7 @@ func (mgr *manager) UpdateSettingD(st model.SettingD) int64 {
 	info.SiteBlur = st.SiteBlur
 	info.SitePajx = st.SitePajx
 	info.SiteIcon = st.SiteIcon
+	info.Watch = st.Watch
 	rsu := mgr.db.Where("option_id = ?", info.OptionId).Save(&info)
 	return rsu.RowsAffected
 }

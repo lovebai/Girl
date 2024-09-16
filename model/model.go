@@ -35,6 +35,7 @@ type Siteinfo struct {
 	LinkType       int
 	LinkApiUrl     string
 	LinkApiToken   string
+	Watch          int
 }
 
 //文章

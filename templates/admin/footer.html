@@ -130,12 +130,14 @@
     $("#updateSetD").click(()=>{
         let siteblur = $("select[name='SiteBlur']").val().trim()
         let sitepajx = $("select[name='SitePajx']").val().trim()
+        let watch = $("select[name='Watch']").val().trim()
         let bgimgurl = $("input[name='bgimg']").val();
         let avatershowtype = $("select[name='AvaterShowType']").val().trim();
         let linktype = $("select[name='LinkType']").val().trim();
         let linkapiurl = $("input[name='LinkApiUrl']").val();
         let linkapitoken = $("input[name='LinkApiToken']").val();
         let siteicon = $("input[name='siteicon']").val();
+        
         $.ajax({
             url: "/{{.admin_url}}/siteinfo/updateD",
             data: JSON.stringify({
@@ -145,6 +147,7 @@
                 linkapitoken,
                 bgimgurl,
                 siteicon,
+                watch:parseInt(watch),
                 siteblur:parseInt(siteblur),
                 sitepajx:parseInt(sitepajx)
                 }),

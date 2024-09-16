@@ -37,6 +37,7 @@ type SettingD struct {
 	SitePajx       int    `json:"sitepajx"`
 	BgimgUrl       string `json:"bgimgurl"`
 	SiteIcon       string `json:"siteicon"`
+	Watch          int    `json:"watch"`
 }
 
 type SettingE struct {

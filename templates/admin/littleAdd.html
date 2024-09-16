@@ -57,7 +57,7 @@
             autoWatch      : false,
             htmlDecode: true,
             path: "/static/editormd/lib/",
-            watch:false,
+            watch:{{if eq .info.Watch 1}}true{{else}}false{{end}},
             toolbarIcons : function() {
             // Or return editormd.toolbarModes[name]; // full, simple, mini
             // Using "||" set icons align right.

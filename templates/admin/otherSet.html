@@ -21,6 +21,13 @@
                             <option value="0" {{if eq .info.SitePajx  0}} selected {{end}}>关闭</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="validationCustom07">是否开启后台MarkDown实时预览</label>
+                        <select class="form-control" id="example-select" name="Watch">
+                            <option value="1" {{if eq .info.Watch 1}} selected {{end}}>开启</option>
+                            <option value="0" {{if eq .info.Watch  0}} selected {{end}}>关闭</option>
+                        </select>
+                    </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom01">站点ICON图标</label>
                         <input type="text" class="form-control"  placeholder="请输入图标地址"
