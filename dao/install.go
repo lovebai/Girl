@@ -128,15 +128,15 @@ func (mgr *manager) CreateLenving() int64 {
 //相册
 func (mgr *manager) CreatePhoto() int64 {
 	ph := []model.Photo{
-		{ImgId: 1, ImgText: "Like_Girl — 5.1.0相册测试", ImgUrl: "https://www.kikiw.cn/liuyi.png", ImgTime: 1718090394000},
-		{ImgId: 2, ImgText: "夏至末至 我最喜欢听的追光者~", ImgUrl: "https://img.gejiba.com/images/43f3e4449c2fe004903d87164998b9e6.jpg", ImgTime: 1718090394000},
-		{ImgId: 3, ImgText: "“真的很想和你去一趟浪漫的厦门”", ImgUrl: "https://img.gejiba.com/images/901a33ff29f3b9480fc8572856cf7664.jpg", ImgTime: 1718090394000},
-		{ImgId: 4, ImgText: "“真的很想和你去一趟浪漫的厦门”", ImgUrl: "https://img.gejiba.com/images/dfafa31a39bc0775306bfd83c3571c68.jpg", ImgTime: 1718090394000},
-		{ImgId: 5, ImgText: `追光者多年后听到还是会心头一颤`, ImgUrl: "https://img.gejiba.com/images/f18a5c0ecd51fc6cc43b5afef3e92837.jpg", ImgTime: 1718090394000},
-		{ImgId: 6, ImgText: "太可爱啦 好像是叫“团团”来着~", ImgUrl: "https://img.gejiba.com/images/8344adb24e8440e83c0d2b36cba19fdd.jpg", ImgTime: 1718090394000},
-		{ImgId: 7, ImgText: "最近不错的一部港片 很好看", ImgUrl: "https://img.gejiba.com/images/d929e9197da0237da2742adb19491abd.jpg", ImgTime: 1718090344000},
-		{ImgId: 8, ImgText: "入手了一辆公路车 骑了30公里 现在屁股发麻...", ImgUrl: "https://img.gejiba.com/images/688553237cdbaacd58ec513e322c47ca.jpg", ImgTime: 1718090294000},
-		{ImgId: 9, ImgText: "太好吃啦 这个牛蛙", ImgUrl: "https://img.gejiba.com/images/9b0940c31dfa5bdded0af45e7fa5b581.jpg", ImgTime: 1718092394000},
+		{ImgId: 1, ImgText: "Like_Girl — 5.1.0相册测试", ImgUrl: "https://www.kikiw.cn/liuyi.png", ImgTime: 1718010394000},
+		{ImgId: 2, ImgText: "夏至末至 我最喜欢听的追光者~", ImgUrl: "https://img.gejiba.com/images/43f3e4449c2fe004903d87164998b9e6.jpg", ImgTime: 1718090294000},
+		{ImgId: 3, ImgText: "“真的很想和你去一趟浪漫的厦门”", ImgUrl: "https://img.gejiba.com/images/901a33ff29f3b9480fc8572856cf7664.jpg", ImgTime: 1718030394000},
+		{ImgId: 4, ImgText: "“真的很想和你去一趟浪漫的厦门”", ImgUrl: "https://img.gejiba.com/images/dfafa31a39bc0775306bfd83c3571c68.jpg", ImgTime: 1718040394000},
+		{ImgId: 5, ImgText: `追光者多年后听到还是会心头一颤`, ImgUrl: "https://img.gejiba.com/images/f18a5c0ecd51fc6cc43b5afef3e92837.jpg", ImgTime: 1718050394000},
+		{ImgId: 6, ImgText: "太可爱啦 好像是叫“团团”来着~", ImgUrl: "https://img.gejiba.com/images/8344adb24e8440e83c0d2b36cba19fdd.jpg", ImgTime: 1718060394000},
+		{ImgId: 7, ImgText: "最近不错的一部港片 很好看", ImgUrl: "https://img.gejiba.com/images/d929e9197da0237da2742adb19491abd.jpg", ImgTime: 1718070344000},
+		{ImgId: 8, ImgText: "入手了一辆公路车 骑了30公里 现在屁股发麻...", ImgUrl: "https://img.gejiba.com/images/688553237cdbaacd58ec513e322c47ca.jpg", ImgTime: 1718080294000},
+		{ImgId: 9, ImgText: "太好吃啦 这个牛蛙", ImgUrl: "https://img.gejiba.com/images/9b0940c31dfa5bdded0af45e7fa5b581.jpg", ImgTime: 1718095394000},
 		{ImgId: 10, ImgText: "我们去草原吧", ImgUrl: "https://img.gejiba.com/images/06cac83c9839f0fa82876f6facf12bb0.jpg", ImgTime: 1718096394000},
 	}
 	return mgr.db.Create(&ph).RowsAffected
@@ -693,6 +693,12 @@ func (mgr *manager) CreateUser(id int, name string, pass string, qq string, sex 
 
 //ip黑名单
 func (mgr *manager) CreateIpBlackList() int64 {
-	ip := model.IpBlackList{}
+	ip := model.IpBlackList{
+		Id:      1,
+		Ip:      "123.123.123",
+		Time:    1718010394000,
+		Commit:  "测试拦截",
+		Address: "北京市",
+	}
 	return mgr.db.Create(&ip).RowsAffected
 }
