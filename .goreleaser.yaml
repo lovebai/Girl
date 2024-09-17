@@ -34,7 +34,7 @@ builds:
 
     goarch:
       - amd64
-      # - arm
+      - arm
       - arm64
 
 
