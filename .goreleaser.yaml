@@ -35,11 +35,12 @@ builds:
       - amd64
       - arm
       - arm64
-      
+
   - env:
       - CGO_ENABLED=0
     binary: girl
-    goos: windows
+    goos:
+      - windows
     goarch:
       - amd64
 
