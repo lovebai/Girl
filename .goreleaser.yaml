@@ -29,13 +29,19 @@ builds:
 
     goos:
       - linux
-      - windows
       - darwin
 
     goarch:
       - amd64
       - arm
       - arm64
+      
+  - env:
+      - CGO_ENABLED=0
+    binary: girl
+    goos: windows
+    goarch:
+      - amd64
 
 
 archives:
