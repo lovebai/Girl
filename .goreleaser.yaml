@@ -24,8 +24,6 @@ before:
 builds:
   - env:
       - CGO_ENABLED=0
-      
-    cgo: true
 
     binary: girl
 
