@@ -66,10 +66,39 @@
             "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|", 
             "h1", "h2", "h3", "h4", "h5", "h6", "|", 
             "center", "hr", "|",
-            "link", "image","mp4", "code",  "datetime",  "pagebreak", "|",
+            "link", "image","mp4", "code",  "datetime",  "pagebreak", "video","|",
              "watch", "preview", "clear"
              ]
             },
+            toolbarIconsClass : {
+                video : "fa-youtube-play"  
+             },
+            toolbarIconTexts : {
+                video : "插入视频" 
+             },
+            lang : {
+                toolbar : {
+                    video : "插入视频框架",
+                },
+                buttons : {
+                    enter  : "确定",
+                    cancel : "取消",
+                    close  : "关闭"
+                },
+                dialog : {
+                    video : {
+                        title    : "插入视频",
+                        url      : "视频地址",
+                        urlTitle : "视频标题",
+                        urlEmpty : "错误：请填写链接地址。"
+                    }
+                }
+             },
+             toolbarHandlers : {
+                video : function() {
+                    this.executePlugin("viedoDialog", "viedo-dialog/viedo-dialog");
+                },
+             }
         
 
 
