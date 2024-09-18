@@ -23,3 +23,10 @@ func RandImgUrl(c *gin.Context) {
 func BingTodayUrl(c *gin.Context) {
 	c.Redirect(http.StatusMovedPermanently, "https://api.bducds.com/api/bing_images/")
 }
+
+func Player(c *gin.Context) {
+	url := c.Query("url")
+	c.HTML(http.StatusOK, "api/aliplayer", gin.H{
+		"url": url,
+	})
+}

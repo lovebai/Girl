@@ -1,0 +1,122 @@
+{{define "api/aliplayer"}}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="IE=edge" >
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+<title>Like_Girl_For_Golang Player</title>
+<link rel="stylesheet" href="https://g.alicdn.com/apsara-media-box/imp-web-player/2.26.0/skins/default/aliplayer-min.css" />
+<script type="text/javascript" charset="utf-8" src="https://g.alicdn.com/apsara-media-box/imp-web-player/2.26.0/aliplayer-min.js"></script>
+<style type="text/css">
+body,html{width:100%;height:100%;background:#000;padding:0;margin:0;overflow-x:hidden;overflow-y:hidden}
+*{margin:0;border:0;padding:0;text-decoration:none}
+.bodybg{background:rgb(0 0 0 / 80%);position:fixed;z-index:999990;top:0;left:0;width:100%;height:100%;}
+.popup_box{width:400px;border:1px solid #ccc;border-radius:6px;margin:0 auto;background:#fff;position:fixed;left:0;right:0;top:100px;z-index:999999;color:#444}
+.popup_box h2{margin:0;font-weight:normal;font-family:"Microsoft Yahei",Arial;font-size:16px;border-bottom:1px solid #ccc;padding:15px}
+.popup_box h2 .closepop{float:right;color:#bfbfbf;cursor:pointer}
+.popup_box h2 .closepop:hover{color:#00aff0}
+#tg_cont{padding:10px 15px 10px}
+.popup_box .popup_cont{padding:10px;color:#444}
+.popup_box .popup_cont p{line-height:30px}
+#open_popup{cursor:pointer}
+</style>
+</head>
+<body>
+<div class="prism-player" id="player-con"></div>
+<script>
+var player = new Aliplayer({
+  "id": "player-con",
+  "source": {{.url}},
+  "width": "100%",
+  "height": "100%",
+  "autoplay": true,
+  "isLive": false,
+  "rePlay": false,
+  "playsinline": true,
+  "isVBR": true,
+  "preload": true,
+  "controlBarVisibility": "hover",
+  "videoWidth": "",
+  "useH5Prism": true,
+  "skinLayout": [
+    {
+      "name": "bigPlayButton",
+      "align": "blabs",
+      "x": 30,
+      "y": 80
+    },
+    {
+      "name": "H5Loading",
+      "align": "cc"
+    },
+    {
+      "name": "errorDisplay",
+      "align": "tlabs",
+      "x": 0,
+      "y": 0
+    },
+    {
+      "name": "infoDisplay"
+    },
+    {
+      "name": "tooltip",
+      "align": "blabs",
+      "x": 0,
+      "y": 56
+    },
+    {
+      "name": "thumbnail"
+    },
+    {
+      "name": "controlBar",
+      "align": "blabs",
+      "x": 0,
+      "y": 0,
+      "children": [
+        {
+          "name": "progress",
+          "align": "blabs",
+          "x": 0,
+          "y": 44
+        },
+        {
+          "name": "playButton",
+          "align": "tl",
+          "x": 15,
+          "y": 12
+        },
+        {
+          "name": "timeDisplay",
+          "align": "tl",
+          "x": 10,
+          "y": 7
+        },
+        {
+          "name": "fullScreenButton",
+          "align": "tr",
+          "x": 10,
+          "y": 12
+        },
+        {
+          "name": "setting",
+          "align": "tr",
+          "x": 15,
+          "y": 12
+        },
+        {
+          "name": "volume",
+          "align": "tr",
+          "x": 5,
+          "y": 10
+        }
+      ]
+    }
+  ]
+}, function (player) {
+    console.log("The player is created");
+  }
+);
+</script>
+</body>
+{{end}}

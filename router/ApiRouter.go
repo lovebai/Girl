@@ -12,5 +12,6 @@ func ApiRouter(router *gin.Engine) {
 	{
 		api.GET("/RandImg", apiController.RandImgUrl)
 		api.GET("/BingImg", apiController.BingTodayUrl)
+		api.GET("/Player", apiController.Player)
 	}
 }
