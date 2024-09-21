@@ -1,6 +1,6 @@
 ## Girl Like For Golang
 
-这是一个情侣小站，该项目前端UI主要基于PHP版的 **Like_Girl V5.1.0** ，如需PHP版本自行下载。
+这是一个情侣小站，该项目前端UI主要基于PHP版的 **Like_Girl V5.1.0** ，如需PHP版本请到[https://gitee.com/kiCode111/LikeGirl_5.1.0](https://gitee.com/kiCode111/LikeGirl_5.1.0https://gitee.com/kiCode111/LikeGirl_5.1.0)自行下载。
 
 ## ✨效果预览
 
