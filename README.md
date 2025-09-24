@@ -93,7 +93,7 @@ goreleaser build --clean --single-target --snapshot
 
 ## 🗒️文档
 
-[https://obai.cc/ji-shu/Like_Girl_For_Golang.html](https://obai.cc/ji-shu/Like_Girl_For_Golang.html "[https://obai.cc/ji-shu/Like_Girl_For_Golang.html](https://obai.cc/ji-shu/Like_Girl_For_Golang.html)")
+[https://ucds.me/ji-shu/Like_Girl_For_Golang.html](https://obai.cc/ji-shu/Like_Girl_For_Golang.html "[https://ucds.me/ji-shu/Like_Girl_For_Golang.html](https://obai.cc/ji-shu/Like_Girl_For_Golang.html)")
 
 ## 技术栈
 
